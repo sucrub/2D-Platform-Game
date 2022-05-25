@@ -55,6 +55,7 @@ public class TileMap {
 		tween = 0.07;
 	}
 	
+	//load image
 	public void loadTiles(String s) {
 		
 		try {
@@ -90,7 +91,7 @@ public class TileMap {
 		
 	}
 	
-	public void loadMap(String s) {
+	public void loadMap(String s) { //???
 		
 		try {
 			

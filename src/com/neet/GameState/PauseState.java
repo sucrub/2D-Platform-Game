@@ -16,7 +16,7 @@ public class PauseState extends GameState {
 		super(gsm);
 		
 		// fonts
-		font = new Font("Century Gothic", Font.PLAIN, 14);
+		font = new Font("Century Gothic", Font.BOLD, 14);
 		
 	}
 	
@@ -31,7 +31,7 @@ public class PauseState extends GameState {
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		g.setColor(Color.WHITE);
 		g.setFont(font);
-		g.drawString("Game Paused", 90, 90);
+		g.drawString("Game Paused", 110, 120);
 	}
 	
 	public void handleInput() {
