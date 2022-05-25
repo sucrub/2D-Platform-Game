@@ -60,27 +60,15 @@ public class TileMap {
 		
 		try {
 
-			tileset = ImageIO.read(
-				getClass().getResourceAsStream(s)
-			);
+			tileset = ImageIO.read(getClass().getResourceAsStream(s));
 			numTilesAcross = tileset.getWidth() / tileSize;
 			tiles = new Tile[2][numTilesAcross];
 			
 			BufferedImage subimage;
 			for(int col = 0; col < numTilesAcross; col++) {
-				subimage = tileset.getSubimage(
-							col * tileSize,
-							0,
-							tileSize,
-							tileSize
-						);
+				subimage = tileset.getSubimage(col * tileSize, 0, tileSize, tileSize);
 				tiles[0][col] = new Tile(subimage, Tile.NORMAL);
-				subimage = tileset.getSubimage(
-							col * tileSize,
-							tileSize,
-							tileSize,
-							tileSize
-						);
+				subimage = tileset.getSubimage(col * tileSize, tileSize, tileSize, tileSize);
 				tiles[1][col] = new Tile(subimage, Tile.BLOCKED);
 			}
 			
@@ -96,9 +84,7 @@ public class TileMap {
 		try {
 			
 			InputStream in = getClass().getResourceAsStream(s);
-			BufferedReader br = new BufferedReader(
-						new InputStreamReader(in)
-					);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			
 			numCols = Integer.parseInt(br.readLine());
 			numRows = Integer.parseInt(br.readLine());
@@ -193,12 +179,7 @@ public class TileMap {
 				int r = rc / numTilesAcross;
 				int c = rc % numTilesAcross;
 				
-				g.drawImage(
-					tiles[r][c].getImage(),
-					(int)x + col * tileSize,
-					(int)y + row * tileSize,
-					null
-				);
+				g.drawImage(tiles[r][c].getImage(), (int)x + col * tileSize, (int)y + row * tileSize, null);
 				
 			}
 			

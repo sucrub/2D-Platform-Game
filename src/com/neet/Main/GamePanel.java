@@ -127,6 +127,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	}
 	
 	public void keyTyped(KeyEvent key) {}
+	
 	public void keyPressed(KeyEvent key) {
 		if(key.isControlDown()) {
 			if(key.getKeyCode() == KeyEvent.VK_R) {
@@ -143,6 +144,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	public void keyReleased(KeyEvent key) {
 		Keys.keySet(key.getKeyCode(), false);
 	}
-	//testing
+	
 
 }
