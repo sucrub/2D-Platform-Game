@@ -59,16 +59,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
-		/*g.setRenderingHint(
-			RenderingHints.KEY_TEXT_ANTIALIASING,
-			RenderingHints.VALUE_TEXT_ANTIALIAS_ON
-		);*/
-		
-		
+
 		running = true;
 		
-		gsm = new GameStateManager();
-		
+		gsm = new GameStateManager();		
 	}
 	
 	public void run() {
@@ -110,6 +104,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	private void draw() {
 		gsm.draw(g);
 	}
+	
 	private void drawToScreen() {
 		Graphics g2 = getGraphics();
 		g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
@@ -132,6 +127,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	}
 	
 	public void keyTyped(KeyEvent key) {}
+	
 	public void keyPressed(KeyEvent key) {
 		if(key.isControlDown()) {
 			if(key.getKeyCode() == KeyEvent.VK_R) {
@@ -148,5 +144,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	public void keyReleased(KeyEvent key) {
 		Keys.keySet(key.getKeyCode(), false);
 	}
+	
 
 }

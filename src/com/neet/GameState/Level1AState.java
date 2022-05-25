@@ -26,10 +26,12 @@ import com.neet.TileMap.TileMap;
 
 public class Level1AState extends GameState {
 	
+	//background
 	private Background sky;
 	private Background clouds;
 	private Background mountains;
 	
+	//player, enemy, tile, etc
 	private Player player;
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
