@@ -67,7 +67,7 @@ public class TileMap {
 			BufferedImage subimage;
 			for(int col = 0; col < numTilesAcross; col++) {
 				subimage = tileset.getSubimage(col * tileSize, 0, tileSize, tileSize);
-				tiles[0][col] = new Tile(subimage, Tile.BLOCKED);
+				tiles[0][col] = new Tile(subimage, Tile.NORMAL);
 				subimage = tileset.getSubimage(col * tileSize, tileSize, tileSize, tileSize);
 				tiles[1][col] = new Tile(subimage, Tile.BLOCKED);
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 2, tileSize, tileSize);
@@ -78,6 +78,7 @@ public class TileMap {
 				tiles[4][col] = new Tile(subimage, Tile.BLOCKED);
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 5, tileSize, tileSize);
 				tiles[5][col] = new Tile(subimage, Tile.BLOCKED);
+
 			}
 			
 		}

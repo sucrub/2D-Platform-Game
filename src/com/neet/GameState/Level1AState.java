@@ -67,7 +67,7 @@ public class Level1AState extends GameState {
 		
 		// tilemap
 		tileMap = new TileMap(30);
-		tileMap.loadTiles("/Tilesets/tilesetnew.png");
+		tileMap.loadTiles("/Tilesets/testMap.png");
 		tileMap.loadMap("/Maps/level1a.map");
 		tileMap.setPosition(140, 0);
 		tileMap.setBounds(

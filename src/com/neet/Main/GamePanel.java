@@ -17,7 +17,7 @@ import com.neet.Handlers.Keys;
 public class GamePanel extends JPanel implements Runnable, KeyListener{
 	
 	// dimensions
-	public static final int WIDTH = 320;
+	public static final int WIDTH = 500;
 	public static final int HEIGHT = 240;
 	public static final int SCALE = 2;
 	
