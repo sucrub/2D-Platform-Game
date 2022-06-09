@@ -36,7 +36,7 @@ public class PauseState extends GameState {
 	
 	public void handleInput() {
 		if(Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(false);
-		if(Keys.isPressed(Keys.ESCAPE)) {
+		if(Keys.isPressed(Keys.UP)) {
 			gsm.setPaused(false);
 			gsm.setState(GameStateManager.MENUSTATE);
 		}
