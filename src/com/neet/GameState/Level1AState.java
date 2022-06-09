@@ -61,13 +61,13 @@ public class Level1AState extends GameState {
 	public void init() {
 		
 		// backgrounds
-		sky = new Background("/Backgrounds/sky.gif", 0);
+		sky = new Background("/Backgrounds/background.png", 0);
 		clouds = new Background("/Backgrounds/clouds.gif", 0.1);
 		mountains = new Background("/Backgrounds/mountains.gif", 0.2);
 		
 		// tilemap
 		tileMap = new TileMap(30);
-		tileMap.loadTiles("/Tilesets/ruinstileset.gif");
+		tileMap.loadTiles("/Tilesets/tilesetnew.png");
 		tileMap.loadMap("/Maps/level1a.map");
 		tileMap.setPosition(140, 0);
 		tileMap.setBounds(
