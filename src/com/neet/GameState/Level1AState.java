@@ -59,7 +59,7 @@ public class Level1AState extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/background.png", 0);
+		sky = new Background("/Backgrounds/newbackground.png", 0);
 		clouds = new Background("/Backgrounds/clouds.gif", 0.1);
 		mountains = new Background("/Backgrounds/mountains.gif", 0.2);
 
