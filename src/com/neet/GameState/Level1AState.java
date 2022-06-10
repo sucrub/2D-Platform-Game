@@ -19,6 +19,7 @@ import com.neet.Entity.Teleport;
 import com.neet.Entity.Title;
 import com.neet.Entity.Enemies.Gazer;
 import com.neet.Entity.Enemies.GelPop;
+import com.neet.Entity.Enemies.Tengu;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 import com.neet.TileMap.Background;
@@ -26,12 +27,10 @@ import com.neet.TileMap.TileMap;
 
 public class Level1AState extends GameState {
 	
-	//background
 	private Background sky;
 	private Background clouds;
 	private Background mountains;
 	
-	//player, enemy, tile, etc
 	private Player player;
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
@@ -79,7 +78,7 @@ public class Level1AState extends GameState {
 		
 		// player
 		player = new Player(tileMap);
-		player.setPosition(300, 131); //(chieu ngang, chieu cao, cang thap cang cao)
+		player.setPosition(300, 161);
 		player.setHealth(PlayerSave.getHealth());
 		player.setLives(PlayerSave.getLives());
 		player.setTime(PlayerSave.getTime());
@@ -137,7 +136,7 @@ public class Level1AState extends GameState {
 	
 	private void populateEnemies() {
 		enemies.clear();
-		/*Tengu t = new Tengu(tileMap, player, enemies);
+		Tengu t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1300, 100);
 		enemies.add(t);
 		t = new Tengu(tileMap, player, enemies);
@@ -145,48 +144,47 @@ public class Level1AState extends GameState {
 		enemies.add(t);
 		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1360, 100);
-		enemies.add(t);*/
+		enemies.add(t);
 		GelPop gp;
 		Gazer g;
 		
-		//comment this to disabled enemies
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(1300, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(1320, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(1340, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(1660, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(1680, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(1700, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(2177, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(2960, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(2980, 100);
-//		enemies.add(gp);
-//		gp = new GelPop(tileMap, player);
-//		gp.setPosition(3000, 100);
-//		enemies.add(gp);
-//		
-//		g = new Gazer(tileMap);
-//		g.setPosition(2600, 100);
-//		enemies.add(g);
-//		g = new Gazer(tileMap);
-//		g.setPosition(3500, 100);
-//		enemies.add(g);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(1300, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(1320, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(1340, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(1660, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(1680, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(1700, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(2177, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(2960, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(2980, 100);
+		enemies.add(gp);
+		gp = new GelPop(tileMap, player);
+		gp.setPosition(3000, 100);
+		enemies.add(gp);
+		
+		g = new Gazer(tileMap);
+		g.setPosition(2600, 100);
+		enemies.add(g);
+		g = new Gazer(tileMap);
+		g.setPosition(3500, 100);
+		enemies.add(g);
 	}
 	
 	public void update() {

@@ -25,7 +25,7 @@ public class GelPop extends Enemy {
 		width = 25;
 		height = 25;
 		cwidth = 20;
-		cheight = 18;
+		cheight = 25;
 		
 		damage = 1;
 		moveSpeed = 0.8;
