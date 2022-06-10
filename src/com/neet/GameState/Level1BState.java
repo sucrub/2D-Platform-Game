@@ -149,7 +149,6 @@ public class Level1BState extends GameState {
 		gp = new GelPop(tileMap, player);
 		gp.setPosition(2640, 370);
 		enemies.add(gp);
-
 		g = new Gazer(tileMap);
 		g.setPosition(904, 130);
 		enemies.add(g);
@@ -162,7 +161,6 @@ public class Level1BState extends GameState {
 		g = new Gazer(tileMap);
 		g.setPosition(1704, 300);
 		enemies.add(g);
-
 		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1900, 580);
 		enemies.add(t);
@@ -175,7 +173,6 @@ public class Level1BState extends GameState {
 		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(2457, 430);
 		enemies.add(t);
-
 	}
 
 	public void update() {

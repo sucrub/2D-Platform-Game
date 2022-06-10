@@ -19,7 +19,6 @@ public class MenuState extends GameState {
 	private int currentChoice = 0;
 	private String[] options = {
 		"Start",
-		"Help",
 		"Quit"
 	};
 	
@@ -81,13 +80,11 @@ public class MenuState extends GameState {
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 		g.drawString("Start", 145, 165);
-		g.drawString("Help", 145, 185);
-		g.drawString("Quit", 145, 205);
+		g.drawString("Quit", 145, 185);
 		
 		// draw floating head
 		if(currentChoice == 0) g.drawImage(head, 125, 154, null);
 		else if(currentChoice == 1) g.drawImage(head, 125, 174, null);
-		else if(currentChoice == 2) g.drawImage(head, 125, 194, null);
 		
 		// other
 		g.setFont(font2);
@@ -102,9 +99,6 @@ public class MenuState extends GameState {
 			gsm.setState(GameStateManager.LEVEL1ASTATE);
 		}
 		else if(currentChoice == 1) {
-			// chay cai help o day ghi huong dan choi game o day
-		}
-		else if(currentChoice == 2) {
 			System.exit(0);
 		}
 	}

@@ -19,6 +19,7 @@ import com.neet.Entity.Teleport;
 import com.neet.Entity.Title;
 import com.neet.Entity.Enemies.Gazer;
 import com.neet.Entity.Enemies.GelPop;
+import com.neet.Entity.Enemies.Tengu;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 import com.neet.TileMap.Background;
@@ -26,10 +27,11 @@ import com.neet.TileMap.TileMap;
 
 public class Level1AState extends GameState {
 
+
 	private Background sky;
 	private Background clouds;
 	private Background mountains;
-
+	
 	private Player player;
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
@@ -133,17 +135,16 @@ public class Level1AState extends GameState {
 
 	private void populateEnemies() {
 		enemies.clear();
-		/*
-		 * Tengu t = new Tengu(tileMap, player, enemies);
-		 * t.setPosition(1300, 100);
-		 * enemies.add(t);
-		 * t = new Tengu(tileMap, player, enemies);
-		 * t.setPosition(1330, 100);
-		 * enemies.add(t);
-		 * t = new Tengu(tileMap, player, enemies);
-		 * t.setPosition(1360, 100);
-		 * enemies.add(t);
-		 */
+
+		Tengu t = new Tengu(tileMap, player, enemies);
+		t.setPosition(1300, 100);
+		enemies.add(t);
+		t = new Tengu(tileMap, player, enemies);
+		t.setPosition(1330, 100);
+		enemies.add(t);
+		t = new Tengu(tileMap, player, enemies);
+		t.setPosition(1360, 100);
+		enemies.add(t);
 		GelPop gp;
 		Gazer g;
 
@@ -177,7 +178,6 @@ public class Level1AState extends GameState {
 		gp = new GelPop(tileMap, player);
 		gp.setPosition(3000, 100);
 		enemies.add(gp);
-
 		g = new Gazer(tileMap);
 		g.setPosition(2600, 100);
 		enemies.add(g);
