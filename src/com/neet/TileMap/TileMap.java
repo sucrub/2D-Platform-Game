@@ -64,7 +64,7 @@ public class TileMap {
 			);
 			numTilesAcross = tileset.getWidth() / tileSize;
 			tiles = new Tile[7][numTilesAcross];
-			
+			System.out.println(numTilesAcross);
 			BufferedImage subimage;
 			for(int col = 0; col < numTilesAcross; col++) {
 				subimage = tileset.getSubimage(
@@ -132,6 +132,8 @@ public class TileMap {
 		
 	}
 	
+	
+	
 	public int getTileSize() { return tileSize; }
 	public double getx() { return x; }
 	public double gety() { return y; }
@@ -183,6 +185,7 @@ public class TileMap {
 		}
 	}
 	
+	
 	public void draw(Graphics2D g) {
 		
 		for(int row = rowOffset; row < rowOffset + numRowsToDraw; row++) {
@@ -210,6 +213,7 @@ public class TileMap {
 		}
 		
 	}
+	
 	
 }
 
