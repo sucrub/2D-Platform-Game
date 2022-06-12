@@ -66,7 +66,7 @@ public class Level1AState extends GameState {
 		mountains = new Background("/Backgrounds/mountains.gif", 0.2);
 
 		// tilemap
-		tileMap = new TileMap(30);
+		tileMap = new TileMap(32);
 		tileMap.loadTiles("/Tilesets/tilesetnewer.png");
 		tileMap.loadMap("/Maps/level1a.map");
 		tileMap.setPosition(140, 0);
