@@ -12,25 +12,19 @@ import com.neet.Entity.PlayerSave;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 
-public class MenuState extends GameState {
-	
+public class ChooseDifficultyState extends GameState{
+
 	private BufferedImage head;
 	
 	private int currentChoice = 0;
 	private String[] options = {
-		"Start",
-		"Help",
-		"Quit"
+		"Normal",
+		"Hard"
 	};
 	
-	private Color titleColor;
-	private Font titleFont;
+	private Font font, titlefont;
 	
-	private Font font;
-	private Font font2;
-	
-	public MenuState(GameStateManager gsm) {
-		
+	public ChooseDifficultyState(GameStateManager gsm) {
 		super(gsm);
 		
 		try {
@@ -38,25 +32,18 @@ public class MenuState extends GameState {
 			// load floating head
 			head = ImageIO.read(getClass().getResourceAsStream("/HUD/lifes_icon.png")).getSubimage(0, 0, 16, 16);
 			
-			// titles and fonts
-			titleColor = Color.WHITE;
-			titleFont = new Font("Times New Roman", Font.BOLD, 28);
+			//font
 			font = new Font("Arial", Font.PLAIN, 14);
-			font2 = new Font("Arial", Font.PLAIN, 10);
+			titlefont = new Font("Times New Roman", Font.PLAIN, 18);
 			
-			// load sound fx
+			//load sounds fx
 			JukeBox.load("/SFX/menuoption.mp3", "menuoption");
 			JukeBox.load("/SFX/menuselect.mp3", "menuselect");
-			
-			// load menu sound
 			JukeBox.load("/Music/menusong.mp3", "menusong");
-			JukeBox.loop("menusong", 600, JukeBox.getFrames("menusong") - 2200);
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void init() {}
@@ -74,41 +61,37 @@ public class MenuState extends GameState {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		
-		// draw title
-		g.setColor(titleColor);
-		g.setFont(titleFont);
-		g.drawString("T H E    G A M E", 150, 90);
+		// draw the "choose difficulty"
+		g.setFont(titlefont);
+		g.setColor(Color.WHITE);
+		g.drawString("Choose difficulty", 185, 95);
 		
-		// draw menu options
+		// draw options
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString("Start", 230, 165);
-		g.drawString("Help", 230, 185);
-		g.drawString("Quit", 230, 205);
+		g.drawString("Easy", 230, 145);
+		g.drawString("Hard", 230, 165);
 		
 		// draw floating head
-		if(currentChoice == 0) g.drawImage(head, 210, 152, null);
-		else if(currentChoice == 1) g.drawImage(head, 210, 172, null);
-		else if(currentChoice == 2) g.drawImage(head, 210, 192, null);
-		
-		// other
-		g.setFont(font2);
-		g.drawString("OOP Project!", 8, 232);
-		
+		if(currentChoice == 0) g.drawImage(head, 210, 132, null);
+		else if(currentChoice == 1) g.drawImage(head, 210, 152, null);
 	}
 	
-	private void select() {
+	public void select() {
 		
 		if(currentChoice == 0) {
+			JukeBox.stop("menusong");
 			JukeBox.play("menuselect");
-			gsm.setState(GameStateManager.CHOOSEDIFFICULTYSTATE);
+			PlayerSave.init();
+			gsm.setState(GameStateManager.LEVEL1ASTATE);
 		}
 		else if(currentChoice == 1) {
+			JukeBox.stop("menusong");
 			JukeBox.play("menuselect");
-			gsm.setState(GameStateManager.HELPSTATE);
-		}
-		else if(currentChoice == 2) {
-			System.exit(0);
+			PlayerSave.init();
+			PlayerSave.setHealth(3);
+			PlayerSave.setLives(1);
+			gsm.setState(GameStateManager.LEVEL1ASTATE);
 		}
 	}
 	
@@ -128,15 +111,4 @@ public class MenuState extends GameState {
 			}
 		}
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-

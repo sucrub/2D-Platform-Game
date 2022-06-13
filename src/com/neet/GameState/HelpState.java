@@ -4,23 +4,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import com.neet.Audio.JukeBox;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 
-public class PauseState extends GameState {
-	
+public class HelpState extends GameState{
+
 	private Font font;
 	
-	public PauseState(GameStateManager gsm) {
-		
+	public HelpState(GameStateManager gsm) {
 		super(gsm);
 		
-		// fonts
 		font = new Font("Century Gothic", Font.PLAIN, 14);
-		
 	}
-	
+
 	public void init() {}
 	
 	public void update() {
@@ -34,17 +30,12 @@ public class PauseState extends GameState {
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		g.setColor(Color.WHITE);
 		g.setFont(font);
-		g.drawString("Game Paused", 190, 110);
+		g.drawString("Write something to help people playing here", 90, 90);
 	}
 	
 	public void handleInput() {
 		
-		if(Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(false);
-		if(Keys.isPressed(Keys.UP)) {
-			
-			gsm.setPaused(false);
+		if(Keys.isPressed(Keys.ESCAPE))
 			gsm.setState(GameStateManager.MENUSTATE);
-		}
 	}
-
 }
