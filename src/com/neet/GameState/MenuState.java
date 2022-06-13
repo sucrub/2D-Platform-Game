@@ -35,9 +35,7 @@ public class MenuState extends GameState {
 		try {
 			
 			// load floating head
-			head = ImageIO.read(
-				getClass().getResourceAsStream("/HUD/Hud.gif")
-			).getSubimage(0, 12, 12, 11);
+			head = ImageIO.read(getClass().getResourceAsStream("/HUD/lifes_icon.png")).getSubimage(0, 0, 16, 16);
 			
 			// titles and fonts
 			titleColor = Color.WHITE;
@@ -74,21 +72,21 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("A R T I F A C T", 70, 90);
+		g.drawString("T H E    G A M E", 150, 90);
 		
 		// draw menu options
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString("Start", 145, 165);
-		g.drawString("Quit", 145, 185);
+		g.drawString("Start", 230, 165);
+		g.drawString("Quit", 230, 185);
 		
 		// draw floating head
-		if(currentChoice == 0) g.drawImage(head, 125, 154, null);
-		else if(currentChoice == 1) g.drawImage(head, 125, 174, null);
+		if(currentChoice == 0) g.drawImage(head, 210, 152, null);
+		else if(currentChoice == 1) g.drawImage(head, 210, 172, null);
 		
 		// other
 		g.setFont(font2);
-		g.drawString("2013 Mike S.", 10, 232);
+		g.drawString("OOP Project!", 8, 232);
 		
 	}
 	

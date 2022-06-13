@@ -15,13 +15,10 @@ public class HUD {
 	public HUD(Player p) {
 		player = p;
 		try {
-			BufferedImage image = ImageIO.read(
-				getClass().getResourceAsStream(
-					"/HUD/Hud.gif"
-				)
-			);
-			heart = image.getSubimage(0, 0, 13, 12);
-			life = image.getSubimage(0, 12, 12, 11);
+			BufferedImage imageheart = ImageIO.read(getClass().getResourceAsStream("/HUD/hearts_hud.png"));
+			heart = imageheart.getSubimage(0, 0, 16, 16);
+			BufferedImage imagelife = ImageIO.read(getClass().getResourceAsStream("/HUD/lifes_icon.png"));
+			life = imagelife.getSubimage(0, 0, 16, 16);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -33,7 +30,7 @@ public class HUD {
 			g.drawImage(heart, 10 + i * 15, 10, null);
 		}
 		for(int i = 0; i < player.getLives(); i++) {
-			g.drawImage(life, 10 + i * 15, 25, null);
+			g.drawImage(life, 10 + i * 15, 30, null);
 		}
 		g.setColor(java.awt.Color.WHITE);
 		g.drawString(player.getTimeToString(), 290, 15);
