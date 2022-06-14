@@ -19,6 +19,7 @@ import com.neet.Entity.Teleport;
 import com.neet.Entity.Title;
 import com.neet.Entity.Enemies.Gazer;
 import com.neet.Entity.Enemies.GelPop;
+import com.neet.Entity.Enemies.Mushroom;
 import com.neet.Entity.Enemies.Tengu;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
@@ -135,6 +136,7 @@ public class Level1AState extends GameState {
 
 	private void populateEnemies() {
 		enemies.clear();
+		
 
 		Tengu t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1300, 100);
@@ -147,6 +149,7 @@ public class Level1AState extends GameState {
 		enemies.add(t);
 		GelPop gp;
 		Gazer g;
+		Mushroom m;
 
 		gp = new GelPop(tileMap, player);
 		gp.setPosition(1300, 100);
@@ -178,12 +181,26 @@ public class Level1AState extends GameState {
 		gp = new GelPop(tileMap, player);
 		gp.setPosition(3000, 100);
 		enemies.add(gp);
+		
 		g = new Gazer(tileMap);
 		g.setPosition(2600, 100);
 		enemies.add(g);
 		g = new Gazer(tileMap);
 		g.setPosition(3500, 100);
 		enemies.add(g);
+		
+		m = new Mushroom(tileMap, player);
+		m.setPosition(700, 184);
+		enemies.add(m);
+		m = new Mushroom(tileMap, player);
+		m.setPosition(1000, 88);
+		enemies.add(m);
+		m = new Mushroom(tileMap, player);
+		m.setPosition(2050, 88);
+		enemies.add(m);
+		m = new Mushroom(tileMap, player);
+		m.setPosition(2150, 57);
+		enemies.add(m);
 	}
 
 	public void update() {

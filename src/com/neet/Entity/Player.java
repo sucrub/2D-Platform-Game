@@ -48,7 +48,7 @@ public class Player extends MapObject {
 			16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16
 	};
 	private final int[] SPRITEDELAYS = {
-			3, 3, 2, 1, 2, 2, 2, 3, 2, 4, 2, 2, 2, 2
+			3, 3, 2, 1, 2, 4, 2, 3, 2, 4, 2, 2, 2, 2
 	};
 
 	private Rectangle ar;
@@ -341,7 +341,7 @@ public class Player extends MapObject {
 
 		if (doubleJump) {
 			dy = doubleJumpStart;
-			alreadyDoubleJump = true;
+			//alreadyDoubleJump = true;
 			doubleJump = false;
 
 			JukeBox.play("playerjump");
