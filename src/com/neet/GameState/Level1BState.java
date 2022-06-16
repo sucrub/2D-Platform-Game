@@ -49,7 +49,7 @@ public class Level1BState extends GameState {
 	private ArrayList<Rectangle> tb;
 	private boolean eventFinish;
 	private boolean eventDead;
-	private boolean eventQuake;
+	
 
 	public Level1BState(GameStateManager gsm) {
 		super(gsm);
@@ -181,9 +181,7 @@ public class Level1BState extends GameState {
 		handleInput();
 
 		// check if quake event should start
-		if (player.getx() > 2175 && !tileMap.isShaking()) {
-			eventQuake = blockInput = true;
-		}
+		
 
 		// check if end of level event should start
 		if (teleport.contains(player)) {
@@ -195,8 +193,7 @@ public class Level1BState extends GameState {
 			eventStart();
 		if (eventDead)
 			eventDead();
-		if (eventQuake)
-			eventQuake();
+		
 		if (eventFinish)
 			eventFinish();
 
@@ -401,28 +398,7 @@ public class Level1BState extends GameState {
 	}
 
 	// earthquake
-	private void eventQuake() {
-		eventCount++;
-		if (eventCount == 1) {
-			player.stop();
-			player.setPosition(2175, player.gety());
-		}
-		if (eventCount == 60) {
-			player.setEmote(Player.CONFUSED);
-		}
-		if (eventCount == 120)
-			player.setEmote(Player.NONE);
-		if (eventCount == 150)
-			tileMap.setShaking(true, 10);
-		if (eventCount == 180)
-			player.setEmote(Player.SURPRISED);
-		if (eventCount == 300) {
-			player.setEmote(Player.NONE);
-			eventQuake = blockInput = false;
-			eventCount = 0;
-		}
-	}
-
+	
 	// finished level
 	private void eventFinish() {
 		eventCount++;

@@ -74,6 +74,8 @@ public class Player extends MapObject {
 	public static final int SURPRISED = 2;
 	private int emote = NONE;
 
+
+
 	public Player(TileMap tm) {
 
 		super(tm);
@@ -130,11 +132,10 @@ public class Player extends MapObject {
 			// emotes
 			spritesheet = ImageIO.read(getClass().getResourceAsStream(
 					"/HUD/Emotes.gif"));
-			confused = spritesheet.getSubimage(
-					0, 0, 14, 17);
 			surprised = spritesheet.getSubimage(
 					14, 0, 14, 17);
-
+			confused = spritesheet.getSubimage(
+					0, 0, 14, 17);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -166,9 +167,7 @@ public class Player extends MapObject {
 		return maxHealth;
 	}
 
-	public void setEmote(int i) {
-		emote = i;
-	}
+
 
 	public void setTeleporting(boolean b) {
 		teleporting = b;
@@ -279,6 +278,9 @@ public class Player extends MapObject {
 		stop();
 	}
 
+	public void setEmote(int i) {
+			emote = i;
+	}
 	public void stop() {
 		left = right = up = down = flinching = dashing = jumping = attacking = false;
 	}
