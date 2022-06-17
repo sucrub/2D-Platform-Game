@@ -249,7 +249,7 @@ public class Level1AState extends GameState {
 		tileMap.setPosition(
 				GamePanel.WIDTH / 2 - player.getx(),
 				GamePanel.HEIGHT / 2 - player.gety());
-		tileMap.update();
+
 		tileMap.fixBounds();
 
 		// update enemies
@@ -364,7 +364,7 @@ public class Level1AState extends GameState {
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;
-		tileMap.setShaking(false, 0);
+		
 		eventStart = true;
 		eventStart();
 		title = new Title(hageonText.getSubimage(0, 0, 178, 20));

@@ -168,7 +168,7 @@ public class Level1CState extends GameState {
 		tileMap.setPosition(
 				GamePanel.WIDTH / 2 - player.getx(),
 				GamePanel.HEIGHT / 2 - player.gety());
-		tileMap.update();
+		
 		tileMap.fixBounds();
 
 		// update enemies
@@ -290,7 +290,7 @@ public class Level1CState extends GameState {
 			tb.add(new Rectangle(0, GamePanel.HEIGHT / 2, GamePanel.WIDTH, GamePanel.HEIGHT / 2));
 			tb.add(new Rectangle(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT));
 			if (!portal.isOpened())
-				tileMap.setShaking(true, 10);
+
 			JukeBox.stop("level1");
 		}
 		if (eventCount > 1 && eventCount < 60) {
@@ -377,7 +377,7 @@ public class Level1CState extends GameState {
 				flash = false;
 		}
 		if (eventCount == 181) {
-			tileMap.setShaking(false, 0);
+
 			flash = false;
 			tlp.setVector(-0.3, -0.3);
 			trp.setVector(0.3, -0.3);
