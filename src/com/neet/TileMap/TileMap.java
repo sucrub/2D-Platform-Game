@@ -56,12 +56,9 @@ public class TileMap {
 	}
 	
 	public void loadTiles(String s) {
-		
+	
 		try {
-
-			tileset = ImageIO.read(
-				getClass().getResourceAsStream(s)
-			);
+			tileset = ImageIO.read(getClass().getResourceAsStream(s));
 			numTilesAcross = tileset.getWidth() / tileSize;
 			tiles = new Tile[7][numTilesAcross];
 			System.out.println(numTilesAcross);
