@@ -17,6 +17,7 @@ import com.neet.Entity.Player;
 import com.neet.Entity.PlayerSave;
 import com.neet.Entity.Teleport;
 import com.neet.Entity.Title;
+import com.neet.Entity.Enemies.BigBoss;
 import com.neet.Entity.Enemies.Gazer;
 import com.neet.Entity.Enemies.GelPop;
 import com.neet.Entity.Enemies.Mushroom;
@@ -134,6 +135,11 @@ public class Level1AState extends GameState {
 		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1360, 100);
 		enemies.add(t);
+
+		GelPop gp;
+		Gazer g;
+		Mushroom m;
+		BigBoss n;
 		
 		gp = new GelPop(tileMap, player);
 		gp.setPosition(1300, 100);
@@ -185,6 +191,10 @@ public class Level1AState extends GameState {
 		m = new Mushroom(tileMap, player);
 		m.setPosition(2150, 57);
 		enemies.add(m);
+		
+		n = new BigBoss(tileMap, player, enemies);
+		n.setPosition(400,195);
+		enemies.add(n);
 	}
 
 	public void update() {
@@ -409,7 +419,7 @@ public class Level1AState extends GameState {
 			PlayerSave.setHealth(player.getHealth());
 			PlayerSave.setLives(player.getLives());
 			PlayerSave.setTime(player.getTime());
-			gsm.setState(GameStateManager.LEVEL1BSTATE);
+			gsm.setState(GameStateManager.LEVEL1ASTATE);
 		}
 
 	}
