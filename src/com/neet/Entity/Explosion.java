@@ -24,8 +24,8 @@ public class Explosion extends MapObject {
 		this.x = x;
 		this.y = y;
 		
-		width = 30;
-		height = 30;
+		width = 16;
+		height = 16;
 		
 		speed = 2;
 		diagSpeed = 1.41;
