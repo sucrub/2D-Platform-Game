@@ -8,9 +8,9 @@ import com.neet.Handlers.Content;
 import com.neet.TileMap.TileMap;
 
 
-public class DarkEnergy extends Enemy {
+public class SpitBullets extends Enemy {
 	
-	private BufferedImage[] startSprites;
+
 	private BufferedImage[] sprites;
 	
 	private boolean start;
@@ -19,29 +19,29 @@ public class DarkEnergy extends Enemy {
 	private int type = 0;
 	public static int VECTOR = 0;
 	public static int GRAVITY = 1;
-	public static int BOUNCE = 2;
+	public static int BOUNCE = 5;
 	
 	private int bounceCount = 0;
 	
-	public DarkEnergy(TileMap tm) {
+	public SpitBullets(TileMap tm) {
 		
 		super(tm);
 		
 		health = maxHealth = 1;
 		
-		width = 20;
-		height = 20;
-		cwidth = 12;
-		cheight = 12;
+		width = 16;
+		height = 25;
+		cwidth = 20;
+		cheight = 30;
 		
 		damage = 1;
-		moveSpeed = 5;
+		moveSpeed = 10;
 		
-		startSprites = Content.DarkEnergy[0];
-		sprites = Content.DarkEnergy[1];
+
+		sprites = Content.SpitBullets[0];
 		
-		animation.setFrames(startSprites);
-		animation.setDelay(2);
+		animation.setFrames(sprites);
+		animation.setDelay(5);
 		
 		start = true;
 		flinching = true;
@@ -57,8 +57,8 @@ public class DarkEnergy extends Enemy {
 		if(start) {
 			if(animation.hasPlayedOnce()) {
 				animation.setFrames(sprites);
-				animation.setNumFrames(0);
-				animation.setDelay(2);
+				animation.setNumFrames(7);
+				animation.setDelay(4);
 				start = false;
 			}
 		}

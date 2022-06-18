@@ -204,7 +204,7 @@ public class Level1AState extends GameState {
 		m.setPosition(2150, 57);
 		enemies.add(m);
 		
-		n = new BigBoss(tileMap, player);
+		n = new BigBoss(tileMap, player, enemies);
 		n.setPosition(400,195);
 		enemies.add(n);
 	}
