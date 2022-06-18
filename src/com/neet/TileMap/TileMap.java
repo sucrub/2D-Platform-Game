@@ -45,10 +45,10 @@ public class TileMap {
 	private int numColsToDraw;
 	
 	// effects
-	
 	private int intensity;
 	
 	public TileMap(int tileSize) {
+		
 		this.tileSize = tileSize;
 		numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
 		numColsToDraw = GamePanel.WIDTH / tileSize + 2;
@@ -56,12 +56,13 @@ public class TileMap {
 	}
 	
 	public void loadTiles(String s) {
-	
+		
 		try {
+			
 			tileset = ImageIO.read(getClass().getResourceAsStream(s));
 			numTilesAcross = tileset.getWidth() / tileSize;
 			tiles = new Tile[7][numTilesAcross];
-			System.out.println(numTilesAcross);
+			
 			BufferedImage subimage;
 			for(int col = 0; col < numTilesAcross; col++) {
 				subimage = tileset.getSubimage(col * tileSize, 0, tileSize, tileSize);
@@ -79,23 +80,18 @@ public class TileMap {
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 6, tileSize, tileSize);
 				tiles[6][col] = new Tile(subimage, Tile.BLOCKED);
 			}
-			
 		}
 		catch(Exception e) {
+			
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 	public void loadMap(String s) {
-		
-		try {
+		try {	
 			
 			InputStream in = getClass().getResourceAsStream(s);
-			BufferedReader br = new BufferedReader(
-						new InputStreamReader(in)
-					);
-			
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));	
 			numCols = Integer.parseInt(br.readLine());
 			numRows = Integer.parseInt(br.readLine());
 			map = new int[numRows][numCols];
@@ -115,35 +111,64 @@ public class TileMap {
 					map[row][col] = Integer.parseInt(tokens[col]);
 				}
 			}
-			
 		}
 		catch(Exception e) {
+			
 			e.printStackTrace();
 		}
 		
 	}
 	
+	public int getTileSize() { 
+		
+		return tileSize; 
+	}
 	
+	public double getx() { 
+		
+		return x; 
+	}
 	
-	public int getTileSize() { return tileSize; }
-	public double getx() { return x; }
-	public double gety() { return y; }
-	public int getWidth() { return width; }
-	public int getHeight() { return height; }
-	public int getNumRows() { return numRows; }
-	public int getNumCols() { return numCols; }
+	public double gety() {
+		
+		return y;
+	}
+	
+	public int getWidth() { 
+		
+		return width; 
+	}
+	
+	public int getHeight() {
+		
+		return height;
+	}
+	
+	public int getNumRows() { 
+		
+		return numRows; 
+	}
+	
+	public int getNumCols() { 
+		
+		return numCols; 
+	}
 	
 	public int getType(int row, int col) {
+		
 		int rc = map[row][col];
 		int r = rc / numTilesAcross;
 		int c = rc % numTilesAcross;
 		return tiles[r][c].getType();
 	}
 
-	
-	public void setTween(double d) { tween = d; }
+	public void setTween(double d) { 
+		
+		tween = d; 
+	}
 
 	public void setBounds(int i1, int i2, int i3, int i4) {
+		
 		xmin = GamePanel.WIDTH - i1;
 		ymin = GamePanel.WIDTH - i2;
 		xmax = i3;
@@ -154,53 +179,35 @@ public class TileMap {
 		
 		this.x += (x - this.x) * tween;
 		this.y += (y - this.y) * tween;
-		
+	
 		fixBounds();
 		
 		colOffset = (int)-this.x / tileSize;
 		rowOffset = (int)-this.y / tileSize;
-		
 	}
 	
 	public void fixBounds() {
+		
 		if(x < xmin) x = xmin;
 		if(y < ymin) y = ymin;
 		if(x > xmax) x = xmax;
 		if(y > ymax) y = ymax;
 	}
 	
-	
-	
-	
 	public void draw(Graphics2D g) {
 		
 		for(int row = rowOffset; row < rowOffset + numRowsToDraw; row++) {
-		
 			if(row >= numRows) break;
-			
 			for(int col = colOffset; col < colOffset + numColsToDraw; col++) {
-				
 				if(col >= numCols) break;
 				if(map[row][col] == 0) continue;
-				
 				int rc = map[row][col];
 				int r = rc / numTilesAcross;
 				int c = rc % numTilesAcross;
-				
-				g.drawImage(
-					tiles[r][c].getImage(),
-					(int)x + col * tileSize,
-					(int)y + row * tileSize,
-					null
-				);
-				
+				g.drawImage(tiles[r][c].getImage(), (int)x + col * tileSize, (int)y + row * tileSize, null);
 			}
-			
 		}
-		
 	}
-	
-	
 }
 
 

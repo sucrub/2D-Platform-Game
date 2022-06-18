@@ -35,6 +35,7 @@ public class GameStateManager {
 	}
 	
 	private void loadState(int state) {
+		
 		if(state == MENUSTATE)
 			gameStates[state] = new MenuState(this);
 		else if(state == HELPSTATE)
@@ -52,18 +53,23 @@ public class GameStateManager {
 	}
 	
 	private void unloadState(int state) {
+		
 		gameStates[state] = null;
 	}
 	
 	public void setState(int state) {
+		
 		unloadState(currentState);
 		currentState = state;
 		loadState(currentState);
 	}
 	
-	public void setPaused(boolean b) { paused = b; }
+	public void setPaused(boolean b) { 
+		paused = b; 
+	}
 	
 	public void update() {
+		
 		if(paused) {
 			pauseState.update();
 			return;
@@ -72,12 +78,15 @@ public class GameStateManager {
 	}
 	
 	public void draw(java.awt.Graphics2D g) {
+		
 		if(paused) {
 			pauseState.draw(g);
 			return;
 		}
+		
 		if(gameStates[currentState] != null) gameStates[currentState].draw(g);
 		else {
+			
 			g.setColor(java.awt.Color.BLACK);
 			g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		}
