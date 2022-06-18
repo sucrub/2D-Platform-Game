@@ -41,7 +41,7 @@ public class SpitBullets extends Enemy {
 		sprites = Content.SpitBullets[0];
 		
 		animation.setFrames(sprites);
-		animation.setDelay(5);
+		animation.setDelay(-1);
 		
 		start = true;
 		flinching = true;
@@ -57,8 +57,8 @@ public class SpitBullets extends Enemy {
 		if(start) {
 			if(animation.hasPlayedOnce()) {
 				animation.setFrames(sprites);
-				animation.setNumFrames(7);
-				animation.setDelay(4);
+				animation.setNumFrames(8);
+				animation.setDelay(-1);
 				start = false;
 			}
 		}

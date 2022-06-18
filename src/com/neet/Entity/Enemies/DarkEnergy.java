@@ -57,7 +57,7 @@ public class DarkEnergy extends Enemy {
 		if(start) {
 			if(animation.hasPlayedOnce()) {
 				animation.setFrames(sprites);
-				animation.setNumFrames(0);
+				animation.setNumFrames(3);
 				animation.setDelay(2);
 				start = false;
 			}
