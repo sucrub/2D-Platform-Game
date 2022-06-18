@@ -17,6 +17,7 @@ public class Content {
 	public static BufferedImage[][] Tengu = load("/Sprites/Enemies/Tengu.gif", 30, 30);
 	public static BufferedImage[][] GelPop = load("/Sprites/Enemies/GelPop.gif", 25, 25);
 	public static BufferedImage[][] DarkEnergy = load("/Sprites/Enemies/DarkEnergy.gif", 20, 20);
+	public static BufferedImage[][] BigBoss = load("/Sprites/Enemies/bigBoss.png", 64, 62);
 	
 	public static BufferedImage[][] load(String s, int w, int h) {
 		BufferedImage[][] ret;
