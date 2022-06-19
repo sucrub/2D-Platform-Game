@@ -83,6 +83,7 @@ public class BigBoss extends Enemy {
 	}
 	
 	
+
 	
 	public void update() {
 		
@@ -139,15 +140,29 @@ public class BigBoss extends Enemy {
 				animation.setDelay(3);
 				SpitBullets de = new SpitBullets(tileMap);
 				de.setPosition(x, y);
+				de.setType(1);
 				if(facingRight) de.setVector(3, 3);
 				else de.setVector(-3, 3);
 				enemies.add(de);
+				
+				FireBall fb = new FireBall(tileMap);
+				fb.setVector(facingRight);
+				fb.setPosition(x, y);
+				fb.setType(3);
+				if(facingRight) fb.setVector(3, 3);
+				else fb.setVector(-3, 3);
+				enemies.add(fb);
+				
+				
+				
+				
+				
 			}
 			if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
 				step++;
 				currentAction = JUMPING;
 				animation.setFrames(jumpSprites);
-				animation.setDelay(-1);
+				animation.setDelay(3);
 			}
 		}
 		// done attacking

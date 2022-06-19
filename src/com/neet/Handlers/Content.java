@@ -19,6 +19,8 @@ public class Content {
 	public static BufferedImage[][] DarkEnergy = load("/Sprites/Enemies/DarkEnergy.gif", 20, 20);
 	public static BufferedImage[][] BigBoss = load("/Sprites/Enemies/BigBoss.png", 64, 62);
 	public static BufferedImage[][] SpitBullets = load ("/Sprites/Enemies/BulletsBoss.gif", 16, 25);
+	public static BufferedImage[][] FireBallLeft = load("/Sprites/Enemies/FireBallLeft.gif",40, 32);
+	public static BufferedImage[][] FireBallRight = load("/Sprites/Enemies/FireBallRight.png",40, 32);
 	
 	public static BufferedImage[][] load(String s, int w, int h) {
 		BufferedImage[][] ret;
