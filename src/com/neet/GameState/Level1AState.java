@@ -99,7 +99,7 @@ public class Level1AState extends GameState {
 
 		// teleport
 		teleport = new Teleport(tileMap);
-		teleport.setPosition(3700, 131);
+		teleport.setPosition(600, 61);
 
 		// start event
 		eventStart = true;
@@ -125,6 +125,7 @@ public class Level1AState extends GameState {
 		Gazer g;
 		Mushroom m;
 		Tengu t;
+		BigBoss n;
 		
 		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1300, 100);
@@ -135,11 +136,6 @@ public class Level1AState extends GameState {
 		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1360, 100);
 		enemies.add(t);
-
-		GelPop gp;
-		Gazer g;
-		Mushroom m;
-		BigBoss n;
 		
 		gp = new GelPop(tileMap, player);
 		gp.setPosition(1300, 100);
