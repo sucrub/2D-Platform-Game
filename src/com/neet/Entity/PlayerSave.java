@@ -13,6 +13,7 @@ public class PlayerSave {
 		lives = 3;
 		health = maxHealth;
 		time = 0;
+		mp = maxMp;
 	}
 
 	public static int getLives() {
