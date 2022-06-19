@@ -167,8 +167,6 @@ public class Player extends MapObject {
 		return maxHealth;
 	}
 
-
-
 	public void setTeleporting(boolean b) {
 		teleporting = b;
 	}

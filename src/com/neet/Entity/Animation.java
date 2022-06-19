@@ -14,10 +14,12 @@ public class Animation {
 	private int timesPlayed;
 	
 	public Animation() {
+		
 		timesPlayed = 0;
 	}
 	
 	public void setFrames(BufferedImage[] frames) {
+		
 		this.frames = frames;
 		currentFrame = 0;
 		count = 0;

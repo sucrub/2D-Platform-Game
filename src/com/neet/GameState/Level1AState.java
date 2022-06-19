@@ -29,9 +29,7 @@ import com.neet.TileMap.TileMap;
 
 public class Level1AState extends GameState {
 
-
 	private Background sky;
-	private Background clouds;
 	private Background mountains;
 	
 	private Player player;
@@ -42,9 +40,6 @@ public class Level1AState extends GameState {
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
-	private BufferedImage hageonText;
-	private Title title;
-	private Title subtitle;
 	private Teleport teleport;
 
 	// events
@@ -63,24 +58,23 @@ public class Level1AState extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/newbackground.png", 0);
-		clouds = new Background("/Backgrounds/clouds.gif", 0.1);
-		mountains = new Background("/Backgrounds/mountains.gif", 0.2);
+		sky = new Background("/Backgrounds/background2.png", 0);
+		mountains = new Background("/Backgrounds/mountain.png", 0.2);
 
 		// tilemap
 		tileMap = new TileMap(32);
 		tileMap.loadTiles("/Tilesets/tilesetnewer.png");
 		tileMap.loadMap("/Maps/level1a.map");
-		tileMap.setPosition(140, 0);
-		tileMap.setBounds(
-				tileMap.getWidth() - 1 * tileMap.getTileSize(),
-				tileMap.getHeight() - 2 * tileMap.getTileSize(),
-				0, 0);
-		tileMap.setTween(1);
+		//tileMap.setPosition(100, 0);
+		//tileMap.setBounds(
+		//		tileMap.getWidth() - 1 * tileMap.getTileSize(),
+		//		tileMap.getHeight() - 2 * tileMap.getTileSize(),
+		//		0, 0);
+//		tileMap.setTween(1);
 
 		// player
 		player = new Player(tileMap);
-		player.setPosition(300, 161);
+		player.setPosition(400, 61);
 		player.setHealth(PlayerSave.getHealth());
 		player.setLives(PlayerSave.getLives());
 		player.setTime(PlayerSave.getTime());
@@ -103,18 +97,6 @@ public class Level1AState extends GameState {
 		// hud
 		hud = new HUD(player);
 
-		// title and subtitle
-		try {
-			hageonText = ImageIO.read(
-					getClass().getResourceAsStream("/HUD/HageonTemple.gif"));
-			title = new Title(hageonText.getSubimage(0, 0, 178, 20));
-			title.sety(60);
-			subtitle = new Title(hageonText.getSubimage(0, 20, 82, 13));
-			subtitle.sety(85);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		// teleport
 		teleport = new Teleport(tileMap);
 		teleport.setPosition(3800, 131);
@@ -136,10 +118,15 @@ public class Level1AState extends GameState {
 	}
 
 	private void populateEnemies() {
+	
 		enemies.clear();
+	
+		GelPop gp;
+		Gazer g;
+		Mushroom m;
+		Tengu t;
 		
-
-		Tengu t = new Tengu(tileMap, player, enemies);
+		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1300, 100);
 		enemies.add(t);
 		t = new Tengu(tileMap, player, enemies);
@@ -153,7 +140,7 @@ public class Level1AState extends GameState {
 		Gazer g;
 		Mushroom m;
 		BigBoss n;
-
+		
 		gp = new GelPop(tileMap, player);
 		gp.setPosition(1300, 100);
 		enemies.add(gp);
@@ -215,12 +202,12 @@ public class Level1AState extends GameState {
 		// check keys
 		handleInput();
 
-		// check if end of level event should start
+		// check if end of level
 		if (teleport.contains(player)) {
 			eventFinish = blockInput = true;
 		}
 
-		// check if player dead event should start
+		// check if player dead
 		if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
 			eventDead = blockInput = true;
 		}
@@ -233,20 +220,7 @@ public class Level1AState extends GameState {
 		if (eventFinish)
 			eventFinish();
 
-		// move title and subtitle
-		if (title != null) {
-			title.update();
-			if (title.shouldRemove())
-				title = null;
-		}
-		if (subtitle != null) {
-			subtitle.update();
-			if (subtitle.shouldRemove())
-				subtitle = null;
-		}
-
 		// move backgrounds
-		clouds.setPosition(tileMap.getx(), tileMap.gety());
 		mountains.setPosition(tileMap.getx(), tileMap.gety());
 
 		// update player
@@ -298,7 +272,6 @@ public class Level1AState extends GameState {
 
 		// draw background
 		sky.draw(g);
-		clouds.draw(g);
 		mountains.draw(g);
 
 		// draw tilemap
@@ -328,12 +301,6 @@ public class Level1AState extends GameState {
 		// draw hud
 		hud.draw(g);
 
-		// draw title
-		if (title != null)
-			title.draw(g);
-		if (subtitle != null)
-			subtitle.draw(g);
-
 		// draw transition boxes
 		g.setColor(java.awt.Color.BLACK);
 		for (int i = 0; i < tb.size(); i++) {
@@ -343,6 +310,7 @@ public class Level1AState extends GameState {
 	}
 
 	public void handleInput() {
+		
 		if (Keys.isPressed(Keys.ESCAPE))
 			gsm.setPaused(true);
 		if (blockInput || player.getHealth() == 0)
@@ -366,18 +334,15 @@ public class Level1AState extends GameState {
 
 	// reset level
 	private void reset() {
+		
 		player.reset();
-		player.setPosition(300, 161);
+		player.setPosition(300, 61);
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;
 		
 		eventStart = true;
 		eventStart();
-		title = new Title(hageonText.getSubimage(0, 0, 178, 20));
-		title.sety(60);
-		subtitle = new Title(hageonText.getSubimage(0, 33, 91, 13));
-		subtitle.sety(85);
 	}
 
 	// level started
@@ -396,12 +361,9 @@ public class Level1AState extends GameState {
 			tb.get(2).y += 4;
 			tb.get(3).x += 6;
 		}
-		if (eventCount == 30)
-			title.begin();
 		if (eventCount == 60) {
 			eventStart = blockInput = false;
 			eventCount = 0;
-			subtitle.begin();
 			tb.clear();
 		}
 	}
