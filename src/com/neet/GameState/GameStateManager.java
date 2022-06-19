@@ -13,9 +13,11 @@ public class GameStateManager {
 	
 	public static final int NUMGAMESTATES = 16;
 	public static final int MENUSTATE = 0;
-	public static final int LEVEL1ASTATE = 2;
-	public static final int LEVEL1BSTATE = 3;
-	public static final int LEVEL1CSTATE = 4;
+	public static final int HELPSTATE = 1;
+	public static final int CHOOSEDIFFICULTYSTATE = 2;
+	public static final int LEVEL1ASTATE = 3;
+	public static final int LEVEL1BSTATE = 4;
+	public static final int LEVEL1CSTATE = 5;
 	public static final int ACIDSTATE = 15;
 	
 	public GameStateManager() {
@@ -33,8 +35,13 @@ public class GameStateManager {
 	}
 	
 	private void loadState(int state) {
+		
 		if(state == MENUSTATE)
 			gameStates[state] = new MenuState(this);
+		else if(state == HELPSTATE)
+			gameStates[state] = new HelpState(this);
+		else if(state == CHOOSEDIFFICULTYSTATE)
+			gameStates[state] = new ChooseDifficultyState(this);
 		else if(state == LEVEL1ASTATE)
 			gameStates[state] = new Level1AState(this);
 		else if(state == LEVEL1BSTATE)
@@ -46,18 +53,23 @@ public class GameStateManager {
 	}
 	
 	private void unloadState(int state) {
+		
 		gameStates[state] = null;
 	}
 	
 	public void setState(int state) {
+		
 		unloadState(currentState);
 		currentState = state;
 		loadState(currentState);
 	}
 	
-	public void setPaused(boolean b) { paused = b; }
+	public void setPaused(boolean b) { 
+		paused = b; 
+	}
 	
 	public void update() {
+		
 		if(paused) {
 			pauseState.update();
 			return;
@@ -66,12 +78,15 @@ public class GameStateManager {
 	}
 	
 	public void draw(java.awt.Graphics2D g) {
+		
 		if(paused) {
 			pauseState.draw(g);
 			return;
 		}
+		
 		if(gameStates[currentState] != null) gameStates[currentState].draw(g);
 		else {
+			
 			g.setColor(java.awt.Color.BLACK);
 			g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		}

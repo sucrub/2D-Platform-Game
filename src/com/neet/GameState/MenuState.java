@@ -36,19 +36,21 @@ public class MenuState extends GameState {
 		try {
 			
 			// load floating head
-			head = ImageIO.read(
-				getClass().getResourceAsStream("/HUD/Hud.gif")
-			).getSubimage(0, 12, 12, 11);
+			head = ImageIO.read(getClass().getResourceAsStream("/HUD/lifes_icon.png")).getSubimage(0, 0, 16, 16);
 			
 			// titles and fonts
 			titleColor = Color.WHITE;
-			titleFont = new Font("Times New Roman", Font.PLAIN, 28);
+			titleFont = new Font("Times New Roman", Font.BOLD, 28);
 			font = new Font("Arial", Font.PLAIN, 14);
 			font2 = new Font("Arial", Font.PLAIN, 10);
 			
 			// load sound fx
 			JukeBox.load("/SFX/menuoption.mp3", "menuoption");
 			JukeBox.load("/SFX/menuselect.mp3", "menuselect");
+			
+			// load menu sound
+			JukeBox.load("/Music/menusong.mp3", "menusong");
+			JukeBox.loop("menusong", 600, JukeBox.getFrames("menusong") - 2200);
 			
 		}
 		catch(Exception e) {
@@ -75,34 +77,35 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("A R T I F A C T", 70, 90);
+		g.drawString("T H E    G A M E", 150, 90);
 		
 		// draw menu options
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString("Start", 145, 165);
-		g.drawString("Help", 145, 185);
-		g.drawString("Quit", 145, 205);
+		g.drawString("Start", 230, 165);
+		g.drawString("Help", 230, 185);
+		g.drawString("Quit", 230, 205);
 		
 		// draw floating head
-		if(currentChoice == 0) g.drawImage(head, 125, 154, null);
-		else if(currentChoice == 1) g.drawImage(head, 125, 174, null);
-		else if(currentChoice == 2) g.drawImage(head, 125, 194, null);
+		if(currentChoice == 0) g.drawImage(head, 210, 152, null);
+		else if(currentChoice == 1) g.drawImage(head, 210, 172, null);
+		else if(currentChoice == 2) g.drawImage(head, 210, 192, null);
 		
 		// other
 		g.setFont(font2);
-		g.drawString("2013 Mike S.", 10, 232);
+		g.drawString("OOP Project!", 8, 232);
 		
 	}
 	
 	private void select() {
+		
 		if(currentChoice == 0) {
 			JukeBox.play("menuselect");
-			PlayerSave.init();
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			gsm.setState(GameStateManager.CHOOSEDIFFICULTYSTATE);
 		}
 		else if(currentChoice == 1) {
-			// chay cai help o day ghi huong dan choi game o day
+			JukeBox.play("menuselect");
+			gsm.setState(GameStateManager.HELPSTATE);
 		}
 		else if(currentChoice == 2) {
 			System.exit(0);
@@ -110,6 +113,7 @@ public class MenuState extends GameState {
 	}
 	
 	public void handleInput() {
+		
 		if(Keys.isPressed(Keys.ENTER)) select();
 		if(Keys.isPressed(Keys.UP)) {
 			if(currentChoice > 0) {

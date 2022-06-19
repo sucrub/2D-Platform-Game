@@ -17,7 +17,7 @@ import com.neet.Handlers.Keys;
 public class GamePanel extends JPanel implements Runnable, KeyListener{
 	
 	// dimensions
-	public static final int WIDTH = 320;
+	public static final int WIDTH = 500;
 	public static final int HEIGHT = 240;
 	public static final int SCALE = 2;
 	
@@ -59,10 +59,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		
 		image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		g = (Graphics2D) image.getGraphics();
-
+			
 		running = true;
 		
-		gsm = new GameStateManager();		
+		gsm = new GameStateManager();
+		
 	}
 	
 	public void run() {
@@ -98,10 +99,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	}
 	
 	private void update() {
+		
 		gsm.update();
 		Keys.update();
 	}
+	
 	private void draw() {
+		
 		gsm.draw(g);
 	}
 	
@@ -112,12 +116,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		if(screenshot) {
 			screenshot = false;
 			try {
+				
 				java.io.File out = new java.io.File("screenshot " + System.nanoTime() + ".gif");
 				javax.imageio.ImageIO.write(image, "gif", out);
 			}
 			catch(Exception e) {}
 		}
+		
 		if(!recording) return;
+		
 		try {
 			java.io.File out = new java.io.File("C:\\out\\frame" + recordingCount + ".gif");
 			javax.imageio.ImageIO.write(image, "gif", out);
@@ -129,6 +136,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	public void keyTyped(KeyEvent key) {}
 	
 	public void keyPressed(KeyEvent key) {
+		
 		if(key.isControlDown()) {
 			if(key.getKeyCode() == KeyEvent.VK_R) {
 				recording = !recording;
@@ -144,6 +152,5 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	public void keyReleased(KeyEvent key) {
 		Keys.keySet(key.getKeyCode(), false);
 	}
-	
 
 }

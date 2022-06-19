@@ -22,8 +22,8 @@ public class Gazer extends Enemy {
 		
 		health = maxHealth = 2;
 		
-		width = 39;
-		height = 20;
+		width = 8;
+		height = 8;
 		cwidth = 25;
 		cheight = 15;
 		
