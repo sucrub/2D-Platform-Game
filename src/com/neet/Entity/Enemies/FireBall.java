@@ -7,11 +7,10 @@ import com.neet.Entity.Enemy;
 import com.neet.Handlers.Content;
 import com.neet.TileMap.TileMap;
 
-
-public class SpitBullets extends Enemy {
+public class FireBall extends Enemy {
 	
-
-	private BufferedImage[] sprites;
+	private BufferedImage[] spritesLeft;
+	private BufferedImage[] spritesRight;
 	
 	private boolean start;
 	private boolean permanent;
@@ -21,28 +20,31 @@ public class SpitBullets extends Enemy {
 	public static int GRAVITY = 1;
 	public static int BOUNCE = 2;
 	public static int HORIZONTAL = 3;
+	public int bounceCount;
 	
-	private int bounceCount = 0;
+	private boolean right;
 	
-	public SpitBullets(TileMap tm) {
+	public FireBall(TileMap tm) {
 		
 		super(tm);
 		
 		health = maxHealth = 1;
 		
-		width = 16;
-		height = 25;
+		width = 32;
+		height = 40;
 		cwidth = 20;
 		cheight = 30;
 		
 		damage = 1;
-		moveSpeed = 10;
+		moveSpeed = 20;
 		
 
-		sprites = Content.SpitBullets[0];
-		
-		animation.setFrames(sprites);
-		animation.setDelay(4);
+		spritesLeft = Content.FireBallLeft[0];
+		spritesRight= Content.FireBallRight[0];
+		animation.setFrames(spritesLeft);
+		animation.setDelay(1);
+		animation.setFrames(spritesRight);
+		animation.setDelay(1);
 		
 		start = true;
 		flinching = true;
@@ -52,13 +54,20 @@ public class SpitBullets extends Enemy {
 	
 	public void setType(int i) { type = i; }
 	public void setPermanent(boolean b) { permanent = b; }
+	public void setVector(boolean c) {right=c;}
 	
 	public void update() {
 		
 		if(start) {
-			if(animation.hasPlayedOnce()) {
-				animation.setFrames(sprites);
-				animation.setNumFrames(8);
+			if(animation.hasPlayedOnce() && !right) {
+				animation.setFrames(spritesRight);
+				animation.setNumFrames(6);
+				animation.setDelay(4);
+				start = false;
+			}
+			else if (animation.hasPlayedOnce() && right) {
+				animation.setFrames(spritesLeft);
+				animation.setNumFrames(6);
 				animation.setDelay(4);
 				start = false;
 			}
@@ -93,14 +102,12 @@ public class SpitBullets extends Enemy {
 			y += dy;
 		}
 		
+		
 		// update animation
 		animation.update();
 		
 		if(!permanent) {
 			if(x < 0 || x > tileMap.getWidth() || y < 0 || y > tileMap.getHeight()) {
-				remove = true;
-			}
-			if(bounceCount == 3) {
 				remove = true;
 			}
 		}
@@ -111,4 +118,5 @@ public class SpitBullets extends Enemy {
 		super.draw(g);
 	}
 	
+
 }
