@@ -34,7 +34,7 @@ public class Level1AState extends GameState {
 
 	private Background sky;
 	private Background mountains;
-	
+
 	private Player player;
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
@@ -329,6 +329,8 @@ public class Level1AState extends GameState {
 			player.setDashing();
 		if (Keys.isPressed(Keys.BUTTON_R))
 			player.setAttacking();
+		if (Keys.isPressed(Keys.BUTTON_F))
+			player.setFlyingKnife();
 
 	}
 
