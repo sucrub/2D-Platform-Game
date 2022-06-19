@@ -8,7 +8,7 @@ import com.neet.Handlers.Content;
 import com.neet.TileMap.TileMap;
 
 
-public class Gazer extends Enemy {
+public class Bird extends Enemy {
 	
 	private BufferedImage[] idleSprites;
 	
@@ -16,7 +16,7 @@ public class Gazer extends Enemy {
 	private double a;
 	private double b;
 	
-	public Gazer(TileMap tm) {
+	public Bird(TileMap tm) {
 		
 		super(tm);
 		
@@ -30,7 +30,7 @@ public class Gazer extends Enemy {
 		damage = 1;
 		moveSpeed = 5;
 		
-		idleSprites = Content.Gazer[0];
+		idleSprites = Content.Bird[0];
 		
 		animation.setFrames(idleSprites);
 		animation.setDelay(4);

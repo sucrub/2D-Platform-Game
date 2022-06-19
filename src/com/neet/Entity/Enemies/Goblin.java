@@ -9,23 +9,23 @@ import com.neet.Handlers.Content;
 import com.neet.Main.GamePanel;
 import com.neet.TileMap.TileMap;
 
-public class GelPop extends Enemy {
+public class Goblin extends Enemy {
 	
 	private BufferedImage[] sprites;
 	private Player player;
 	private boolean active;
 	
-	public GelPop(TileMap tm, Player p) {
+	public Goblin(TileMap tm, Player p) {
 		
 		super(tm);
 		player = p;
 		
 		health = maxHealth = 1;
 		
-		width = 25;
-		height = 25;
+		width = 16;
+		height = 16;
 		cwidth = 20;
-		cheight = 25;
+		cheight = 15;
 		
 		damage = 1;
 		moveSpeed = 0.8;
@@ -33,7 +33,7 @@ public class GelPop extends Enemy {
 		maxFallSpeed = 4.0;
 		jumpStart = -5;
 		
-		sprites = Content.GelPop[0];
+		sprites = Content.Goblin[0];
 		
 		animation.setFrames(sprites);
 		animation.setDelay(4);

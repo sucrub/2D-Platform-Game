@@ -10,12 +10,15 @@ import javax.imageio.ImageIO;
 public class Content {
 	
 	public static BufferedImage[][] EnergyParticle = load("/Sprites/Player/EnergyParticle.gif", 5, 5);
-	public static BufferedImage[][] Explosion = load("/Sprites/Enemies/Explosion.gif", 30, 30);
+	public static BufferedImage[][] Explosion = load("/Sprites/Enemies/Explosion.gif", 16, 16);
 	
+	public static BufferedImage[][] Mushroom1 = load("/Sprites/Enemies/Mushroom1.gif", 16, 16);
 	public static BufferedImage[][] Mushroom = load("/Sprites/Enemies/Mushroom.gif", 16, 16);
-	public static BufferedImage[][] Gazer = load("/Sprites/Enemies/Bird.png",32 , 32);
-	public static BufferedImage[][] Tengu = load("/Sprites/Enemies/Tengu.gif", 30, 30);
-	public static BufferedImage[][] GelPop = load("/Sprites/Enemies/GelPop.gif", 25, 25);
+
+	public static BufferedImage[][] Bird = load("/Sprites/Enemies/Bird.gif", 8, 8);
+	public static BufferedImage[][] Bomb = load("/Sprites/Enemies/Bomb.gif", 30, 30);
+	public static BufferedImage[][] Goblin = load("/Sprites/Enemies/Goblin.gif", 16, 16);
+
 	public static BufferedImage[][] DarkEnergy = load("/Sprites/Enemies/DarkEnergy.gif", 20, 20);
 	public static BufferedImage[][] BigBoss = load("/Sprites/Enemies/BigBoss.png", 64, 62);
 	public static BufferedImage[][] SpitBullets = load ("/Sprites/Enemies/BulletsBoss.gif", 16, 25);

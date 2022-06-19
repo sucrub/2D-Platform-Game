@@ -17,11 +17,14 @@ import com.neet.Entity.Player;
 import com.neet.Entity.PlayerSave;
 import com.neet.Entity.Teleport;
 import com.neet.Entity.Title;
+
 import com.neet.Entity.Enemies.BigBoss;
-import com.neet.Entity.Enemies.Gazer;
-import com.neet.Entity.Enemies.GelPop;
+import com.neet.Entity.Enemies.Bird;
+import com.neet.Entity.Enemies.Goblin;
 import com.neet.Entity.Enemies.Mushroom;
-import com.neet.Entity.Enemies.Tengu;
+import com.neet.Entity.Enemies.Mushroom1;
+import com.neet.Entity.Enemies.Bomb;
+
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 import com.neet.TileMap.Background;
@@ -126,54 +129,58 @@ public class Level1AState extends GameState {
 		Mushroom m;
 		Tengu t;
 		BigBoss n;
+
+		Bomb bo = new Bomb(tileMap, player, enemies);
+		bo.setPosition(1300, 100);
+		enemies.add(bo);
+		bo = new Bomb(tileMap, player, enemies);
+		bo.setPosition(1330, 100);
+		enemies.add(bo);
+		bo = new Bomb(tileMap, player, enemies);
+		bo.setPosition(1360, 100);
+		enemies.add(bo);
+		Goblin go;
+		Bird bi;
+		Mushroom m;
+		Mushroom1 m1;
+
+		go = new Goblin(tileMap, player);
+		go.setPosition(1300, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(1320, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(1340, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(1660, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(1680, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(1700, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(2177, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(2960, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(2980, 100);
+		enemies.add(go);
+		go = new Goblin(tileMap, player);
+		go.setPosition(3000, 100);
+		enemies.add(go);
 		
-		t = new Tengu(tileMap, player, enemies);
-		t.setPosition(1300, 100);
-		enemies.add(t);
-		t = new Tengu(tileMap, player, enemies);
-		t.setPosition(1330, 100);
-		enemies.add(t);
-		t = new Tengu(tileMap, player, enemies);
-		t.setPosition(1360, 100);
-		enemies.add(t);
-		
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1300, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1320, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1340, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1660, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1680, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(1700, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(2177, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(2960, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(2980, 100);
-		enemies.add(gp);
-		gp = new GelPop(tileMap, player);
-		gp.setPosition(3000, 100);
-		enemies.add(gp);
-		
-		g = new Gazer(tileMap);
-		g.setPosition(2600, 100);
-		enemies.add(g);
-		g = new Gazer(tileMap);
-		g.setPosition(3500, 100);
-		enemies.add(g);
+		bi = new Bird(tileMap);
+		bi.setPosition(2600, 100);
+		enemies.add(bi);
+		bi = new Bird(tileMap);
+		bi.setPosition(3500, 100);
+		enemies.add(bi);
 		
 		m = new Mushroom(tileMap, player);
 		m.setPosition(700, 184);
@@ -191,6 +198,11 @@ public class Level1AState extends GameState {
 		n = new BigBoss(tileMap, player, enemies);
 		n.setPosition(800,88);
 		enemies.add(n);
+
+		m1 = new Mushroom1(tileMap, player);
+		m1.setPosition(700, 100);
+		enemies.add(m1);
+
 	}
 
 	public void update() {

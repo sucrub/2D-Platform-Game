@@ -9,7 +9,7 @@ import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
 import com.neet.TileMap.TileMap;
 
-public class Tengu extends Enemy {
+public class Bomb extends Enemy {
 	
 	private Player player;
 	private ArrayList<Enemy> enemies;
@@ -28,7 +28,7 @@ public class Tengu extends Enemy {
 	private int attackDelay = 30;
 	private int step;
 	
-	public Tengu(TileMap tm, Player p, ArrayList<Enemy> en) {
+	public Bomb(TileMap tm, Player p, ArrayList<Enemy> en) {
 		
 		super(tm);
 		player = p;
@@ -47,9 +47,9 @@ public class Tengu extends Enemy {
 		maxFallSpeed = 4.0;
 		jumpStart = -5;
 		
-		idleSprites = Content.Tengu[0];
-		jumpSprites = Content.Tengu[1];
-		attackSprites = Content.Tengu[2];
+		idleSprites = Content.Bomb[0];
+		jumpSprites = Content.Bomb[1];
+		attackSprites = Content.Bomb[2];
 		
 		animation.setFrames(idleSprites);
 		animation.setDelay(-1);
