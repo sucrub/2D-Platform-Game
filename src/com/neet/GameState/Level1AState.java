@@ -148,6 +148,7 @@ public class Level1AState extends GameState {
 		t = new Tengu(tileMap, player, enemies);
 		t.setPosition(1360, 100);
 		enemies.add(t);
+
 		GelPop gp;
 		Gazer g;
 		Mushroom m;
