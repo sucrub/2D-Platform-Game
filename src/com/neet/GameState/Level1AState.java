@@ -124,10 +124,10 @@ public class Level1AState extends GameState {
 	
 		enemies.clear();
 	
-		GelPop gp;
-		Gazer g;
+		Goblin go;
+		Bird bi;
 		Mushroom m;
-		Tengu t;
+		Mushroom1 m1;
 		BigBoss n;
 
 		Bomb bo = new Bomb(tileMap, player, enemies);
@@ -139,10 +139,6 @@ public class Level1AState extends GameState {
 		bo = new Bomb(tileMap, player, enemies);
 		bo.setPosition(1360, 100);
 		enemies.add(bo);
-		Goblin go;
-		Bird bi;
-		Mushroom m;
-		Mushroom1 m1;
 
 		go = new Goblin(tileMap, player);
 		go.setPosition(1300, 100);
