@@ -189,7 +189,7 @@ public class Level1AState extends GameState {
 		enemies.add(m);
 		
 		n = new BigBoss(tileMap, player, enemies);
-		n.setPosition(400,195);
+		n.setPosition(800,88);
 		enemies.add(n);
 	}
 
@@ -415,7 +415,7 @@ public class Level1AState extends GameState {
 			PlayerSave.setHealth(player.getHealth());
 			PlayerSave.setLives(player.getLives());
 			PlayerSave.setTime(player.getTime());
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			gsm.setState(GameStateManager.HELPSTATE);
 		}
 
 	}

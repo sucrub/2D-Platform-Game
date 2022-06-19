@@ -13,7 +13,7 @@ public class Content {
 	public static BufferedImage[][] Explosion = load("/Sprites/Enemies/Explosion.gif", 30, 30);
 	
 	public static BufferedImage[][] Mushroom = load("/Sprites/Enemies/Mushroom.gif", 16, 16);
-	public static BufferedImage[][] Gazer = load("/Sprites/Enemies/Gazer.gif", 8, 8);
+	public static BufferedImage[][] Gazer = load("/Sprites/Enemies/Bird.png",32 , 32);
 	public static BufferedImage[][] Tengu = load("/Sprites/Enemies/Tengu.gif", 30, 30);
 	public static BufferedImage[][] GelPop = load("/Sprites/Enemies/GelPop.gif", 25, 25);
 	public static BufferedImage[][] DarkEnergy = load("/Sprites/Enemies/DarkEnergy.gif", 20, 20);
