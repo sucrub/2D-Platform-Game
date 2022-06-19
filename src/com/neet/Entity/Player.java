@@ -186,7 +186,6 @@ public class Player extends MapObject {
 		return maxHealth;
 	}
 
-
 	public int getMp() {
 		return mp;
 	}
@@ -314,9 +313,6 @@ public class Player extends MapObject {
 		stop();
 	}
 
-	public void setEmote(int i) {
-			emote = i;
-	}
 	public void stop() {
 		left = right = up = down = flinching = dashing = jumping = attacking = false;
 	}
