@@ -13,7 +13,8 @@ import com.neet.TileMap.TileMap;
 public class BigBoss extends Enemy {
 	
 	private Player player;
-	private boolean active;
+	private boolean active = true;
+
 	private ArrayList<Enemy> enemies;
 	
 	private BufferedImage[] jumpSprites;
@@ -57,7 +58,9 @@ public class BigBoss extends Enemy {
 		attackSprites = Content.BigBoss[0];
 		
 		animation.setFrames(idleSprites);
-		animation.setDelay(-1);
+		animation.setDelay(4);
+		
+		
 		
 		left = true;
 		facingRight = false;
@@ -86,7 +89,7 @@ public class BigBoss extends Enemy {
 	// check if done flinching
 		if(flinching) {
 			flinchCount++;
-			if(flinchCount == 6) flinching = false;
+			if(flinchCount == 9) flinching = false;
 		}
 		
 		getNextPosition();
@@ -98,16 +101,18 @@ public class BigBoss extends Enemy {
 		
 		if(player.getx() < x) facingRight = false;
 		else facingRight = true;
-		
+
+
+	
 		// idle
 		if(step == 0) {
 			if(currentAction != IDLE) {
 				currentAction = IDLE;
 				animation.setFrames(idleSprites);
-				animation.setDelay(-1);
+				animation.setDelay(3);
 			}
 			attackTick++;
-			if(attackTick >= attackDelay && Math.abs(player.getx() - x) < 60) {
+			if(attackTick >= attackDelay ) {
 				step++;
 				attackTick = 0;
 			}
@@ -117,10 +122,10 @@ public class BigBoss extends Enemy {
 			if(currentAction != JUMPING) {
 				currentAction = JUMPING;
 				animation.setFrames(jumpSprites);
-				animation.setDelay(-1);
+				animation.setDelay(3);
 			}
 			jumping = true;
-			if(facingRight) left = true;
+			if(player.getx()-xtemp < 0 ) left = true;
 			else right = true;
 			if(falling) {
 				step++;
