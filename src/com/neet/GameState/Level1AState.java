@@ -68,12 +68,12 @@ public class Level1AState extends GameState {
 		tileMap = new TileMap(32);
 		tileMap.loadTiles("/Tilesets/tilesetnewer.png");
 		tileMap.loadMap("/Maps/level1a.map");
-		//tileMap.setPosition(100, 0);
-		//tileMap.setBounds(
-		//		tileMap.getWidth() - 1 * tileMap.getTileSize(),
-		//		tileMap.getHeight() - 2 * tileMap.getTileSize(),
-		//		0, 0);
-//		tileMap.setTween(1);
+		// tileMap.setPosition(100, 0);
+		// tileMap.setBounds(
+		// tileMap.getWidth() - 1 * tileMap.getTileSize(),
+		// tileMap.getHeight() - 2 * tileMap.getTileSize(),
+		// 0, 0);
+		// tileMap.setTween(1);
 
 		// player
 		player = new Player(tileMap);
@@ -121,9 +121,9 @@ public class Level1AState extends GameState {
 	}
 
 	private void populateEnemies() {
-	
+
 		enemies.clear();
-	
+
 		Goblin go;
 		Bird bi;
 		Mushroom m;
@@ -170,14 +170,14 @@ public class Level1AState extends GameState {
 		go = new Goblin(tileMap, player);
 		go.setPosition(3000, 100);
 		enemies.add(go);
-		
+
 		bi = new Bird(tileMap);
 		bi.setPosition(2600, 100);
 		enemies.add(bi);
 		bi = new Bird(tileMap);
 		bi.setPosition(3500, 100);
 		enemies.add(bi);
-		
+
 		m = new Mushroom(tileMap, player);
 		m.setPosition(700, 184);
 		enemies.add(m);
@@ -190,9 +190,9 @@ public class Level1AState extends GameState {
 		m = new Mushroom(tileMap, player);
 		m.setPosition(2150, 57);
 		enemies.add(m);
-		
+
 		n = new BigBoss(tileMap, player, enemies);
-		n.setPosition(800,88);
+		n.setPosition(800, 88);
 		enemies.add(n);
 
 		m1 = new Mushroom1(tileMap, player);
@@ -314,7 +314,7 @@ public class Level1AState extends GameState {
 	}
 
 	public void handleInput() {
-		
+
 		if (Keys.isPressed(Keys.ESCAPE))
 			gsm.setPaused(true);
 		if (blockInput || player.getHealth() == 0)
@@ -340,13 +340,13 @@ public class Level1AState extends GameState {
 
 	// reset level
 	private void reset() {
-		
+
 		player.reset();
 		player.setPosition(300, 61);
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;
-		
+
 		eventStart = true;
 		eventStart();
 	}
