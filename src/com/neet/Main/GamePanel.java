@@ -34,12 +34,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	// game state manager
 	private GameStateManager gsm;
 	
-	// other
-	private boolean recording = false;
-	private int recordingCount = 0;
-	private boolean screenshot;
-	
 	public GamePanel() {
+		
 		super();
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
 		setFocusable(true);
@@ -47,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	}
 	
 	public void addNotify() {
+		
 		super.addNotify();
 		if(thread == null) {
 			thread = new Thread(this);
@@ -63,10 +60,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		running = true;
 		
 		gsm = new GameStateManager();
-		
 	}
 	
 	public void run() {
+		
 		init();
 		
 		long start;
@@ -110,46 +107,20 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	}
 	
 	private void drawToScreen() {
+		
 		Graphics g2 = getGraphics();
 		g2.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		g2.dispose();
-		if(screenshot) {
-			screenshot = false;
-			try {
-				
-				java.io.File out = new java.io.File("screenshot " + System.nanoTime() + ".gif");
-				javax.imageio.ImageIO.write(image, "gif", out);
-			}
-			catch(Exception e) {}
-		}
-		
-		if(!recording) return;
-		
-		try {
-			java.io.File out = new java.io.File("C:\\out\\frame" + recordingCount + ".gif");
-			javax.imageio.ImageIO.write(image, "gif", out);
-			recordingCount++;
-		}
-		catch(Exception e) {}
 	}
 	
 	public void keyTyped(KeyEvent key) {}
 	
 	public void keyPressed(KeyEvent key) {
 		
-		if(key.isControlDown()) {
-			if(key.getKeyCode() == KeyEvent.VK_R) {
-				recording = !recording;
-				return;
-			}
-			if(key.getKeyCode() == KeyEvent.VK_S) {
-				screenshot = true;
-				return;
-			}
-		}
 		Keys.keySet(key.getKeyCode(), true);
 	}
 	public void keyReleased(KeyEvent key) {
+		
 		Keys.keySet(key.getKeyCode(), false);
 	}
 

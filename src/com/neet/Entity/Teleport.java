@@ -14,21 +14,21 @@ public class Teleport extends MapObject {
 	public Teleport(TileMap tm) {
 		super(tm);
 		facingRight = true;
-		width = height = 40;
+		width = height = 32;
 		cwidth = 20;
 		cheight = 40;
 		try {
 			BufferedImage spritesheet = ImageIO.read(
-				getClass().getResourceAsStream("/Sprites/Player/Teleport.gif")
+				getClass().getResourceAsStream("/Sprites/Player/teleport4.png")
 			);
-			sprites = new BufferedImage[9];
+			sprites = new BufferedImage[2];
 			for(int i = 0; i < sprites.length; i++) {
 				sprites[i] = spritesheet.getSubimage(
 					i * width, 0, width, height
 				);
 			}
 			animation.setFrames(sprites);
-			animation.setDelay(1);
+			animation.setDelay(100);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

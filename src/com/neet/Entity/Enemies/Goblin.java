@@ -20,7 +20,7 @@ public class Goblin extends Enemy {
 		super(tm);
 		player = p;
 		
-		health = maxHealth = 1;
+		health = maxHealth = 5;
 		
 		width = 16;
 		height = 16;

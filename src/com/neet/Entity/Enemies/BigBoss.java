@@ -40,7 +40,7 @@ public class BigBoss extends Enemy {
 		player = p;
 		enemies = en;
 		
-		health = maxHealth = 50;
+		health = maxHealth = 30;
 		
 		width = 64;
 		height = 62;
