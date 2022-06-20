@@ -38,8 +38,8 @@ public class Bomb extends Enemy {
 		
 		width = 30;
 		height = 30;
-		cwidth = 20;
-		cheight = 26;
+		cwidth = 8;
+		cheight = 25;
 		
 		damage = 1;
 		moveSpeed = 1.5;
