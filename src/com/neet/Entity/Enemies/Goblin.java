@@ -24,8 +24,8 @@ public class Goblin extends Enemy {
 		
 		width = 16;
 		height = 16;
-		cwidth = 20;
-		cheight = 15;
+		cwidth = 8;
+		cheight = 16;
 		
 		damage = 1;
 		moveSpeed = 0.8;

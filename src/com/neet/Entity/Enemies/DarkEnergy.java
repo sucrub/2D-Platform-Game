@@ -31,8 +31,8 @@ public class DarkEnergy extends Enemy {
 		
 		width = 20;
 		height = 20;
-		cwidth = 12;
-		cheight = 12;
+		cwidth = 8;
+		cheight = 8;
 		
 		damage = 1;
 		moveSpeed = 5;
