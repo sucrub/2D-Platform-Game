@@ -174,7 +174,7 @@ public class BigBoss extends Enemy {
 			}
 			else {
 				if(step == 1) {
-					if(dy == 0 && currentAction != ATTACKING) {
+					if(dy ==0 && currentAction != ATTACKING) {
 						currentAction = ATTACKING;
 						animation.setFrames(attackSprites);
 						animation.setDelay(3);
