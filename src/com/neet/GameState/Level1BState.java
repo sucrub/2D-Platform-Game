@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.EnemyProjectile;
-import com.neet.Entity.EnergyParticle;
 import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
@@ -33,7 +32,6 @@ public class Level1BState extends GameState {
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<EnemyProjectile> eprojectiles;
-	private ArrayList<EnergyParticle> energyParticles;
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
@@ -49,7 +47,6 @@ public class Level1BState extends GameState {
 	private ArrayList<Rectangle> tb;
 	private boolean eventFinish;
 	private boolean eventDead;
-	
 
 	public Level1BState(GameStateManager gsm) {
 		super(gsm);
@@ -81,9 +78,8 @@ public class Level1BState extends GameState {
 		populateEnemies();
 
 		// energy particle
-		energyParticles = new ArrayList<EnergyParticle>();
 
-		player.init(enemies, energyParticles);
+		// player.init(enemies);
 
 		// explosions
 		explosions = new ArrayList<Explosion>();
@@ -181,7 +177,6 @@ public class Level1BState extends GameState {
 		handleInput();
 
 		// check if quake event should start
-		
 
 		// check if end of level event should start
 		if (teleport.contains(player)) {
@@ -193,7 +188,7 @@ public class Level1BState extends GameState {
 			eventStart();
 		if (eventDead)
 			eventDead();
-		
+
 		if (eventFinish)
 			eventFinish();
 
@@ -222,7 +217,7 @@ public class Level1BState extends GameState {
 		tileMap.setPosition(
 				GamePanel.WIDTH / 2 - player.getx(),
 				GamePanel.HEIGHT / 2 - player.gety());
-		
+
 		tileMap.fixBounds();
 
 		// update enemies
@@ -398,7 +393,7 @@ public class Level1BState extends GameState {
 	}
 
 	// earthquake
-	
+
 	// finished level
 	private void eventFinish() {
 		eventCount++;

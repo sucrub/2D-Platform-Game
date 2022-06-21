@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
-import com.neet.Entity.EnergyParticle;
 import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
@@ -30,7 +29,6 @@ public class Level1CState extends GameState {
 	private Player player;
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
-	private ArrayList<EnergyParticle> energyParticles;
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
@@ -85,11 +83,8 @@ public class Level1CState extends GameState {
 		enemies = new ArrayList<Enemy>();
 		populateEnemies();
 
-		// energy particle
-		energyParticles = new ArrayList<EnergyParticle>();
-
 		// init player
-		player.init(enemies, energyParticles);
+		player.init(enemies);
 
 		// hud
 		hud = new HUD(player);
@@ -168,7 +163,7 @@ public class Level1CState extends GameState {
 		tileMap.setPosition(
 				GamePanel.WIDTH / 2 - player.getx(),
 				GamePanel.HEIGHT / 2 - player.gety());
-		
+
 		tileMap.fixBounds();
 
 		// update enemies
@@ -291,7 +286,7 @@ public class Level1CState extends GameState {
 			tb.add(new Rectangle(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT));
 			if (!portal.isOpened())
 
-			JukeBox.stop("level1");
+				JukeBox.stop("level1");
 		}
 		if (eventCount > 1 && eventCount < 60) {
 			tb.get(0).height -= 4;
@@ -366,10 +361,6 @@ public class Level1CState extends GameState {
 				eventCount = 360;
 			}
 		}
-		if (eventCount > 60 && eventCount < 180) {
-			energyParticles.add(
-					new EnergyParticle(tileMap, 157, 107, (int) (Math.random() * 4)));
-		}
 		if (eventCount >= 160 && eventCount <= 180) {
 			if (eventCount % 4 == 0 || eventCount % 4 == 1)
 				flash = true;
@@ -383,7 +374,6 @@ public class Level1CState extends GameState {
 			trp.setVector(0.3, -0.3);
 			blp.setVector(-0.3, 0.3);
 			brp.setVector(0.3, 0.3);
-			player.setEmote(Player.SURPRISED);
 		}
 		if (eventCount == 240) {
 			tlp.setVector(0, -5);
@@ -392,7 +382,6 @@ public class Level1CState extends GameState {
 			brp.setVector(0, -5);
 		}
 		if (eventCount == 300) {
-			player.setEmote(Player.NONE);
 			portal.setOpening();
 		}
 		if (eventCount == 360) {

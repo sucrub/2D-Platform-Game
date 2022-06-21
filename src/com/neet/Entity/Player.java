@@ -34,7 +34,6 @@ public class Player extends MapObject {
 	private boolean doubleJump;
 	private boolean alreadyDoubleJump;
 	private double doubleJumpStart;
-	private ArrayList<EnergyParticle> energyParticles;
 	private long time;
 
 	// fireball
@@ -78,14 +77,6 @@ public class Player extends MapObject {
 	private static final int KNOCKBACK = 8;
 	// private static final int DOUBLE_JUMP = 9;
 	private static final int TELEPORTING = 11;
-
-	// emotes
-	private BufferedImage confused;
-	private BufferedImage surprised;
-	public static final int NONE = 0;
-	public static final int CONFUSED = 1;
-	public static final int SURPRISED = 2;
-	private int emote = NONE;
 
 	public Player(TileMap tm) {
 
@@ -145,18 +136,9 @@ public class Player extends MapObject {
 				count += FRAMEHEIGHTS[i];
 			}
 
-			// emotes
-			spritesheet = ImageIO.read(getClass().getResourceAsStream(
-					"/HUD/Emotes.gif"));
-			surprised = spritesheet.getSubimage(
-					14, 0, 14, 17);
-			confused = spritesheet.getSubimage(
-					0, 0, 14, 17);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		energyParticles = new ArrayList<EnergyParticle>();
 
 		setAnimation(IDLE);
 
@@ -168,11 +150,8 @@ public class Player extends MapObject {
 
 	}
 
-	public void init(
-			ArrayList<Enemy> enemies,
-			ArrayList<EnergyParticle> energyParticles) {
+	public void init(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;
-		this.energyParticles = energyParticles;
 	}
 
 	public int getHealth() {
@@ -189,10 +168,6 @@ public class Player extends MapObject {
 
 	public int getMaxMp() {
 		return maxMp;
-	}
-
-	public void setEmote(int i) {
-		emote = i;
 	}
 
 	public void setTeleporting(boolean b) {
@@ -413,10 +388,10 @@ public class Player extends MapObject {
 		time++;
 
 		// check teleporting
-		if (teleporting) {
-			energyParticles.add(
-					new EnergyParticle(tileMap, x, y, EnergyParticle.UP));
-		}
+		// if (teleporting) {
+		// energyParticles.add(
+		// new EnergyParticle(tileMap, x, y, EnergyParticle.UP));
+		// }
 
 		// update position
 		boolean isFalling = falling;
@@ -434,15 +409,6 @@ public class Player extends MapObject {
 			flinchCount++;
 			if (flinchCount > 80) {
 				flinching = false;
-			}
-		}
-
-		// energy particles
-		for (int i = 0; i < energyParticles.size(); i++) {
-			energyParticles.get(i).update();
-			if (energyParticles.get(i).shouldRemove()) {
-				energyParticles.remove(i);
-				i--;
 			}
 		}
 
@@ -591,17 +557,6 @@ public class Player extends MapObject {
 		// draw knife
 		for (int i = 0; i < knifes.size(); i++) {
 			knifes.get(i).draw(g);
-		}
-		// draw emote
-		if (emote == CONFUSED) {
-			g.drawImage(confused, (int) (x + xmap - cwidth / 2), (int) (y + ymap - 40), null);
-		} else if (emote == SURPRISED) {
-			g.drawImage(surprised, (int) (x + xmap - cwidth / 2), (int) (y + ymap - 40), null);
-		}
-
-		// draw energy particles
-		for (int i = 0; i < energyParticles.size(); i++) {
-			energyParticles.get(i).draw(g);
 		}
 
 		// flinch
