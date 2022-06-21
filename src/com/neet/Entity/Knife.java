@@ -44,7 +44,6 @@ public class Knife extends MapObject {
 			animation.setDelay(20);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("loi a");
 		}
 
 	}
