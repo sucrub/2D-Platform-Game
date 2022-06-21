@@ -28,6 +28,8 @@ public class BigBoss extends Enemy {
 	private int attackTick;
 	private int attackDelay = 30;
 	private int step=0;
+	private int timeDelay=0;
+	private int chooseNextSkill=0;
 
 	
 	
@@ -104,7 +106,11 @@ public class BigBoss extends Enemy {
 		
 		
 
-		
+		if(timeDelay<1) {
+			timeDelay++;
+		}
+		else {
+			timeDelay=0;
 			// idle
 			if(step == 0) {
 				if(currentAction != IDLE) {
@@ -116,76 +122,93 @@ public class BigBoss extends Enemy {
 				if(attackTick >= attackDelay ) {
 					step++;
 					attackTick = 0;
+					chooseNextSkill = getRandomNumber(0,2);
 				}
 			}
-			// jump away
-			if(step == 1) {
-				if(currentAction != JUMPING) {
-					currentAction = JUMPING;
-					animation.setFrames(jumpSprites);
-					animation.setDelay(3);
-				}
-				jumping = true;
-				if(player.getx()-xtemp < 0 ) left = true;
-				else right = true;
-				if(falling) {
-					step=getRandomNumber(1,3)+ step;
-				}
-			}
-			// attack
-			if(step == 2) {
-				if(dy > 0 && currentAction != ATTACKING) {
-					currentAction = ATTACKING;
-					animation.setFrames(attackSprites);
-					animation.setDelay(3);
-					SpitBullets de = new SpitBullets(tileMap);
-					de.setPosition(x, y);
-					de.setType(getRandomNumber(0,3));
-					if(facingRight) de.setVector(3, 3);
-					else de.setVector(-3, 3);
-					enemies.add(de);
+			
+			if(chooseNextSkill==0) {
+				// jump away
+				if(step == 1) {
+					if(currentAction != JUMPING) {
+						currentAction = JUMPING;
+						animation.setFrames(jumpSprites);
+						animation.setDelay(3);
 					}
-				if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
-					step+=2;
-					currentAction = JUMPING;
-					animation.setFrames(jumpSprites);
-					animation.setDelay(3);
-				}
-			}
-			
-			if(step == 3) {
-				if(dy > 0 && currentAction != ATTACKING) {
-					currentAction = ATTACKING;
-					animation.setFrames(attackSprites);
-					animation.setDelay(3);
-					
-					FireBall fb = new FireBall(tileMap);
-					fb.setVector(facingRight);
-					fb.setPosition(x, y);
-					fb.setType(3);
-					if(facingRight) fb.setVector(3, 3);
-					else fb.setVector(-3, 3);
-					enemies.add(fb);
-				}
-				if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
-					step++;
-					currentAction = JUMPING;
-					animation.setFrames(jumpSprites);
-					animation.setDelay(3);
+					jumping = true;
+					if(player.getx()-xtemp < 0 ) left = true;
+					else right = true;
+					if(falling) {
+						step++;
 					}
+				}
+				// attack
+				if(step == 2) {
+					if(dy > 0 && currentAction != ATTACKING) {
+						currentAction = ATTACKING;
+						animation.setFrames(attackSprites);
+						animation.setDelay(3);
+						SpitBullets de = new SpitBullets(tileMap);
+						de.setPosition(x, y);
+						de.setType(getRandomNumber(0,3));
+						if(facingRight) de.setVector(3, 3);
+						else de.setVector(-3, 3);
+						enemies.add(de);
+						}
+					if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
+						step++;
+						currentAction = JUMPING;
+						animation.setFrames(jumpSprites);
+						animation.setDelay(3);
+					}
+				}
+				// done attacking
+				if(step == 3) {
+					if(dy == 0) step++;
+				}
+				
+				// land
+				if(step == 4) {
+					step = 0;
+					left = right = jumping = false;
+				}
+			}
+			else {
+				if(step == 1) {
+					if(dy == 0 && currentAction != ATTACKING) {
+						currentAction = ATTACKING;
+						animation.setFrames(attackSprites);
+						animation.setDelay(3);
+						
+						FireBall fb = new FireBall(tileMap);
+						fb.setVector(facingRight);
+						fb.setPosition(x, y);
+						fb.setType(3);
+						if(facingRight) fb.setVector(3, 3);
+						else fb.setVector(-3, 3);
+						enemies.add(fb);
+					}
+					if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
+						step+=2;
+						currentAction = IDLE;
+						animation.setFrames(idleSprites);
+						animation.setDelay(3);
+						}
+				}
+				// done attacking
+				if(step == 3) {
+					if(dy == 0) step++;
+				}
+				
+				// land
+				if(step == 4) {
+					step = 0;
+					left = right = jumping = false;
+				}
 			}
 			
-			
-			// done attacking
-			if(step == 4) {
-				if(dy == 0) step++;
-			}
-			
-			// land
-			if(step == 5) {
-				step = 0;
-				left = right = jumping = false;
-			}
+
+	}			
+
 }
 
 	
