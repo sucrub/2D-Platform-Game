@@ -387,12 +387,6 @@ public class Player extends MapObject {
 
 		time++;
 
-		// check teleporting
-		// if (teleporting) {
-		// energyParticles.add(
-		// new EnergyParticle(tileMap, x, y, EnergyParticle.UP));
-		// }
-
 		// update position
 		boolean isFalling = falling;
 		getNextPosition();
