@@ -6,9 +6,13 @@ public class PlayerSave {
 	private static int health = 2;
 	private static int maxHealth = 6;
 	private static long time = 0;
+	private static int mp = 2000;
+	private static int maxMp = 2000;
 
 	public static void init() {
+		
 		lives = 3;
+		mp = maxMp;
 		health = maxHealth;
 		time = 0;
 	}
@@ -35,6 +39,22 @@ public class PlayerSave {
 
 	public static void setmaxHealth(int i) {
 		maxHealth = i;
+	}
+
+	public static int getMp() {
+		return mp;
+	}
+
+	public static void setMp(int i) {
+		mp = i;
+	}
+
+	public static int getMaxMp() {
+		return maxMp;
+	}
+
+	public static void setMaxMp(int i) {
+		maxMp = i;
 	}
 
 	public static long getTime() {
