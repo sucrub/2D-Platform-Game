@@ -36,7 +36,11 @@ public class Player extends MapObject {
 	private long time;
 
 
+
 	// fireball
+
+	// knife
+
 	private boolean flyingKnife;
 	private int knifeCost;
 	private int flyingKnifeDamage;
@@ -117,7 +121,7 @@ public class Player extends MapObject {
 		damage = 1;
 		dashDamage = 1;
 
-		mp = maxMp = 2500;
+		mp = maxMp = 2000;
 
 		knifeCost = 200;
 		flyingKnifeDamage = 2;
@@ -215,6 +219,7 @@ public class Player extends MapObject {
 	}
 
 	public void setAttacking() {
+		
 		if (knockback)
 			return;
 
@@ -223,12 +228,18 @@ public class Player extends MapObject {
 	}
 
 	public void setFlyingKnife() {
+		
+		if (knockback)
+			return;
+		
 		flyingKnife = true;
 	}
 
 	public void setDashing() {
+		
 		if (knockback)
 			return;
+		
 		if (!attacking && !dashing) {
 			dashing = true;
 			JukeBox.play("playercharge");
@@ -246,48 +257,69 @@ public class Player extends MapObject {
 	}
 
 	public String getTimeToString() {
+		
 		int minutes = (int) (time / 3600);
 		int seconds = (int) ((time % 3600) / 60);
 		return seconds < 10 ? minutes + ":0" + seconds : minutes + ":" + seconds;
 	}
 
 	public long getTime() {
+		
 		return time;
 	}
 
 	public void setTime(long t) {
+		
 		time = t;
 	}
 
 	public void setHealth(int i) {
+		
 		health = i;
 	}
 
 	public void setmaxHealth(int i) {
+		
 		maxHealth = i;
 	}
 
 	public void setLives(int i) {
+		
 		lives = i;
+	}
+	
+	public void setmaxMp(int i) {
+		
+		maxMp = i;
+	}
+	
+	public void setMp(int i) {
+		
+		mp = i;
 	}
 
 	public void loseLife() {
+		
 		lives--;
 	}
 
 	public int getLives() {
+		
 		return lives;
 	}
 
 	public void increaseScore(int score) {
+		
 		this.score += score;
 	}
 
 	public int getScore() {
+		
 		return score;
 	}
 
 	public void hit(int damage) {
+		
 		if (flinching)
 			return;
 		JukeBox.play("playerhit");
@@ -295,7 +327,7 @@ public class Player extends MapObject {
 		health -= damage;
 		if (health < 0)
 			health = 0;
-		flinching = true;
+		flinching = false;
 		flinchCount = 0;
 		if (facingRight)
 			dx = -1;
@@ -308,6 +340,7 @@ public class Player extends MapObject {
 	}
 
 	public void reset() {
+		
 		health = maxHealth;
 		facingRight = true;
 		currentAction = -1;
@@ -315,6 +348,7 @@ public class Player extends MapObject {
 	}
 
 	public void stop() {
+		
 		left = right = up = down = flinching = dashing = jumping = attacking = false;
 	}
 
@@ -407,6 +441,7 @@ public class Player extends MapObject {
 	}
 
 	private void setAnimation(int i) {
+		
 		currentAction = i;
 		animation.setFrames(sprites.get(currentAction));
 		animation.setDelay(SPRITEDELAYS[currentAction]);
@@ -468,12 +503,12 @@ public class Player extends MapObject {
 		}
 
 		// fireball attack
-		mp += 1;
+		mp += 1; //increase mp
 		if (mp > maxMp)
 			mp = maxMp;
 		if (flyingKnife && currentAction != FLYING_KNIFE) {
 			if (mp > knifeCost) {
-				mp -= knifeCost;
+				mp -= knifeCost; //decrease mp
 				Knife kn = new Knife(tileMap, facingRight);
 				kn.setPosition(x, y);
 				knifes.add(kn);
@@ -516,24 +551,12 @@ public class Player extends MapObject {
 				}
 			}
 
-			// /*
-			// * if(e.intersects(this)) {
-			// * e.hit(chargeDamage);
-			// * }
-			// */
-			// }
-			// }
 			if (currentAction == DASHING) {
 
 				if (animation.getCount() == 0) {
 					if (e.intersects(cr)) {
 						e.hit(dashDamage);
 					}
-					/*
-					 * if(e.intersects(this)) {
-					 * e.hit(chargeDamage);
-					 * }
-					 */
 				}
 			}
 

@@ -91,7 +91,7 @@ public class ChooseDifficultyState extends GameState{
 			PlayerSave.init();
 			PlayerSave.setHealth(3);
 			PlayerSave.setLives(1);
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			gsm.setState(GameStateManager.LEVEL1BSTATE);
 		}
 	}
 	

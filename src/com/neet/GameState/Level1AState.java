@@ -141,7 +141,7 @@ public class Level1AState extends GameState {
 		enemies.add(bo);
 
 		go = new Goblin(tileMap, player);
-		go.setPosition(1300, 100);
+		go.setPosition(800, 88);
 		enemies.add(go);
 		go = new Goblin(tileMap, player);
 		go.setPosition(1320, 100);
@@ -191,9 +191,9 @@ public class Level1AState extends GameState {
 		m.setPosition(2150, 57);
 		enemies.add(m);
 		
-		n = new BigBoss(tileMap, player, enemies);
-		n.setPosition(800,88);
-		enemies.add(n);
+//		n = new BigBoss(tileMap, player, enemies);
+//		n.setPosition(800,88);
+//		enemies.add(n);
 
 		m1 = new Mushroom1(tileMap, player);
 		m1.setPosition(700, 100);
@@ -425,7 +425,7 @@ public class Level1AState extends GameState {
 			PlayerSave.setHealth(player.getHealth());
 			PlayerSave.setLives(player.getLives());
 			PlayerSave.setTime(player.getTime());
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			gsm.setState(GameStateManager.LEVEL1BSTATE);
 		}
 
 	}

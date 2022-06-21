@@ -8,9 +8,13 @@ public class PlayerSave {
 	private static int mp = 2500;
 	private static int maxMp = 2500;
 	private static long time = 0;
+	private static int mp = 2000;
+	private static int maxMp = 2000;
 
 	public static void init() {
+		
 		lives = 3;
+		mp = maxMp;
 		health = maxHealth;
 		time = 0;
 		mp = maxMp;
@@ -47,6 +51,7 @@ public class PlayerSave {
 	public static void setMp(int i) {
 		mp = i;
 	}
+
 
 	public static int getmaxMp() {
 		return maxMp;
