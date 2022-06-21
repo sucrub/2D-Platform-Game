@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
-import com.neet.Main.GamePanel;
 import com.neet.TileMap.TileMap;
 
 public class BigBoss extends Enemy {
 	
 	private Player player;
-	private boolean active = true;
 
 	private ArrayList<Enemy> enemies;
 	
@@ -29,9 +27,8 @@ public class BigBoss extends Enemy {
 	
 	private int attackTick;
 	private int attackDelay = 30;
-	private int step;
-	
-	
+	private int step=0;
+
 	
 	
 	public BigBoss(TileMap tm, Player p, ArrayList<Enemy> en) {
@@ -45,7 +42,7 @@ public class BigBoss extends Enemy {
 		width = 64;
 		height = 62;
 		cwidth = 56;
-		cheight = 44;
+		cheight = 48;
 		
 		damage = 2;
 		moveSpeed = 1.5;
@@ -83,7 +80,9 @@ public class BigBoss extends Enemy {
 	}
 	
 	
-
+	public int getRandomNumber(int min, int max) {
+	    return (int) ((Math.random() * (max - min)) + min);
+	}
 	
 	public void update() {
 		
@@ -102,80 +101,93 @@ public class BigBoss extends Enemy {
 		
 		if(player.getx() < x) facingRight = false;
 		else facingRight = true;
-
-
-	
-		// idle
-		if(step == 0) {
-			if(currentAction != IDLE) {
-				currentAction = IDLE;
-				animation.setFrames(idleSprites);
-				animation.setDelay(3);
-			}
-			attackTick++;
-			if(attackTick >= attackDelay ) {
-				step++;
-				attackTick = 0;
-			}
-		}
-		// jump away
-		if(step == 1) {
-			if(currentAction != JUMPING) {
-				currentAction = JUMPING;
-				animation.setFrames(jumpSprites);
-				animation.setDelay(3);
-			}
-			jumping = true;
-			if(player.getx()-xtemp < 0 ) left = true;
-			else right = true;
-			if(falling) {
-				step++;
-			}
-		}
-		// attack
-		if(step == 2) {
-			if(dy > 0 && currentAction != ATTACKING) {
-				currentAction = ATTACKING;
-				animation.setFrames(attackSprites);
-				animation.setDelay(3);
-				SpitBullets de = new SpitBullets(tileMap);
-				de.setPosition(x, y);
-				de.setType(1);
-				if(facingRight) de.setVector(3, 3);
-				else de.setVector(-3, 3);
-				enemies.add(de);
-				
-				FireBall fb = new FireBall(tileMap);
-				fb.setVector(facingRight);
-				fb.setPosition(x, y);
-				fb.setType(3);
-				if(facingRight) fb.setVector(3, 3);
-				else fb.setVector(-3, 3);
-				enemies.add(fb);
-				
-				
-				
-				
-				
-			}
-			if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
-				step++;
-				currentAction = JUMPING;
-				animation.setFrames(jumpSprites);
-				animation.setDelay(3);
-			}
-		}
-		// done attacking
-		if(step == 3) {
-			if(dy == 0) step++;
-		}
-		// land
-		if(step == 4) {
-			step = 0;
-			left = right = jumping = false;
-		}
 		
-	}
+		
+
+		
+			// idle
+			if(step == 0) {
+				if(currentAction != IDLE) {
+					currentAction = IDLE;
+					animation.setFrames(idleSprites);
+					animation.setDelay(3);
+				}
+				attackTick++;
+				if(attackTick >= attackDelay ) {
+					step++;
+					attackTick = 0;
+				}
+			}
+			// jump away
+			if(step == 1) {
+				if(currentAction != JUMPING) {
+					currentAction = JUMPING;
+					animation.setFrames(jumpSprites);
+					animation.setDelay(3);
+				}
+				jumping = true;
+				if(player.getx()-xtemp < 0 ) left = true;
+				else right = true;
+				if(falling) {
+					step=getRandomNumber(1,3)+ step;
+				}
+			}
+			// attack
+			if(step == 2) {
+				if(dy > 0 && currentAction != ATTACKING) {
+					currentAction = ATTACKING;
+					animation.setFrames(attackSprites);
+					animation.setDelay(3);
+					SpitBullets de = new SpitBullets(tileMap);
+					de.setPosition(x, y);
+					de.setType(getRandomNumber(0,3));
+					if(facingRight) de.setVector(3, 3);
+					else de.setVector(-3, 3);
+					enemies.add(de);
+					}
+				if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
+					step+=2;
+					currentAction = JUMPING;
+					animation.setFrames(jumpSprites);
+					animation.setDelay(3);
+				}
+			}
+			
+			if(step == 3) {
+				if(dy > 0 && currentAction != ATTACKING) {
+					currentAction = ATTACKING;
+					animation.setFrames(attackSprites);
+					animation.setDelay(3);
+					
+					FireBall fb = new FireBall(tileMap);
+					fb.setVector(facingRight);
+					fb.setPosition(x, y);
+					fb.setType(3);
+					if(facingRight) fb.setVector(3, 3);
+					else fb.setVector(-3, 3);
+					enemies.add(fb);
+				}
+				if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
+					step++;
+					currentAction = JUMPING;
+					animation.setFrames(jumpSprites);
+					animation.setDelay(3);
+					}
+			}
+			
+			
+			// done attacking
+			if(step == 4) {
+				if(dy == 0) step++;
+			}
+			
+			// land
+			if(step == 5) {
+				step = 0;
+				left = right = jumping = false;
+			}
+}
+
 	
 	public void draw(Graphics2D g) {
 		

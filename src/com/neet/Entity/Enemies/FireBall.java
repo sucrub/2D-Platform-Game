@@ -110,6 +110,10 @@ public class FireBall extends Enemy {
 			if(x < 0 || x > tileMap.getWidth() || y < 0 || y > tileMap.getHeight()) {
 				remove = true;
 			}
+//			checkTileMapCollision();
+//			if(dx==0) {
+//				remove = true;
+//			}
 		}
 		
 	}

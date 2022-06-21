@@ -35,6 +35,7 @@ public class Player extends MapObject {
 	private ArrayList<EnergyParticle> energyParticles;
 	private long time;
 
+
 	// fireball
 	private boolean flyingKnife;
 	private int knifeCost;
@@ -416,6 +417,9 @@ public class Player extends MapObject {
 	public void update() {
 
 		time++;
+//		Number time delay
+//		if(delayTime==0) {delayTime++;}
+//		else if (delayTime==300) {delayTime=0;}
 
 		// check teleporting
 		if (teleporting) {
