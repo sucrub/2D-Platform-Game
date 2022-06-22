@@ -1,3 +1,5 @@
+/*THIS CLASS OVERALL IS FOR THE OBJECT ON THE MAP INCLUDING PROJECTILES, PLAYER, ENEMIES, ETC*/
+
 package com.neet.Entity;
 
 import java.awt.Rectangle;
@@ -11,7 +13,6 @@ public abstract class MapObject {
 	
 	// tile stuff
 	protected TileMap tileMap;
-
 
 	protected int tileSize;
 	protected double xmap;
@@ -66,8 +67,8 @@ public abstract class MapObject {
 	protected double jumpStart;
 	protected double stopJumpSpeed;
 	
-	// constructor
 	public MapObject(TileMap tm) {
+		
 		tileMap = tm;
 		tileSize = tm.getTileSize();
 		animation = new Animation();
@@ -75,12 +76,14 @@ public abstract class MapObject {
 	}
 	
 	public boolean intersects(MapObject o) {
+		
 		Rectangle r1 = getRectangle();
 		Rectangle r2 = o.getRectangle();
 		return r1.intersects(r2);
 	}
 	
 	public boolean intersects(Rectangle r) {
+		
 		return getRectangle().intersects(r);
 	}
 	

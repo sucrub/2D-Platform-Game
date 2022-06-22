@@ -1,3 +1,5 @@
+//SE XOA CLASS NAY, CLASS NAY CHO HIEU UNG TIA BONG BONG HIEN RA LUC NHAY
+
 package com.neet.Entity;
 
 import java.awt.Graphics2D;
