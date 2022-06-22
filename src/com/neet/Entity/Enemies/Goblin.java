@@ -3,6 +3,7 @@ package com.neet.Entity.Enemies;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
@@ -11,6 +12,8 @@ import com.neet.TileMap.TileMap;
 
 public class Goblin extends Enemy {
 	
+	
+	private boolean knockback;
 	private BufferedImage[] sprites;
 	private Player player;
 	private boolean active;
@@ -90,6 +93,27 @@ public class Goblin extends Enemy {
 		
 		// update animation
 		animation.update();
+		
+	}
+	
+	public void hit(int damage) {
+		if(dead || flinching) return;
+		JukeBox.play("enemyhit");
+		health -= damage;
+		if(health < 0) health = 0;
+		if(health == 0) dead = true;
+		if(dead) remove = true;
+		flinching = true;
+		flinchCount = 0;
+		
+		if (facingRight)
+			dx = -2;
+		else
+			dx = 2;
+		dy = -2;
+		knockback = true;
+		falling = true;
+		jumping = false;
 		
 	}
 	

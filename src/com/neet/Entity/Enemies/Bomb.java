@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
@@ -11,6 +12,7 @@ import com.neet.TileMap.TileMap;
 
 public class Bomb extends Enemy {
 	
+	private boolean knockback;
 	private Player player;
 	private ArrayList<Enemy> enemies;
 	
@@ -144,6 +146,27 @@ public class Bomb extends Enemy {
 			step = 0;
 			left = right = jumping = false;
 		}
+		
+	}
+	
+	public void hit(int damage) {
+		if(dead || flinching) return;
+		JukeBox.play("enemyhit");
+		health -= damage;
+		if(health < 0) health = 0;
+		if(health == 0) dead = true;
+		if(dead) remove = true;
+		flinching = true;
+		flinchCount = 0;
+		
+		if (facingRight)
+			dx = -2;
+		else
+			dx = 2;
+		dy = -2;
+		knockback = true;
+		falling = true;
+		jumping = false;
 		
 	}
 	

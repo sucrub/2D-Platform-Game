@@ -11,7 +11,6 @@ public class Enemy extends MapObject {
 	protected int damage;
 	protected boolean remove;
 	
-	private boolean knockback;
 	protected boolean flinching;
 	protected long flinchCount;
 	
@@ -37,14 +36,6 @@ public class Enemy extends MapObject {
 		if(dead) remove = true;
 		flinching = true;
 		flinchCount = 0;
-		if (facingRight)
-			dx = -2;
-		else
-			dx = 2;
-		dy = -3;
-		knockback = true;
-		falling = true;
-		jumping = false;
 		
 	}
 	
