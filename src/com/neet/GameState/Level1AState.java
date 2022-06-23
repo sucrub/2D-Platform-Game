@@ -128,7 +128,7 @@ public class Level1AState extends GameState {
 		Bird bi;
 		Mushroom m;
 		Mushroom1 m1;
-		BigBoss n;
+//		BigBoss n;
 
 		Bomb bo = new Bomb(tileMap, player, enemies);
 		bo.setPosition(1300, 100);
