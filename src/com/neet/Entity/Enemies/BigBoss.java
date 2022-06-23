@@ -1,5 +1,6 @@
 package com.neet.Entity.Enemies;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -87,6 +88,9 @@ public class BigBoss extends Enemy {
 	}
 	
 	public void update() {
+		
+	//draw heart
+
 		
 	// check if done flinching
 		if(flinching) {
@@ -213,7 +217,11 @@ public class BigBoss extends Enemy {
 
 	
 	public void draw(Graphics2D g) {
-		
+		 g.setColor(Color.WHITE);
+		 g.fillRect(149, 19,201, 7);
+		 g.setColor(Color.RED);
+		 g.fillRect(151, 21,199, 6);
+		 
 		if(flinching) {
 			if(flinchCount == 0 || flinchCount == 2) return;
 		}
