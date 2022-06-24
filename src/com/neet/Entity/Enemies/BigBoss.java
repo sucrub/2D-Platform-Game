@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import com.neet.Entity.Enemy;
 import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
@@ -13,12 +15,15 @@ import com.neet.TileMap.TileMap;
 public class BigBoss extends Enemy {
 	
 	private Player player;
-
+	
+	private int BossNumber;
+	
 	private ArrayList<Enemy> enemies;
 	
 	private BufferedImage[] jumpSprites;
 	private BufferedImage[] idleSprites;
 	private BufferedImage[] attackSprites;
+	private BufferedImage	HeartBarBoss;
 	
 	private boolean jumping;
 	
@@ -31,14 +36,25 @@ public class BigBoss extends Enemy {
 	private int step=0;
 	private int timeDelay=0;
 	private int chooseNextSkill=0;
+	private double percentHealth;
+	private int percentBar;
 
 	
 	
-	public BigBoss(TileMap tm, Player p, ArrayList<Enemy> en) {
+	public BigBoss(TileMap tm, Player p, ArrayList<Enemy> en, int t) {
 		
+
 		super(tm);
 		player = p;
 		enemies = en;
+		BossNumber=t;
+		
+		try {
+			BufferedImage Bar = ImageIO.read(getClass().getResourceAsStream("/Sprites/Enemies/HeartBarBoss.png"));
+			HeartBarBoss = Bar.getSubimage(0, 0, 224, 24);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		health = maxHealth = 30;
 		
@@ -56,6 +72,7 @@ public class BigBoss extends Enemy {
 		idleSprites = Content.BigBoss[0];
 		jumpSprites = Content.BigBoss[0];
 		attackSprites = Content.BigBoss[0];
+
 		
 		animation.setFrames(idleSprites);
 		animation.setDelay(4);
@@ -89,7 +106,9 @@ public class BigBoss extends Enemy {
 	
 	public void update() {
 		
-	//draw heart
+	//percentHealth
+		percentHealth = 210/maxHealth;
+
 
 		
 	// check if done flinching
@@ -217,11 +236,11 @@ public class BigBoss extends Enemy {
 
 	
 	public void draw(Graphics2D g) {
-		 g.setColor(Color.WHITE);
-		 g.fillRect(149, 19,201, 7);
-		 g.setColor(Color.RED);
-		 g.fillRect(151, 21,199, 6);
-		 
+		
+		g.drawImage(HeartBarBoss,149, 19+BossNumber*24, null);
+		g.setColor(Color.RED);
+		g.fillRect(149+14, 19+15+BossNumber*24, (int)percentHealth*health , 4);
+		
 		if(flinching) {
 			if(flinchCount == 0 || flinchCount == 2) return;
 		}

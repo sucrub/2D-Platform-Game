@@ -25,6 +25,9 @@ public class Content {
 	public static BufferedImage[][] FireBallLeft = load("/Sprites/Enemies/FireBallLeft.gif",40, 32);
 	public static BufferedImage[][] FireBallRight = load("/Sprites/Enemies/FireBallRight.png",40, 32);
 	
+
+	
+	
 	public static BufferedImage[][] load(String s, int w, int h) {
 		BufferedImage[][] ret;
 		try {
