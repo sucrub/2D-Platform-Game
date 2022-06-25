@@ -52,6 +52,7 @@ public class Level1CState extends GameState {
 	private ArrayList<Rectangle> tb;
 	private boolean eventFinish;
 	private boolean eventDead;
+	private int CountBoss=2;
 
 	public Level1CState(GameStateManager gsm) {
 		super(gsm);
@@ -218,7 +219,10 @@ public class Level1CState extends GameState {
 		if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
 			eventDead = blockInput = true;
 		}
-
+		//check end game
+		if (CountBoss==0) {
+			eventFinish = blockInput = true;
+}
 		// play events
 		if (eventStart)
 			eventStart();
@@ -248,8 +252,10 @@ public class Level1CState extends GameState {
 				enemies.remove(i);
 				i--;
 				explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
+				CountBoss--;
 			}
 		}
+		System.out.print("\n"+CountBoss);
 
 		// update enemy projectiles
 		for (int i = 0; i < eprojectiles.size(); i++) {
