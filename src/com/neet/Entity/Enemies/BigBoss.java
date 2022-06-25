@@ -241,9 +241,9 @@ public class BigBoss extends Enemy {
 			if (flinchCount % 10 < 10)
 				return;
 
-		g.drawImage(HeartBarBoss,149, 19+BossNumber*24, null);
+		g.drawImage(HeartBarBoss,149, 10+BossNumber*24, null);
 		g.setColor(Color.RED);
-		g.fillRect(149+14, 19+15+BossNumber*24, (int)percentHealth*health , 4);
+		g.fillRect(149+14, 10+15+BossNumber*24, (int)percentHealth*health , 4);
 		
 		if(flinching) {
 			if(flinchCount == 0 || flinchCount == 2) return;
