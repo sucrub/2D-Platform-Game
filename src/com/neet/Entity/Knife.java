@@ -76,6 +76,7 @@ public class Knife extends MapObject {
 
 		if (dx == 0 && !hit) {
 			setHit();
+			remove = true;
 		}
 
 		animation.update();

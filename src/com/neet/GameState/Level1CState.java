@@ -30,7 +30,7 @@ import com.neet.Main.GamePanel;
 import com.neet.TileMap.Background;
 import com.neet.TileMap.TileMap;
 
-public class Level1BState extends GameState {
+public class Level1CState extends GameState {
 
 	private Background sky;
 	private Background mountains;
@@ -53,7 +53,7 @@ public class Level1BState extends GameState {
 	private boolean eventFinish;
 	private boolean eventDead;
 
-	public Level1BState(GameStateManager gsm) {
+	public Level1CState(GameStateManager gsm) {
 		super(gsm);
 		init();
 	}

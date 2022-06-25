@@ -237,7 +237,7 @@ public class BigBoss extends Enemy {
 	
 	public void draw(Graphics2D g) {
 		
-		if (flinching) {
+		if (flinching) 
 			if (flinchCount % 10 < 10)
 				return;
 
@@ -245,8 +245,13 @@ public class BigBoss extends Enemy {
 		g.setColor(Color.RED);
 		g.fillRect(149+14, 19+15+BossNumber*24, (int)percentHealth*health , 4);
 		
+		if(flinching) {
+			if(flinchCount == 0 || flinchCount == 2) return;
+		}
+		
 		super.draw(g);
 		
 	}
 }
+
 
