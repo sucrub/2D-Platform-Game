@@ -30,7 +30,7 @@ import com.neet.Main.GamePanel;
 import com.neet.TileMap.Background;
 import com.neet.TileMap.TileMap;
 
-public class Level1CState extends GameState {
+public class Level3State extends GameState {
 
 	private Background sky;
 	private Background mountains;
@@ -53,7 +53,7 @@ public class Level1CState extends GameState {
 	private boolean eventFinish;
 	private boolean eventDead;
 
-	public Level1CState(GameStateManager gsm) {
+	public Level3State(GameStateManager gsm) {
 		super(gsm);
 		init();
 	}
@@ -68,16 +68,10 @@ public class Level1CState extends GameState {
 		tileMap = new TileMap(32);
 		tileMap.loadTiles("/Tilesets/tilesetnewer.png");
 		tileMap.loadMap("/Maps/level1c.map");
-		//tileMap.setPosition(100, 0);
-		//tileMap.setBounds(
-		//		tileMap.getWidth() - 1 * tileMap.getTileSize(),
-		//		tileMap.getHeight() - 2 * tileMap.getTileSize(),
-		//		0, 0);
-//		tileMap.setTween(1);
 
 		// player
 		player = new Player(tileMap);
-		player.setPosition(350, 61);
+		player.setPosition(300, 61);
 		player.setHealth(PlayerSave.getHealth());
 		player.setLives(PlayerSave.getLives());
 		player.setTime(PlayerSave.getTime());
@@ -115,8 +109,11 @@ public class Level1CState extends GameState {
 		JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
 
 		// music
-		JukeBox.load("/Music/level1.mp3", "level1");
-		JukeBox.loop("level1", 600, JukeBox.getFrames("level1") - 2200);
+		JukeBox.load("/Music/level2.mp3", "level2");
+		JukeBox.stop("level2");
+		
+		JukeBox.load("/Music/level3.mp3", "level3");
+		JukeBox.loop("level3", 600, JukeBox.getFrames("level3") - 2200);
 
 	}
 
@@ -130,78 +127,14 @@ public class Level1CState extends GameState {
 		Mushroom1 m1;
 		BigBoss n;
 
-//		Bomb bo = new Bomb(tileMap, player, enemies);
-//		bo.setPosition(1300, 100);
-//		enemies.add(bo);
-//		bo = new Bomb(tileMap, player, enemies);
-//		bo.setPosition(1330, 100);
-//		enemies.add(bo);
-//		bo = new Bomb(tileMap, player, enemies);
-//		bo.setPosition(1360, 100);
-//		enemies.add(bo);
-//
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(1300, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(1320, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(1340, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(1660, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(1680, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(1700, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(2177, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(2960, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(2980, 100);
-//		enemies.add(go);
-//		go = new Goblin(tileMap, player);
-//		go.setPosition(3000, 100);
-//		enemies.add(go);
-//		
-//		bi = new Bird(tileMap);
-//		bi.setPosition(2600, 100);
-//		enemies.add(bi);
-//		bi = new Bird(tileMap);
-//		bi.setPosition(3500, 100);
-//		enemies.add(bi);
-//		
-//		m = new Mushroom(tileMap, player);
-//		m.setPosition(700, 184);
-//		enemies.add(m);
-//		m = new Mushroom(tileMap, player);
-//		m.setPosition(1000, 88);
-//		enemies.add(m);
-//		m = new Mushroom(tileMap, player);
-//		m.setPosition(2050, 88);
-//		enemies.add(m);
-//		m = new Mushroom(tileMap, player);
-//		m.setPosition(2150, 57);
-//		enemies.add(m);
-
 		n = new BigBoss(tileMap, player, enemies,0);
 		n.setPosition(200,88);
 		enemies.add(n);
+		
+		/////HARD///
 		n = new BigBoss(tileMap, player, enemies,1);
 		n.setPosition(400,88);
 		enemies.add(n);
-
-//		m1 = new Mushroom1(tileMap, player);
-//		m1.setPosition(700, 100);
-//		enemies.add(m1);
-
 	}
 
 	public void update() {
@@ -428,7 +361,7 @@ public class Level1CState extends GameState {
 			PlayerSave.setHealth(player.getHealth());
 			PlayerSave.setLives(player.getLives());
 			PlayerSave.setTime(player.getTime());
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			gsm.setState(GameStateManager.VICTORYSTATE);
 		}
 
 	}

@@ -83,13 +83,13 @@ public class ChooseDifficultyState extends GameState{
 			JukeBox.stop("menusong");
 			JukeBox.play("menuselect");
 			PlayerSave.init();
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			gsm.setState(GameStateManager.LEVEL1STATE);
 		}
 		else if(currentChoice == 1) {
 			JukeBox.stop("menusong");
 			JukeBox.play("menuselect");
 			PlayerSave.init();
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			gsm.setState(GameStateManager.LEVEL1STATE);
 		}
 	}
 	

@@ -20,7 +20,7 @@ public class Mushroom1 extends Enemy{
 		super(tm);
 		player = p;
 		
-		health = maxHealth = 4;
+		health = maxHealth = 4; //HARD = 6
 		
 		width = 16;
 		height = 16;

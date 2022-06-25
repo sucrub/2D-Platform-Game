@@ -20,7 +20,7 @@ public class Bird extends Enemy {
 		
 		super(tm);
 		
-		health = maxHealth = 2;
+		health = maxHealth = 2; //HARD = 4
 		
 		width = 8;
 		height = 8;
