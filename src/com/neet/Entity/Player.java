@@ -503,12 +503,12 @@ public class Player extends MapObject {
 				flyingKnife = false;
 		}
 
-		// fireball attack
+		// knife attack
 		mp += 1; //increase mp
 		if (mp > maxMp)
 			mp = maxMp;
 		if (flyingKnife && currentAction != FLYING_KNIFE) {
-			if (mp > knifeCost) {
+			if (mp > knifeCost && !knockback) {
 				mp -= knifeCost; //decrease mp
 				Knife kn = new Knife(tileMap, facingRight);
 				kn.setPosition(x, y);

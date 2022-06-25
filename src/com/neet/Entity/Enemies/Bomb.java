@@ -36,7 +36,7 @@ public class Bomb extends Enemy {
 		player = p;
 		enemies = en;
 		
-		health = maxHealth = 1;
+		health = maxHealth = 1; //HARD = 3
 		
 		width = 30;
 		height = 30;

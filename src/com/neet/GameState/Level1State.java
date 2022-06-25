@@ -30,10 +30,9 @@ import com.neet.Main.GamePanel;
 import com.neet.TileMap.Background;
 import com.neet.TileMap.TileMap;
 
-public class Level1AState extends GameState {
+public class Level1State extends GameState {
 
 	private Background sky;
-	private Background mountains;
 
 	private Player player;
 	private TileMap tileMap;
@@ -53,7 +52,7 @@ public class Level1AState extends GameState {
 	private boolean eventFinish;
 	private boolean eventDead;
 
-	public Level1AState(GameStateManager gsm) {
+	public Level1State(GameStateManager gsm) {
 		super(gsm);
 		init();
 	}
@@ -61,23 +60,16 @@ public class Level1AState extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/background2.png", 0);
-		mountains = new Background("/Backgrounds/mountain.png", 0.2);
+		sky = new Background("/Backgrounds/level1background.png", 0);
 
 		// tilemap
 		tileMap = new TileMap(32);
 		tileMap.loadTiles("/Tilesets/tilesetnewer.png");
 		tileMap.loadMap("/Maps/level1a.map");
-		//tileMap.setPosition(100, 0);
-		//tileMap.setBounds(
-		//		tileMap.getWidth() - 1 * tileMap.getTileSize(),
-		//		tileMap.getHeight() - 2 * tileMap.getTileSize(),
-		//		0, 0);
-//		tileMap.setTween(1);
 
 		// player
 		player = new Player(tileMap);
-		player.setPosition(400, 61);
+		player.setPosition(400, 61); //400, 61
 		player.setHealth(PlayerSave.getHealth());
 		player.setLives(PlayerSave.getLives());
 		player.setTime(PlayerSave.getTime());
@@ -102,7 +94,7 @@ public class Level1AState extends GameState {
 
 		// teleport
 		teleport = new Teleport(tileMap);
-		teleport.setPosition(600, 61);
+		teleport.setPosition(4200, 51);
 
 		// start event
 		eventStart = true;
@@ -125,80 +117,140 @@ public class Level1AState extends GameState {
 		enemies.clear();
 	
 		Goblin go;
+		Bomb bo;
 		Bird bi;
 		Mushroom m;
 		Mushroom1 m1;
-//		BigBoss n;
-
-		Bomb bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(1300, 100);
-		enemies.add(bo);
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(1330, 100);
-		enemies.add(bo);
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(1360, 100);
-		enemies.add(bo);
-
+		BigBoss n;
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(800, 88);
+		go.setPosition(800, 100);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(1320, 100);
+		go.setPosition(850, 100);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(1340, 100);
+		go.setPosition(1000, 100);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(1660, 100);
+		go.setPosition(1400, 100);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(1680, 100);
+		go.setPosition(1600, 150);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(1700, 100);
+		go.setPosition(1630, 150);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(2177, 100);
+		go.setPosition(1660, 150);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(2960, 100);
+		go.setPosition(1720, 150);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(2980, 100);
+		go.setPosition(2550, 100);
 		enemies.add(go);
+		
 		go = new Goblin(tileMap, player);
-		go.setPosition(3000, 100);
+		go.setPosition(2630, 140);
 		enemies.add(go);
+		
+		go = new Goblin(tileMap, player);
+		go.setPosition(2830, 120);
+		enemies.add(go);
+		
+		go = new Goblin(tileMap, player);
+		go.setPosition(2870, 120);
+		enemies.add(go);
+		
+		go = new Goblin(tileMap, player);
+		go.setPosition(3200, 120);
+		enemies.add(go);
+		
+		go = new Goblin(tileMap, player);
+		go.setPosition(3600, 120);
+		enemies.add(go);
+		
+		go = new Goblin(tileMap, player);
+		go.setPosition(3540, 120);
+		enemies.add(go);
+		
+		m = new Mushroom(tileMap, player);
+		m.setPosition(590, 215);
+		enemies.add(m);
+		
+		m = new Mushroom(tileMap, player);
+		m.setPosition(980, 88);
+		enemies.add(m);
+		
+		m = new Mushroom(tileMap, player);
+		m.setPosition(1650, 185);
+		enemies.add(m);
+		
+		m = new Mushroom(tileMap, player);
+		m.setPosition(2790, 120);
+		enemies.add(m);
+		
+		m = new Mushroom(tileMap, player);
+		m.setPosition(3180, 120);
+		enemies.add(m);
+		
+		m = new Mushroom(tileMap, player);
+		m.setPosition(3350, 153);
+		enemies.add(m);
 		
 		bi = new Bird(tileMap);
-		bi.setPosition(2600, 100);
+		bi.setPosition(1900, 80);
 		enemies.add(bi);
+		
 		bi = new Bird(tileMap);
-		bi.setPosition(3500, 100);
+		bi.setPosition(2100, 50);
 		enemies.add(bi);
 		
-		m = new Mushroom(tileMap, player);
-		m.setPosition(700, 184);
-		enemies.add(m);
-		m = new Mushroom(tileMap, player);
-		m.setPosition(1000, 88);
-		enemies.add(m);
-		m = new Mushroom(tileMap, player);
-		m.setPosition(2050, 88);
-		enemies.add(m);
-		m = new Mushroom(tileMap, player);
-		m.setPosition(2150, 57);
-		enemies.add(m);
+		bi = new Bird(tileMap);
+		bi.setPosition(2350, 70);
+		enemies.add(bi);
 		
-//		n = new BigBoss(tileMap, player, enemies);
-//		n.setPosition(800,88);
-//		enemies.add(n);
-
-		m1 = new Mushroom1(tileMap, player);
-		m1.setPosition(700, 100);
-		enemies.add(m1);
-
+		bi = new Bird(tileMap);
+		bi.setPosition(3230, 170);
+		enemies.add(bi);
+		
+		bi = new Bird(tileMap);
+		bi.setPosition(3280, 170);
+		enemies.add(bi);
+		
+		bo = new Bomb(tileMap, player, enemies); 
+		bo.setPosition(2630, 50);
+		enemies.add(bo);
+		
+		bo = new Bomb(tileMap, player, enemies); 
+		bo.setPosition(3900, 50);
+		enemies.add(bo);
+		
+		////////HARD////////
+		go = new Goblin(tileMap, player);
+		go.setPosition(3560, 120);
+		enemies.add(go);
+		
+		go = new Goblin(tileMap, player);
+		go.setPosition(3580, 120);
+		enemies.add(go);
+		
+		bo = new Bomb(tileMap, player, enemies); 
+		bo.setPosition(1250, 40);
+		enemies.add(bo);
+		
+		bo = new Bomb(tileMap, player, enemies); 
+		bo.setPosition(3280, 50);
+		enemies.add(bo);
 	}
 
 	public void update() {
@@ -223,9 +275,6 @@ public class Level1AState extends GameState {
 			eventDead();
 		if (eventFinish)
 			eventFinish();
-
-		// move backgrounds
-		mountains.setPosition(tileMap.getx(), tileMap.gety());
 
 		// update player
 		player.update();
@@ -276,7 +325,6 @@ public class Level1AState extends GameState {
 
 		// draw background
 		sky.draw(g);
-		mountains.draw(g);
 
 		// draw tilemap
 		tileMap.draw(g);
@@ -296,11 +344,11 @@ public class Level1AState extends GameState {
 			explosions.get(i).draw(g);
 		}
 
-		// draw player
-		player.draw(g);
-
 		// draw teleport
 		teleport.draw(g);
+		
+		// draw player
+		player.draw(g);
 
 		// draw hud
 		hud.draw(g);
@@ -425,7 +473,8 @@ public class Level1AState extends GameState {
 			PlayerSave.setHealth(player.getHealth());
 			PlayerSave.setLives(player.getLives());
 			PlayerSave.setTime(player.getTime());
-			gsm.setState(GameStateManager.LEVEL1CSTATE);
+
+			gsm.setState(GameStateManager.LEVEL2STATE);
 		}
 
 	}
