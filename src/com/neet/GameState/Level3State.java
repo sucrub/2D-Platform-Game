@@ -46,7 +46,7 @@ public class Level3State extends GameState {
 	private Teleport teleport;
 	
 	//CountBoss
-	private int CountBoss=2;
+	private int CountBoss=1;
 
 	// events
 	private boolean blockInput = false;
@@ -132,13 +132,17 @@ public class Level3State extends GameState {
 		enemies.add(n);
 		
 		/////HARD///
-		n = new BigBoss(tileMap, player, enemies,1);
-		n.setPosition(400,88);
-		enemies.add(n);
+		if(ChooseDifficultyState.Hard()) {
+			n = new BigBoss(tileMap, player, enemies,1);
+			n.setPosition(400,88);
+			enemies.add(n);
+			CountBoss=2;
+		}
 	}
 
 	public void update() {
 
+		 System.out.println(ChooseDifficultyState.Hard());
 		// check keys
 		handleInput();
 
@@ -190,7 +194,6 @@ public class Level3State extends GameState {
 				CountBoss--;
 			}
 		}
-		System.out.print("\n"+CountBoss);
 
 		// update enemy projectiles
 		for (int i = 0; i < eprojectiles.size(); i++) {

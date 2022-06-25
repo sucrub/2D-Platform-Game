@@ -22,6 +22,8 @@ public class ChooseDifficultyState extends GameState{
 		"Hard"
 	};
 	
+	public static boolean Hard;
+	
 	private Font font, titlefont;
 	
 	public ChooseDifficultyState(GameStateManager gsm) {
@@ -55,6 +57,7 @@ public class ChooseDifficultyState extends GameState{
 		
 	}
 	
+	
 	public void draw(Graphics2D g) {
 		
 		// draw bg
@@ -84,13 +87,19 @@ public class ChooseDifficultyState extends GameState{
 			JukeBox.play("menuselect");
 			PlayerSave.init();
 			gsm.setState(GameStateManager.LEVEL1STATE);
+			Hard= false;
 		}
 		else if(currentChoice == 1) {
 			JukeBox.stop("menusong");
 			JukeBox.play("menuselect");
 			PlayerSave.init();
 			gsm.setState(GameStateManager.LEVEL1STATE);
+			Hard=true;
 		}
+	}
+	
+	public static boolean Hard() {
+		return Hard;
 	}
 	
 	public void handleInput() {
@@ -109,4 +118,5 @@ public class ChooseDifficultyState extends GameState{
 			}
 		}
 	}
+	
 }

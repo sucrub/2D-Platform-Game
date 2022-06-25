@@ -124,7 +124,6 @@ public class Level2State extends GameState {
 		Mushroom m;
 		Mushroom1 m1;
 		Bomb bo;
-		BigBoss n;
 
 		go = new Goblin(tileMap, player);
 		go.setPosition(500, 140);
@@ -259,41 +258,43 @@ public class Level2State extends GameState {
 		enemies.add(go);
 		
 		//////HARD/////
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(600, 140);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(900, 50);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(1600, 50);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(1800, 50);
-		enemies.add(bo);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(1250, 200);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(1300, 200);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(2530, 50);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(2880, 50);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(2900, 50);
-		enemies.add(go);
+		if(ChooseDifficultyState.Hard()) {
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(600, 140);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(900, 50);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(1600, 50);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(1800, 50);
+			enemies.add(bo);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(1250, 200);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(1300, 200);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(2530, 50);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(2880, 50);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(2900, 50);
+			enemies.add(go);
+		}
 		
 //		bo = new Bomb(tileMap, player, enemies);
 //		bo.setPosition(3600, 120);
@@ -301,7 +302,7 @@ public class Level2State extends GameState {
 	}
 
 	public void update() {
-
+		 System.out.println(ChooseDifficultyState.Hard());
 		// check keys
 		handleInput();
 

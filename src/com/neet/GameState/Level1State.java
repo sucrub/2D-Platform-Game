@@ -120,8 +120,6 @@ public class Level1State extends GameState {
 		Bomb bo;
 		Bird bi;
 		Mushroom m;
-		Mushroom1 m1;
-		BigBoss n;
 		
 		go = new Goblin(tileMap, player);
 		go.setPosition(800, 100);
@@ -236,25 +234,27 @@ public class Level1State extends GameState {
 		enemies.add(bo);
 		
 		////////HARD////////
-		go = new Goblin(tileMap, player);
-		go.setPosition(3560, 120);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(3580, 120);
-		enemies.add(go);
-		
-		bo = new Bomb(tileMap, player, enemies); 
-		bo.setPosition(1250, 40);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies); 
-		bo.setPosition(3280, 50);
-		enemies.add(bo);
+		if(ChooseDifficultyState.Hard()) {
+			go = new Goblin(tileMap, player);
+			go.setPosition(3560, 120);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(3580, 120);
+			enemies.add(go);
+			
+			bo = new Bomb(tileMap, player, enemies); 
+			bo.setPosition(1250, 40);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies); 
+			bo.setPosition(3280, 50);
+			enemies.add(bo);
+		}
 	}
 
 	public void update() {
-
+		 System.out.println(ChooseDifficultyState.Hard());
 		// check keys
 		handleInput();
 
