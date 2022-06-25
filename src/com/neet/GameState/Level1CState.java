@@ -61,13 +61,13 @@ public class Level1CState extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/background2.png", 0);
+		sky = new Background("/Backgrounds/bossbackground.png", 0);
 		mountains = new Background("/Backgrounds/mountain.png", 0.2);
 
 		// tilemap
 		tileMap = new TileMap(32);
 		tileMap.loadTiles("/Tilesets/tilesetnewer.png");
-		tileMap.loadMap("/Maps/level1b.map");
+		tileMap.loadMap("/Maps/level1c.map");
 		//tileMap.setPosition(100, 0);
 		//tileMap.setBounds(
 		//		tileMap.getWidth() - 1 * tileMap.getTileSize(),
@@ -279,7 +279,7 @@ public class Level1CState extends GameState {
 
 		// draw background
 		sky.draw(g);
-		mountains.draw(g);
+//		mountains.draw(g);
 
 		// draw tilemap
 		tileMap.draw(g);

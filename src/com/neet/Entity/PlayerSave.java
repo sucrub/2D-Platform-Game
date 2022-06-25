@@ -1,3 +1,5 @@
+/*THIS CLASS IS ABOUT PLAYER STATS*/
+
 package com.neet.Entity;
 
 public class PlayerSave {

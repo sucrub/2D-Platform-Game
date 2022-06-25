@@ -1,3 +1,5 @@
+/*THIS CLASS IS ABOUT PLAYER*/
+
 package com.neet.Entity;
 
 import java.awt.Graphics2D;

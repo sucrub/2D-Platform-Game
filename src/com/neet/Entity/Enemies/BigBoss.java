@@ -57,7 +57,7 @@ public class BigBoss extends Enemy {
 			e.printStackTrace();
 		}
 		
-		health = maxHealth = 1;
+		health = maxHealth = 30;
 		
 		width = 64;
 		height = 62;
