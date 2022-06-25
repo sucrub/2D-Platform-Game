@@ -252,6 +252,7 @@ public class BigBoss extends Enemy {
 		super.draw(g);
 		
 	}
+	
 }
 
 
