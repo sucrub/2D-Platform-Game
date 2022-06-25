@@ -191,10 +191,10 @@ public class Level1CState extends GameState {
 //		m.setPosition(2150, 57);
 //		enemies.add(m);
 
-		n = new BigBoss(tileMap, player, enemies,1);
+		n = new BigBoss(tileMap, player, enemies,0);
 		n.setPosition(200,88);
 		enemies.add(n);
-		n = new BigBoss(tileMap, player, enemies,2);
+		n = new BigBoss(tileMap, player, enemies,1);
 		n.setPosition(400,88);
 		enemies.add(n);
 
