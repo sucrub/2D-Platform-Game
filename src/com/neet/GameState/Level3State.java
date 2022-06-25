@@ -44,6 +44,9 @@ public class Level3State extends GameState {
 
 	private HUD hud;
 	private Teleport teleport;
+	
+	//CountBoss
+	private int CountBoss=2;
 
 	// events
 	private boolean blockInput = false;
@@ -120,11 +123,7 @@ public class Level3State extends GameState {
 	private void populateEnemies() {
 	
 		enemies.clear();
-	
-		Goblin go;
-		Bird bi;
-		Mushroom m;
-		Mushroom1 m1;
+		
 		BigBoss n;
 
 		n = new BigBoss(tileMap, player, enemies,0);
@@ -152,6 +151,11 @@ public class Level3State extends GameState {
 			eventDead = blockInput = true;
 		}
 
+		//Check if done Boss
+		if (CountBoss==0) {
+			eventFinish = blockInput = true;
+		};
+		
 		// play events
 		if (eventStart)
 			eventStart();
@@ -181,6 +185,7 @@ public class Level3State extends GameState {
 				enemies.remove(i);
 				i--;
 				explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
+				CountBoss--;
 			}
 		}
 
