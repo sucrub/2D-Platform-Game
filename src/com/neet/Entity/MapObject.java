@@ -88,16 +88,19 @@ public abstract class MapObject {
 	}
 	
 	public boolean contains(MapObject o) {
+		
 		Rectangle r1 = getRectangle();
 		Rectangle r2 = o.getRectangle();
 		return r1.contains(r2);
 	}
 	
 	public boolean contains(Rectangle r) {
+		
 		return getRectangle().contains(r);
 	}
 	
 	public Rectangle getRectangle() {
+		
 		return new Rectangle(
 				(int)x - cwidth / 2,
 				(int)y - cheight / 2,
@@ -107,6 +110,7 @@ public abstract class MapObject {
 	}
 	
 	public void calculateCorners(double x, double y) {
+		
 		int leftTile = (int)(x - cwidth / 2) / tileSize;
 		int rightTile = (int)(x + cwidth / 2 - 1) / tileSize;
 		int topTile = (int)(y - cheight / 2) / tileSize;

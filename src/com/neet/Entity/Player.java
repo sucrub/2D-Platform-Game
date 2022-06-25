@@ -133,8 +133,7 @@ public class Player extends MapObject {
 		try {
 
 			BufferedImage spritesheet = ImageIO.read(
-					getClass().getResourceAsStream(
-							"/Sprites/Player/sprite_sheet.png"));
+					getClass().getResourceAsStream("/Sprites/Player/sprite_sheet.png"));
 
 			int count = 0;
 			sprites = new ArrayList<BufferedImage[]>();
@@ -231,8 +230,8 @@ public class Player extends MapObject {
 		
 		if (knockback)
 			return;
-		
-		flyingKnife = true;
+		else
+			flyingKnife = true;
 	}
 
 	public void setDashing() {

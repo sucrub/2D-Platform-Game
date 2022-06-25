@@ -118,6 +118,7 @@ public class FireBall extends Enemy {
 		
 	}
 	
+	
 	public void draw(Graphics2D g) {
 		super.draw(g);
 	}

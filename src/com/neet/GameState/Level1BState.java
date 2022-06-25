@@ -194,9 +194,9 @@ public class Level1BState extends GameState {
 		n = new BigBoss(tileMap, player, enemies);
 		n.setPosition(500,88);
 		enemies.add(n);
-		n = new BigBoss(tileMap, player, enemies);
-		n.setPosition(200,88);
-		enemies.add(n);
+//		n = new BigBoss(tileMap, player, enemies);
+//		n.setPosition(200,88);
+//		enemies.add(n);
 
 //		m1 = new Mushroom1(tileMap, player);
 //		m1.setPosition(700, 100);

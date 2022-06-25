@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
@@ -31,19 +32,17 @@ public class BigBoss extends Enemy {
 	private int timeDelay=0;
 	private int chooseNextSkill=0;
 
-	
-	
 	public BigBoss(TileMap tm, Player p, ArrayList<Enemy> en) {
 		
 		super(tm);
 		player = p;
 		enemies = en;
 		
-		health = maxHealth = 30;
+		health = maxHealth = 1;
 		
 		width = 64;
 		height = 62;
-		cwidth = 56;
+		cwidth = 50;
 		cheight = 48;
 		
 		damage = 2;
@@ -210,12 +209,12 @@ public class BigBoss extends Enemy {
 	}			
 
 }
-
 	
 	public void draw(Graphics2D g) {
 		
-		if(flinching) {
-			if(flinchCount == 0 || flinchCount == 2) return;
+		if (flinching) {
+			if (flinchCount % 10 < 10)
+				return;
 		}
 		
 		super.draw(g);

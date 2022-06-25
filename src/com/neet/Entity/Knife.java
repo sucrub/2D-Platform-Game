@@ -80,12 +80,13 @@ public class Knife extends MapObject {
 
 		animation.update();
 		
-		if (hit && animation.hasPlayedOnce()) {
+		if (hit) {
 			remove = true;
 		}
 	}
 
 	public void draw(Graphics2D g) {
+		
 		super.draw(g);
 	}
 

@@ -3,6 +3,7 @@ package com.neet.Entity.Enemies;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
@@ -14,13 +15,14 @@ public class Goblin extends Enemy {
 	private BufferedImage[] sprites;
 	private Player player;
 	private boolean active;
+	private boolean knockback;
 	
 	public Goblin(TileMap tm, Player p) {
 		
 		super(tm);
 		player = p;
 		
-		health = maxHealth = 1;
+		health = maxHealth = 5;
 		
 		width = 16;
 		height = 16;
@@ -93,10 +95,37 @@ public class Goblin extends Enemy {
 		
 	}
 	
+	public void hit(int damage) {
+		
+		if(dead || flinching) return;
+		JukeBox.play("enemyhit");
+		health -= damage;
+		if(health < 0) health = 0;
+		if(health == 0) dead = true;
+		if(dead) remove = true;
+		flinching = true;
+		flinchCount = 0;
+		
+		if (facingRight)
+			dx = 2;
+		else
+			dx = -2;
+		dy = -2;
+		knockback = true;
+		falling = true;
+		jumping = false;
+		
+	}
+	
 	public void draw(Graphics2D g) {
 		
-		if(flinching) {
-			if(flinchCount == 0 || flinchCount == 2) return;
+//		if(flinching) {
+//			if(flinchCount == 0 || flinchCount == 2) return;
+//		}
+		
+		if (flinching) {
+			if (flinchCount % 10 < 10)
+				return;
 		}
 		
 		super.draw(g);
