@@ -55,7 +55,7 @@ public class Level3State extends GameState {
 	private ArrayList<Rectangle> tb;
 	private boolean eventFinish;
 	private boolean eventDead;
-	private int CountBoss=2;
+
 
 	public Level3State(GameStateManager gsm) {
 		super(gsm);
