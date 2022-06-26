@@ -2,10 +2,9 @@ package com.neet.GameState;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+
 
 import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
@@ -16,9 +15,9 @@ import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
 import com.neet.Entity.PlayerSave;
 import com.neet.Entity.Teleport;
-import com.neet.Entity.Title;
 
-import com.neet.Entity.Enemies.BigBoss;
+
+
 import com.neet.Entity.Enemies.Bird;
 import com.neet.Entity.Enemies.Goblin;
 import com.neet.Entity.Enemies.Mushroom;
@@ -124,7 +123,6 @@ public class Level2State extends GameState {
 		Mushroom m;
 		Mushroom1 m1;
 		Bomb bo;
-		BigBoss n;
 
 		go = new Goblin(tileMap, player);
 		go.setPosition(500, 140);
@@ -259,41 +257,43 @@ public class Level2State extends GameState {
 		enemies.add(go);
 		
 		//////HARD/////
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(600, 140);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(900, 50);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(1600, 50);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies);
-		bo.setPosition(1800, 50);
-		enemies.add(bo);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(1250, 200);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(1300, 200);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(2530, 50);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(2880, 50);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(2900, 50);
-		enemies.add(go);
+		if(ChooseDifficultyState.Hard()) {
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(600, 140);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(900, 50);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(1600, 50);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies);
+			bo.setPosition(1800, 50);
+			enemies.add(bo);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(1250, 200);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(1300, 200);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(2530, 50);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(2880, 50);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(2900, 50);
+			enemies.add(go);
+		}
 		
 //		bo = new Bomb(tileMap, player, enemies);
 //		bo.setPosition(3600, 120);
@@ -301,7 +301,7 @@ public class Level2State extends GameState {
 	}
 
 	public void update() {
-
+		
 		// check keys
 		handleInput();
 

@@ -39,7 +39,7 @@ public class BigBoss extends Enemy {
 	private int timeDelay=0;
 	private int chooseNextSkill=0;
 	private double percentHealth;
-	private int percentBar;
+
 
 	public BigBoss(TileMap tm, Player p, ArrayList<Enemy> en, int t) {
 
@@ -57,7 +57,7 @@ public class BigBoss extends Enemy {
 			e.printStackTrace();
 		}
 		
-		health = maxHealth = 30;
+		health = maxHealth = 10;
 		
 		width = 64;
 		height = 62;

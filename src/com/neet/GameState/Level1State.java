@@ -120,8 +120,6 @@ public class Level1State extends GameState {
 		Bomb bo;
 		Bird bi;
 		Mushroom m;
-		Mushroom1 m1;
-		BigBoss n;
 		
 		go = new Goblin(tileMap, player);
 		go.setPosition(800, 100);
@@ -236,25 +234,27 @@ public class Level1State extends GameState {
 		enemies.add(bo);
 		
 		////////HARD////////
-		go = new Goblin(tileMap, player);
-		go.setPosition(3560, 120);
-		enemies.add(go);
-		
-		go = new Goblin(tileMap, player);
-		go.setPosition(3580, 120);
-		enemies.add(go);
-		
-		bo = new Bomb(tileMap, player, enemies); 
-		bo.setPosition(1250, 40);
-		enemies.add(bo);
-		
-		bo = new Bomb(tileMap, player, enemies); 
-		bo.setPosition(3280, 50);
-		enemies.add(bo);
+		if(ChooseDifficultyState.Hard()) {
+			go = new Goblin(tileMap, player);
+			go.setPosition(3560, 120);
+			enemies.add(go);
+			
+			go = new Goblin(tileMap, player);
+			go.setPosition(3580, 120);
+			enemies.add(go);
+			
+			bo = new Bomb(tileMap, player, enemies); 
+			bo.setPosition(1250, 40);
+			enemies.add(bo);
+			
+			bo = new Bomb(tileMap, player, enemies); 
+			bo.setPosition(3280, 50);
+			enemies.add(bo);
+		}
 	}
 
 	public void update() {
-
+		
 		// check keys
 		handleInput();
 
@@ -390,7 +390,7 @@ public class Level1State extends GameState {
 	private void reset() {
 		
 		player.reset();
-		player.setPosition(300, 61);
+		player.setPosition(310, 61);
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;
@@ -473,6 +473,7 @@ public class Level1State extends GameState {
 			PlayerSave.setHealth(player.getHealth());
 			PlayerSave.setLives(player.getLives());
 			PlayerSave.setTime(player.getTime());
+
 			gsm.setState(GameStateManager.LEVEL2STATE);
 		}
 

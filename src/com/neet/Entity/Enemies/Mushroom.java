@@ -20,7 +20,15 @@ public class Mushroom extends Enemy{
 		super(tm);
 		player = p;
 		
-		health = maxHealth = 4; //HARD = 6
+
+		 //SetDifficult
+		if(com.neet.GameState.ChooseDifficultyState.Hard()) {
+			health = maxHealth =6;
+		}
+		else {
+			health = maxHealth = 4;
+		}
+
 		
 		width = 16;
 		height = 16;
