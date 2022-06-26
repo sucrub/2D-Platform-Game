@@ -19,7 +19,6 @@ public class VictoryState extends GameState {
 	public VictoryState(GameStateManager gsm) {
 		super(gsm);
 		
-		font = new Font("Century Gothic", Font.PLAIN, 20);
 	}
 
 	public void init() {}
@@ -35,14 +34,13 @@ public class VictoryState extends GameState {
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		g.setColor(Color.WHITE);
 		g.setFont(font);
-		g.drawString("YOU WIN!!!", 90, 90);
 		try {
 			BufferedImage Victory = ImageIO.read(getClass().getResourceAsStream("/Sprites/Other/victory.png"));
 			victory = Victory.getSubimage(0, 0, 270, 75);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		g.drawImage(victory, 100, 80, null );
+		g.drawImage(victory, 100, 70, null );
 
 	}
 	
