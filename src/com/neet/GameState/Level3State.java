@@ -2,10 +2,8 @@ package com.neet.GameState;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 
 import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
@@ -15,15 +13,8 @@ import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
 import com.neet.Entity.PlayerSave;
-import com.neet.Entity.Teleport;
-import com.neet.Entity.Title;
 
 import com.neet.Entity.Enemies.BigBoss;
-import com.neet.Entity.Enemies.Bird;
-import com.neet.Entity.Enemies.Goblin;
-import com.neet.Entity.Enemies.Mushroom;
-import com.neet.Entity.Enemies.Mushroom1;
-import com.neet.Entity.Enemies.Bomb;
 
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
@@ -146,11 +137,6 @@ public class Level3State extends GameState {
 		// check keys
 		handleInput();
 
-//		// check if end of level
-//		if (teleport.contains(player)) {
-//			eventFinish = blockInput = true;
-//		}
-
 		// check if player dead
 		if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
 			eventDead = blockInput = true;
@@ -215,9 +201,6 @@ public class Level3State extends GameState {
 			
 		}
 
-//		// update teleport
-//		teleport.update();
-//
 	}
 
 	public void draw(Graphics2D g) {
@@ -246,9 +229,6 @@ public class Level3State extends GameState {
 
 		// draw player
 		player.draw(g);
-
-//		// draw teleport
-//		teleport.draw(g);
 
 		// draw hud
 		hud.draw(g);

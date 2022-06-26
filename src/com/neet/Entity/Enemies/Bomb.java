@@ -36,8 +36,15 @@ public class Bomb extends Enemy {
 		player = p;
 		enemies = en;
 		
-		health = maxHealth = 1; //HARD = 3
-		
+
+		 //SetDifficult
+		if(com.neet.GameState.ChooseDifficultyState.Hard()) {
+			health = maxHealth = 3;
+		}
+		else {
+			health = maxHealth = 1;
+		}
+
 		width = 30;
 		height = 30;
 		cwidth = 8;

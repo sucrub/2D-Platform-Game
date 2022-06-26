@@ -2,10 +2,9 @@ package com.neet.GameState;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
+
 
 import com.neet.Audio.JukeBox;
 import com.neet.Entity.Enemy;
@@ -16,9 +15,9 @@ import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
 import com.neet.Entity.PlayerSave;
 import com.neet.Entity.Teleport;
-import com.neet.Entity.Title;
 
-import com.neet.Entity.Enemies.BigBoss;
+
+
 import com.neet.Entity.Enemies.Bird;
 import com.neet.Entity.Enemies.Goblin;
 import com.neet.Entity.Enemies.Mushroom;

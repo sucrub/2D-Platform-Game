@@ -22,8 +22,15 @@ public class Goblin extends Enemy {
 		super(tm);
 		player = p;
 		
-		health = maxHealth = 3; //HARD = 5
-		
+
+		 //SetDifficult
+		if(com.neet.GameState.ChooseDifficultyState.Hard()) {
+			health = maxHealth =5;
+		}
+		else {
+			health = maxHealth = 3;
+		}
+
 		width = 16;
 		height = 16;
 		cwidth = 8;

@@ -390,7 +390,7 @@ public class Level1State extends GameState {
 	private void reset() {
 		
 		player.reset();
-		player.setPosition(300, 61);
+		player.setPosition(310, 61);
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;

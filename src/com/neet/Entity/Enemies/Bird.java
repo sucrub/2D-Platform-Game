@@ -20,7 +20,13 @@ public class Bird extends Enemy {
 		
 		super(tm);
 		
-		health = maxHealth = 2; //HARD = 4
+		 //SetDifficult
+		if(com.neet.GameState.ChooseDifficultyState.Hard()) {
+			health = maxHealth =4;
+		}
+		else {
+			health = maxHealth = 2;
+		}
 		
 		width = 8;
 		height = 8;
