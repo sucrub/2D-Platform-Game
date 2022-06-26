@@ -142,7 +142,7 @@ public class Level3State extends GameState {
 
 	public void update() {
 
-		 System.out.println(ChooseDifficultyState.Hard());
+		
 		// check keys
 		handleInput();
 
