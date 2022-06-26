@@ -43,7 +43,7 @@ public class Level3State extends GameState {
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
-	private Teleport teleport;
+//	private Teleport teleport;
 	
 	//CountBoss
 	private int CountBoss=1;
@@ -98,9 +98,9 @@ public class Level3State extends GameState {
 		// hud
 		hud = new HUD(player);
 
-		// teleport
-		teleport = new Teleport(tileMap);
-		//teleport.setPosition(600, 61);
+//		// teleport
+//		teleport = new Teleport(tileMap);
+//		//teleport.setPosition(600, 61);
 
 		// start event
 		eventStart = true;
@@ -146,10 +146,10 @@ public class Level3State extends GameState {
 		// check keys
 		handleInput();
 
-		// check if end of level
-		if (teleport.contains(player)) {
-			eventFinish = blockInput = true;
-		}
+//		// check if end of level
+//		if (teleport.contains(player)) {
+//			eventFinish = blockInput = true;
+//		}
 
 		// check if player dead
 		if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
@@ -212,11 +212,12 @@ public class Level3State extends GameState {
 				explosions.remove(i);
 				i--;
 			}
+			
 		}
 
-		// update teleport
-		teleport.update();
-
+//		// update teleport
+//		teleport.update();
+//
 	}
 
 	public void draw(Graphics2D g) {
@@ -246,8 +247,8 @@ public class Level3State extends GameState {
 		// draw player
 		player.draw(g);
 
-		// draw teleport
-		teleport.draw(g);
+//		// draw teleport
+//		teleport.draw(g);
 
 		// draw hud
 		hud.draw(g);
