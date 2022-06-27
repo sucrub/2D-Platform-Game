@@ -22,7 +22,7 @@ public class Mushroom1 extends Enemy{
 		
 
 		 //SetDifficult
-		if(com.neet.GameState.ChooseDifficultyState.Hard()) {
+		if(com.neet.GameState.ChooseDifficultyState.hard()) {
 			health = maxHealth =6;
 		}
 		else {

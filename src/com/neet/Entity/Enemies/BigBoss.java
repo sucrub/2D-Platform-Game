@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 
 import javax.imageio.ImageIO;
 
@@ -43,14 +43,13 @@ public class BigBoss extends Enemy {
 
 	public BigBoss(TileMap tm, Player p, ArrayList<Enemy> en, int t) {
 
-		
-
 		super(tm);
 		player = p;
 		enemies = en;
 		BossNumber=t;
 		
 		try {
+			
 			BufferedImage Bar = ImageIO.read(getClass().getResourceAsStream("/Sprites/Enemies/HeartBarBoss.png"));
 			HeartBarBoss = Bar.getSubimage(0, 0, 224, 24);
 		}catch(Exception e) {
@@ -59,8 +58,10 @@ public class BigBoss extends Enemy {
 		
 		health = maxHealth = 20;
 		
+		//image size
 		width = 64;
 		height = 62;
+		//hitbox
 		cwidth = 50;
 		cheight = 48;
 		
@@ -73,35 +74,37 @@ public class BigBoss extends Enemy {
 		idleSprites = Content.BigBoss[0];
 		jumpSprites = Content.BigBoss[0];
 		attackSprites = Content.BigBoss[0];
-
 		
 		animation.setFrames(idleSprites);
 		animation.setDelay(4);
-		
-		
 		
 		left = true;
 		facingRight = false;
 		
 		attackTick =0;
-		
 	}
 	
 	private void getNextPosition() {
+		
 		if(left) dx = -moveSpeed;
 		else if(right) dx = moveSpeed;
 		else dx = 0;
+		
 		if(falling) {
+			
 			dy += fallSpeed;
 			if(dy > maxFallSpeed) dy = maxFallSpeed;
 		}
+		
 		if(jumping && !falling) {
+			
 			dy = jumpStart;
 		}
 	}
 	
 	
 	public int getRandomNumber(int min, int max) {
+		
 	    return (int) ((Math.random() * (max - min)) + min);
 	}
 	
@@ -110,8 +113,6 @@ public class BigBoss extends Enemy {
 	//percentHealth
 		percentHealth = 210/maxHealth;
 
-
-		
 	// check if done flinching
 		if(flinching) {
 			flinchCount++;
@@ -128,12 +129,12 @@ public class BigBoss extends Enemy {
 		if(player.getx() < x) facingRight = false;
 		else facingRight = true;
 		
-		
-
 		if(timeDelay<1) {
 			timeDelay++;
 		}
+		
 		else {
+			
 			timeDelay=0;
 			// idle
 			if(step == 0) {
@@ -151,6 +152,7 @@ public class BigBoss extends Enemy {
 			}
 			
 			if(chooseNextSkill==0) {
+				
 				// jump away
 				if(step == 1) {
 					if(currentAction != JUMPING) {
@@ -165,9 +167,12 @@ public class BigBoss extends Enemy {
 						step++;
 					}
 				}
+				
 				// attack
 				if(step == 2) {
+					
 					if(dy > 0 && currentAction != ATTACKING) {
+						
 						currentAction = ATTACKING;
 						animation.setFrames(attackSprites);
 						animation.setDelay(3);
@@ -178,26 +183,34 @@ public class BigBoss extends Enemy {
 						else de.setVector(-3, 3);
 						enemies.add(de);
 						}
+					
 					if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
+						
 						step++;
 						currentAction = JUMPING;
 						animation.setFrames(jumpSprites);
 						animation.setDelay(3);
 					}
 				}
+				
 				// done attacking
 				if(step == 3) {
+					
 					if(dy == 0) step++;
 				}
 				
 				// land
 				if(step == 4) {
+					
 					step = 0;
 					left = right = jumping = false;
 				}
 			}
+			
 			else {
+				
 				if(step == 1) {
+					
 					if(dy ==0 && currentAction != ATTACKING) {
 						currentAction = ATTACKING;
 						animation.setFrames(attackSprites);
@@ -211,26 +224,29 @@ public class BigBoss extends Enemy {
 						else fb.setVector(-3, 3);
 						enemies.add(fb);
 					}
+					
 					if(currentAction == ATTACKING && animation.hasPlayedOnce()) {
+						
 						step+=2;
 						currentAction = IDLE;
 						animation.setFrames(idleSprites);
 						animation.setDelay(3);
 						}
 				}
+				
 				// done attacking
 				if(step == 3) {
+					
 					if(dy == 0) step++;
 				}
 				
 				// land
 				if(step == 4) {
+					
 					step = 0;
 					left = right = jumping = false;
 				}
 			}
-			
-
 	}			
 
 }

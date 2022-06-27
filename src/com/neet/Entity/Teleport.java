@@ -1,3 +1,5 @@
+/*CONG DICH CHUYEN*/
+
 package com.neet.Entity;
 
 import java.awt.Graphics2D;

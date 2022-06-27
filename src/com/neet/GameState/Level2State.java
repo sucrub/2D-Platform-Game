@@ -4,25 +4,20 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-
-
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.EnemyProjectile;
-import com.neet.Entity.EnergyParticle;
 import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
-import com.neet.Entity.PlayerSave;
+import com.neet.Entity.PlayerStatus;
 import com.neet.Entity.Teleport;
-
-
 
 import com.neet.Entity.Enemies.Bird;
 import com.neet.Entity.Enemies.Goblin;
 import com.neet.Entity.Enemies.Mushroom;
 import com.neet.Entity.Enemies.Mushroom1;
-import com.neet.Entity.Enemies.Bomb;
+import com.neet.Entity.Enemies.Bomber;
 
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
@@ -37,7 +32,6 @@ public class Level2State extends GameState {
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<EnemyProjectile> eprojectiles;
-	private ArrayList<EnergyParticle> energyParticles;
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
@@ -69,22 +63,18 @@ public class Level2State extends GameState {
 		// player
 		player = new Player(tileMap);
 		player.setPosition(400, 140); //400, 140
-		player.setHealth(PlayerSave.getHealth());
-		player.setLives(PlayerSave.getLives());
-		player.setTime(PlayerSave.getTime());
-		player.setmaxHealth(PlayerSave.getmaxHealth());
+		player.setHealth(PlayerStatus.getHealth());
+		player.setLives(PlayerStatus.getLives());
+		player.setTime(PlayerStatus.getTime());
+		player.setmaxHealth(PlayerStatus.getmaxHealth());
 
 		// enemies
 		enemies = new ArrayList<Enemy>();
 		eprojectiles = new ArrayList<EnemyProjectile>();
 		populateEnemies();
 
-		// energy particle
-		energyParticles = new ArrayList<EnergyParticle>();
-
-		// init player
-		player.init(enemies, energyParticles);
-
+		player.init(enemies);
+		
 		// explosions
 		explosions = new ArrayList<Explosion>();
 
@@ -101,16 +91,16 @@ public class Level2State extends GameState {
 		eventStart();
 
 		// sfx
-		JukeBox.load("/SFX/teleport.mp3", "teleport");
-		JukeBox.load("/SFX/explode.mp3", "explode");
-		JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
+		Audio.load("/SFX/teleport.mp3", "teleport");
+		Audio.load("/SFX/explode.mp3", "explode");
+		Audio.load("/SFX/enemyhit.mp3", "enemyhit");
 
 		// music
-		JukeBox.load("/Music/level1.mp3", "level1");
-		JukeBox.stop("level1");
+		Audio.load("/Music/level1.mp3", "level1");
+		Audio.stop("level1");
 		
-		JukeBox.load("/Music/level2.mp3", "level2");
-		JukeBox.loop("level2", 600, JukeBox.getFrames("level2") - 2200);
+		Audio.load("/Music/level2.mp3", "level2");
+		Audio.loop("level2", 600, Audio.getFrames("level2") - 2200);
 
 	}
 
@@ -122,7 +112,7 @@ public class Level2State extends GameState {
 		Bird bi;
 		Mushroom m;
 		Mushroom1 m1;
-		Bomb bo;
+		Bomber bo;
 
 		go = new Goblin(tileMap, player);
 		go.setPosition(500, 140);
@@ -192,7 +182,7 @@ public class Level2State extends GameState {
 		m.setPosition(2570, 87);
 		enemies.add(m);
 		
-		bo = new Bomb(tileMap, player, enemies);
+		bo = new Bomber(tileMap, player, enemies);
 		bo.setPosition(2390, 50);
 		enemies.add(bo);
 		
@@ -257,20 +247,20 @@ public class Level2State extends GameState {
 		enemies.add(go);
 		
 		//////HARD/////
-		if(ChooseDifficultyState.Hard()) {
-			bo = new Bomb(tileMap, player, enemies);
+		if(ChooseDifficultyState.hard()) {
+			bo = new Bomber(tileMap, player, enemies);
 			bo.setPosition(600, 140);
 			enemies.add(bo);
 			
-			bo = new Bomb(tileMap, player, enemies);
+			bo = new Bomber(tileMap, player, enemies);
 			bo.setPosition(900, 50);
 			enemies.add(bo);
 			
-			bo = new Bomb(tileMap, player, enemies);
+			bo = new Bomber(tileMap, player, enemies);
 			bo.setPosition(1600, 50);
 			enemies.add(bo);
 			
-			bo = new Bomb(tileMap, player, enemies);
+			bo = new Bomber(tileMap, player, enemies);
 			bo.setPosition(1800, 50);
 			enemies.add(bo);
 			
@@ -295,9 +285,6 @@ public class Level2State extends GameState {
 			enemies.add(go);
 		}
 		
-//		bo = new Bomb(tileMap, player, enemies);
-//		bo.setPosition(3600, 120);
-//		enemies.add(bo);
 	}
 
 	public void update() {
@@ -331,13 +318,13 @@ public class Level2State extends GameState {
 				GamePanel.WIDTH / 2 - player.getx(),
 				GamePanel.HEIGHT / 2 - player.gety());
 
-		tileMap.fixBounds();
-
 		// update enemies
 		for (int i = 0; i < enemies.size(); i++) {
+			
 			Enemy e = enemies.get(i);
 			e.update();
 			if (e.isDead()) {
+				
 				enemies.remove(i);
 				i--;
 				explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
@@ -346,9 +333,11 @@ public class Level2State extends GameState {
 
 		// update enemy projectiles
 		for (int i = 0; i < eprojectiles.size(); i++) {
+			
 			EnemyProjectile ep = eprojectiles.get(i);
 			ep.update();
 			if (ep.shouldRemove()) {
+				
 				eprojectiles.remove(i);
 				i--;
 			}
@@ -356,8 +345,10 @@ public class Level2State extends GameState {
 
 		// update explosions
 		for (int i = 0; i < explosions.size(); i++) {
+			
 			explosions.get(i).update();
 			if (explosions.get(i).shouldRemove()) {
+				
 				explosions.remove(i);
 				i--;
 			}
@@ -503,7 +494,7 @@ public class Level2State extends GameState {
 	private void eventFinish() {
 		eventCount++;
 		if (eventCount == 1) {
-			JukeBox.play("teleport");
+			Audio.play("teleport");
 			player.setTeleporting(true);
 			player.stop();
 		} else if (eventCount == 120) {
@@ -515,12 +506,12 @@ public class Level2State extends GameState {
 			tb.get(0).y -= 4;
 			tb.get(0).width += 12;
 			tb.get(0).height += 8;
-			JukeBox.stop("teleport");
+			Audio.stop("teleport");
 		}
 		if (eventCount == 180) {
-			PlayerSave.setHealth(player.getHealth());
-			PlayerSave.setLives(player.getLives());
-			PlayerSave.setTime(player.getTime());
+			PlayerStatus.setHealth(player.getHealth());
+			PlayerStatus.setLives(player.getLives());
+			PlayerStatus.setTime(player.getTime());
 			gsm.setState(GameStateManager.LEVEL3STATE);
 		}
 

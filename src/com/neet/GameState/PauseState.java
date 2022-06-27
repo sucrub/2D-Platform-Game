@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 

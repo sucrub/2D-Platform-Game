@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.TileMap.TileMap;
 import com.neet.Entity.Knife;
 
@@ -23,9 +23,11 @@ public class Player extends MapObject {
 	private int health;
 	private int maxHealth;
 	private int damage;
-	private int dashDamage;
 	private int mp;
 	private int maxMp;
+	private int mpDash;
+	private int maxMpDash;
+	private int dashCost;
 
 	private boolean knockback;
 	private boolean flinching;
@@ -34,7 +36,6 @@ public class Player extends MapObject {
 	private boolean doubleJump;
 	private boolean alreadyDoubleJump;
 	private double doubleJumpStart;
-	private ArrayList<EnergyParticle> energyParticles;
 	private long time;
 
 
@@ -69,8 +70,7 @@ public class Player extends MapObject {
 			3, 3, 2, 1, 2, 4, 2, 3, 2, 4, 2, 2, 2, 2
 	};
 
-	private Rectangle ar;
-	private Rectangle cr;
+	private Rectangle ar; // attacking damage
 
 	// animation actions
 	private static final int DEAD = 0;
@@ -85,33 +85,20 @@ public class Player extends MapObject {
 	// private static final int DOUBLE_JUMP = 9;
 	private static final int TELEPORTING = 11;
 
-	// emotes
-	private BufferedImage confused;
-	private BufferedImage surprised;
-	public static final int NONE = 0;
-	public static final int CONFUSED = 1;
-	public static final int SURPRISED = 2;
-	private int emote = NONE;
-
-
-
 	public Player(TileMap tm) {
 
 		super(tm);
 
 		ar = new Rectangle(0, 0, 0, 0);
 		ar.width = 30;
-		ar.height = 20;
-		cr = new Rectangle(0, 0, 0, 0);
-		cr.width = 50;
-		cr.height = 40;
+		ar.height = 16;
 
-		width = 30;
-		height = 30;
-		cwidth = 16;
+		width = 16;
+		height = 16;
+		cwidth = 8;
 		cheight = 16;
 
-		moveSpeed = 3;
+		moveSpeed = 1;
 		maxSpeed = 3;
 		stopSpeed = 1.6;
 		fallSpeed = 0.15;
@@ -121,9 +108,10 @@ public class Player extends MapObject {
 		doubleJumpStart = -3;
 
 		damage = 1;
-		dashDamage = 1;
 
-		mp = maxMp = 2000;
+		mp = maxMp = 2500;
+		mpDash = maxMpDash = 1000;
+		dashCost = 1000;
 
 		knifeCost = 200;
 		flyingKnifeDamage = 2;
@@ -154,34 +142,22 @@ public class Player extends MapObject {
 				count += FRAMEHEIGHTS[i];
 			}
 
-			// emotes
-			spritesheet = ImageIO.read(getClass().getResourceAsStream(
-					"/HUD/Emotes.gif"));
-			surprised = spritesheet.getSubimage(
-					14, 0, 14, 17);
-			confused = spritesheet.getSubimage(
-					0, 0, 14, 17);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		energyParticles = new ArrayList<EnergyParticle>();
-
 		setAnimation(IDLE);
 
-		JukeBox.load("/SFX/playerjump.mp3", "playerjump");
-		JukeBox.load("/SFX/playerlands.mp3", "playerlands");
-		JukeBox.load("/SFX/playerattack.mp3", "playerattack");
-		JukeBox.load("/SFX/playerhit.mp3", "playerhit");
-		JukeBox.load("/SFX/playercharge.mp3", "playercharge");
+		Audio.load("/SFX/playerjump.mp3", "playerjump");
+		Audio.load("/SFX/playerlands.mp3", "playerlands");
+		Audio.load("/SFX/playerattack.mp3", "playerattack");
+		Audio.load("/SFX/playerhit.mp3", "playerhit");
+		Audio.load("/SFX/playercharge.mp3", "playercharge");
 
 	}
 
-	public void init(
-			ArrayList<Enemy> enemies,
-			ArrayList<EnergyParticle> energyParticles) {
+	public void init(ArrayList<Enemy> enemies) {
 		this.enemies = enemies;
-		this.energyParticles = energyParticles;
 	}
 
 	public int getHealth() {
@@ -200,10 +176,6 @@ public class Player extends MapObject {
 		return maxMp;
 	}
 
-	public void setEmote(int i) {
-		emote = i;
-	}
-
 	public void setTeleporting(boolean b) {
 		teleporting = b;
 	}
@@ -213,8 +185,7 @@ public class Player extends MapObject {
 			return;
 		if (b && !jumping && falling && !alreadyDoubleJump) {
 			doubleJump = true;
-			// jumping = false;
-		} // else
+		}
 		jumping = b;
 
 	}
@@ -240,11 +211,11 @@ public class Player extends MapObject {
 		
 		if (knockback)
 			return;
-		
-		if (!attacking && !dashing) {
+
+		if (!attacking && !dashing && dashCost <= mpDash) {
 			dashing = true;
-			JukeBox.play("playercharge");
-			// chargingTick = 0;
+			Audio.play("playercharge");
+
 		}
 	}
 
@@ -320,10 +291,10 @@ public class Player extends MapObject {
 	}
 
 	public void hit(int damage) {
-		
+
 		if (flinching)
 			return;
-		JukeBox.play("playerhit");
+		Audio.play("playerhit");
 		stop();
 		health -= damage;
 		if (health < 0)
@@ -334,7 +305,7 @@ public class Player extends MapObject {
 			dx = -1;
 		else
 			dx = 1;
-		dy = -3;
+		dy = -1;
 		knockback = true;
 		falling = true;
 		jumping = false;
@@ -349,8 +320,8 @@ public class Player extends MapObject {
 	}
 
 	public void stop() {
-		
-		left = right = up = down = flinching = dashing = jumping = attacking = false;
+
+		left = right = up = down = flinching = dashing = jumping = attacking = flyingKnife = false;
 	}
 
 	private void getNextPosition() {
@@ -394,13 +365,19 @@ public class Player extends MapObject {
 			dx = 0;
 		}
 		// dashing
+		mpDash += 50;
+		if (mpDash > maxMpDash)
+			mpDash = maxMpDash;
+
 		if (dashing) {
+			mpDash -= dashCost;
 			dy = 0;
 			left = right = false;
+			double ddx = moveSpeed * 18;
 			if (facingRight)
-				dx = moveSpeed * 3;
+				dx = ddx;
 			else
-				dx = -moveSpeed * 3;
+				dx = -ddx;
 		}
 
 		// jumping
@@ -408,23 +385,15 @@ public class Player extends MapObject {
 			// sfx.get("jump").play();
 			dy = jumpStart;
 			falling = true;
-			JukeBox.play("playerjump");
+			Audio.play("playerjump");
 		}
 
 		if (doubleJump) {
-			dy = doubleJumpStart;
-			// alreadyDoubleJump = true;
-			doubleJump = false;
 
-			JukeBox.play("playerjump");
-			for (int i = 0; i < 6; i++) {
-				energyParticles.add(
-						new EnergyParticle(
-								tileMap,
-								x,
-								y + cheight / 4,
-								EnergyParticle.UP));
-			}
+			dy = doubleJumpStart;
+			alreadyDoubleJump = true;
+			doubleJump = false;
+			Audio.play("playerjump");
 		}
 
 		if (!falling)
@@ -457,19 +426,13 @@ public class Player extends MapObject {
 //		if(delayTime==0) {delayTime++;}
 //		else if (delayTime==300) {delayTime=0;}
 
-		// check teleporting
-		if (teleporting) {
-			energyParticles.add(
-					new EnergyParticle(tileMap, x, y, EnergyParticle.UP));
-		}
-
 		// update position
 		boolean isFalling = falling;
 		getNextPosition();
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
 		if (isFalling && !falling) {
-			JukeBox.play("playerlands");
+			Audio.play("playerlands");
 		}
 		if (dx == 0)
 			x = (int) x;
@@ -477,17 +440,8 @@ public class Player extends MapObject {
 		// check done flinching
 		if (flinching) {
 			flinchCount++;
-			if (flinchCount > 120) {
+			if (flinchCount > 80) {
 				flinching = false;
-			}
-		}
-
-		// energy particles
-		for (int i = 0; i < energyParticles.size(); i++) {
-			energyParticles.get(i).update();
-			if (energyParticles.get(i).shouldRemove()) {
-				energyParticles.remove(i);
-				i--;
 			}
 		}
 
@@ -507,16 +461,24 @@ public class Player extends MapObject {
 		mp += 1; //increase mp
 		if (mp > maxMp)
 			mp = maxMp;
-		if (flyingKnife && currentAction != FLYING_KNIFE) {
-			if (mp > knifeCost && !knockback) {
-				mp -= knifeCost; //decrease mp
+
+		if (mp < knifeCost)
+			flyingKnife = false;
+
+		else {
+
+			if (flyingKnife && currentAction != FLYING_KNIFE) {
+
+				mp -= knifeCost;
+
 				Knife kn = new Knife(tileMap, facingRight);
 				kn.setPosition(x, y);
 				knifes.add(kn);
+
 			}
 		}
 
-		// update fireballs
+		// update flying knife
 		for (int i = 0; i < knifes.size(); i++) {
 			knifes.get(i).update();
 			if (knifes.get(i).shouldRemove()) {
@@ -528,15 +490,9 @@ public class Player extends MapObject {
 		// check dashing finish
 		if (currentAction == DASHING) {
 
-			if (animation.hasPlayed(4)) {
+			if (animation.hasPlayedOnce()) {
 				dashing = false;
-
 			}
-			cr.y = (int) y - 20;
-			if (facingRight)
-				cr.x = (int) x - 15;
-			else
-				cr.x = (int) x - 35;
 		}
 
 		// check enemy interaction
@@ -549,15 +505,6 @@ public class Player extends MapObject {
 					animation.getFrame() == 3 && animation.getCount() == 0) {
 				if (e.intersects(ar)) {
 					e.hit(damage);
-				}
-			}
-
-			if (currentAction == DASHING) {
-
-				if (animation.getCount() == 0) {
-					if (e.intersects(cr)) {
-						e.hit(dashDamage);
-					}
 				}
 			}
 
@@ -575,7 +522,7 @@ public class Player extends MapObject {
 			}
 
 			if (e.isDead()) {
-				JukeBox.play("explode", 2000);
+				Audio.play("explode", 2000);
 			}
 
 		}
@@ -595,7 +542,7 @@ public class Player extends MapObject {
 			}
 		} else if (attacking) {
 			if (currentAction != ATTACKING) {
-				JukeBox.play("playerattack");
+				Audio.play("playerattack");
 
 				setAnimation(ATTACKING);
 				ar.y = (int) y - 2;
@@ -603,25 +550,6 @@ public class Player extends MapObject {
 					ar.x = (int) x + 10;
 				else
 					ar.x = (int) x - 40;
-			} else {
-				if (animation.getFrame() == 4 && animation.getCount() == 0) {
-					for (int c = 0; c < 3; c++) {
-						if (facingRight)
-							energyParticles.add(
-									new EnergyParticle(
-											tileMap,
-											ar.x + ar.width - 4,
-											ar.y + ar.height / 2,
-											EnergyParticle.RIGHT));
-						else
-							energyParticles.add(
-									new EnergyParticle(
-											tileMap,
-											ar.x + 4,
-											ar.y + ar.height / 2,
-											EnergyParticle.LEFT));
-					}
-				}
 			}
 		} else if (flyingKnife) {
 			if (currentAction != FLYING_KNIFE) {
@@ -665,17 +593,6 @@ public class Player extends MapObject {
 		// draw knife
 		for (int i = 0; i < knifes.size(); i++) {
 			knifes.get(i).draw(g);
-		}
-		// draw emote
-		if (emote == CONFUSED) {
-			g.drawImage(confused, (int) (x + xmap - cwidth / 2), (int) (y + ymap - 40), null);
-		} else if (emote == SURPRISED) {
-			g.drawImage(surprised, (int) (x + xmap - cwidth / 2), (int) (y + ymap - 40), null);
-		}
-
-		// draw energy particles
-		for (int i = 0; i < energyParticles.size(); i++) {
-			energyParticles.get(i).draw(g);
 		}
 
 		// flinch

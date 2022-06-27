@@ -2,7 +2,7 @@
 
 package com.neet.Entity;
 
-public class PlayerSave {
+public class PlayerStatus {
 
 	private static int lives = 3;
 	private static int health = 2;
