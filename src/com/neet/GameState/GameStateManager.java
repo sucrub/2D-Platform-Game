@@ -11,7 +11,7 @@ public class GameStateManager {
 	private PauseState pauseState;
 	private boolean paused;
 	
-	public static final int NUMGAMESTATES = 16;
+	public static final int NUMGAMESTATES = 10;
 	public static final int MENUSTATE = 0;
 	public static final int HELPSTATE = 1;
 	public static final int CHOOSEDIFFICULTYSTATE = 2;
@@ -31,7 +31,6 @@ public class GameStateManager {
 		
 		currentState = MENUSTATE;
 		loadState(currentState);
-		
 	}
 	
 	private void loadState(int state) {
@@ -65,6 +64,7 @@ public class GameStateManager {
 	}
 	
 	public void setPaused(boolean b) { 
+		
 		paused = b; 
 	}
 	
@@ -74,6 +74,7 @@ public class GameStateManager {
 			pauseState.update();
 			return;
 		}
+		
 		if(gameStates[currentState] != null) gameStates[currentState].update();
 	}
 	
@@ -85,6 +86,7 @@ public class GameStateManager {
 		}
 		
 		if(gameStates[currentState] != null) gameStates[currentState].draw(g);
+		
 		else {
 			
 			g.setColor(java.awt.Color.BLACK);

@@ -66,7 +66,7 @@ public class Level3State extends GameState {
 
 		// player
 		player = new Player(tileMap);
-		player.setPosition(300, 61);
+		player.setPosition(250, 61);
 		player.setHealth(PlayerStatus.getHealth());
 		player.setLives(PlayerStatus.getLives());
 		player.setTime(PlayerStatus.getTime());
@@ -125,7 +125,7 @@ public class Level3State extends GameState {
 		/////HARD///
 		if(ChooseDifficultyState.hard()) {
 			n = new BigBoss(tileMap, player, enemies,1);
-			n.setPosition(400,88);
+			n.setPosition(450,88);
 			enemies.add(n);
 			CountBoss=2;
 		}
@@ -270,7 +270,7 @@ public class Level3State extends GameState {
 	private void reset() {
 		
 		player.reset();
-		player.setPosition(300, 61);
+		player.setPosition(250, 61);
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;

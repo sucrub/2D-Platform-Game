@@ -98,12 +98,14 @@ public class ChooseDifficultyState extends GameState{
 	}
 	
 	public static boolean hard() {
+		
 		return hard;
 	}
 	
 	public void handleInput() {
 		
 		if(Keys.isPressed(Keys.ENTER)) select();
+		
 		if(Keys.isPressed(Keys.UP)) {
 			if(currentChoice > 0) {
 				Audio.play("menuoption", 0);

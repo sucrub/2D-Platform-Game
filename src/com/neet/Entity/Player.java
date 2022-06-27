@@ -413,7 +413,7 @@ public class Player extends MapObject {
 
 		if (doubleJump) {
 			dy = doubleJumpStart;
-			// alreadyDoubleJump = true;
+			alreadyDoubleJump = true;
 			doubleJump = false;
 
 			Audio.play("playerjump");

@@ -52,6 +52,7 @@ public class Level1State extends GameState {
 	private boolean eventDead;
 
 	public Level1State(GameStateManager gsm) {
+		
 		super(gsm);
 		init();
 	}
@@ -234,6 +235,7 @@ public class Level1State extends GameState {
 		
 		////////HARD////////
 		if(ChooseDifficultyState.hard()) {
+			
 			go = new Goblin(tileMap, player);
 			go.setPosition(3560, 120);
 			enemies.add(go);
@@ -279,17 +281,15 @@ public class Level1State extends GameState {
 		player.update();
 
 		// update tilemap
-		tileMap.setPosition(
-				GamePanel.WIDTH / 2 - player.getx(),
-				GamePanel.HEIGHT / 2 - player.gety());
-
-		tileMap.fixBounds();
+		tileMap.setPosition(GamePanel.WIDTH / 2 - player.getx(), GamePanel.HEIGHT / 2 - player.gety());
 
 		// update enemies
 		for (int i = 0; i < enemies.size(); i++) {
+			
 			Enemy e = enemies.get(i);
 			e.update();
 			if (e.isDead()) {
+				
 				enemies.remove(i);
 				i--;
 				explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
@@ -298,9 +298,11 @@ public class Level1State extends GameState {
 
 		// update enemy projectiles
 		for (int i = 0; i < eprojectiles.size(); i++) {
+			
 			EnemyProjectile ep = eprojectiles.get(i);
 			ep.update();
 			if (ep.shouldRemove()) {
+				
 				eprojectiles.remove(i);
 				i--;
 			}
@@ -308,8 +310,10 @@ public class Level1State extends GameState {
 
 		// update explosions
 		for (int i = 0; i < explosions.size(); i++) {
+			
 			explosions.get(i).update();
 			if (explosions.get(i).shouldRemove()) {
+				
 				explosions.remove(i);
 				i--;
 			}
@@ -355,6 +359,7 @@ public class Level1State extends GameState {
 		// draw transition boxes
 		g.setColor(java.awt.Color.BLACK);
 		for (int i = 0; i < tb.size(); i++) {
+			
 			g.fill(tb.get(i));
 		}
 
@@ -389,7 +394,7 @@ public class Level1State extends GameState {
 	private void reset() {
 		
 		player.reset();
-		player.setPosition(310, 61);
+		player.setPosition(400, 61);
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;
@@ -400,7 +405,9 @@ public class Level1State extends GameState {
 
 	// level started
 	private void eventStart() {
+		
 		eventCount++;
+		//transition
 		if (eventCount == 1) {
 			tb.clear();
 			tb.add(new Rectangle(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT / 2));
@@ -423,11 +430,13 @@ public class Level1State extends GameState {
 
 	// player has died
 	private void eventDead() {
+		
 		eventCount++;
 		if (eventCount == 1) {
 			player.setDead();
 			player.stop();
 		}
+		//transition
 		if (eventCount == 60) {
 			tb.clear();
 			tb.add(new Rectangle(
@@ -452,11 +461,13 @@ public class Level1State extends GameState {
 
 	// finished level
 	private void eventFinish() {
+		
 		eventCount++;
 		if (eventCount == 1) {
 			Audio.play("teleport");
 			player.setTeleporting(true);
 			player.stop();
+			//transition
 		} else if (eventCount == 120) {
 			tb.clear();
 			tb.add(new Rectangle(
