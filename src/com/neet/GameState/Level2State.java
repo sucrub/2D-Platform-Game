@@ -4,19 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-
-
 import com.neet.Audio.Audio;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.EnemyProjectile;
-import com.neet.Entity.EnergyParticle;
 import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
 import com.neet.Entity.PlayerStatus;
 import com.neet.Entity.Teleport;
-
-
 
 import com.neet.Entity.Enemies.Bird;
 import com.neet.Entity.Enemies.Goblin;
@@ -37,7 +32,6 @@ public class Level2State extends GameState {
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<EnemyProjectile> eprojectiles;
-	private ArrayList<EnergyParticle> energyParticles;
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
@@ -79,12 +73,8 @@ public class Level2State extends GameState {
 		eprojectiles = new ArrayList<EnemyProjectile>();
 		populateEnemies();
 
-		// energy particle
-		energyParticles = new ArrayList<EnergyParticle>();
-
-		// init player
-		player.init(enemies, energyParticles);
-
+		player.init(enemies);
+		
 		// explosions
 		explosions = new ArrayList<Explosion>();
 
@@ -295,9 +285,6 @@ public class Level2State extends GameState {
 			enemies.add(go);
 		}
 		
-//		bo = new Bomb(tileMap, player, enemies);
-//		bo.setPosition(3600, 120);
-//		enemies.add(bo);
 	}
 
 	public void update() {
@@ -331,13 +318,13 @@ public class Level2State extends GameState {
 				GamePanel.WIDTH / 2 - player.getx(),
 				GamePanel.HEIGHT / 2 - player.gety());
 
-		tileMap.fixBounds();
-
 		// update enemies
 		for (int i = 0; i < enemies.size(); i++) {
+			
 			Enemy e = enemies.get(i);
 			e.update();
 			if (e.isDead()) {
+				
 				enemies.remove(i);
 				i--;
 				explosions.add(new Explosion(tileMap, e.getx(), e.gety()));
@@ -346,9 +333,11 @@ public class Level2State extends GameState {
 
 		// update enemy projectiles
 		for (int i = 0; i < eprojectiles.size(); i++) {
+			
 			EnemyProjectile ep = eprojectiles.get(i);
 			ep.update();
 			if (ep.shouldRemove()) {
+				
 				eprojectiles.remove(i);
 				i--;
 			}
@@ -356,8 +345,10 @@ public class Level2State extends GameState {
 
 		// update explosions
 		for (int i = 0; i < explosions.size(); i++) {
+			
 			explosions.get(i).update();
 			if (explosions.get(i).shouldRemove()) {
+				
 				explosions.remove(i);
 				i--;
 			}

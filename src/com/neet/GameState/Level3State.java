@@ -74,10 +74,8 @@ public class Level3State extends GameState {
 		enemies = new ArrayList<Enemy>();
 		eprojectiles = new ArrayList<EnemyProjectile>();
 		populateEnemies();
-
-		// init player
-		player.init(enemies, energyParticles);
-
+		
+		player.init(enemies);
 
 		// explosions
 		explosions = new ArrayList<Explosion>();
@@ -136,12 +134,8 @@ public class Level3State extends GameState {
 		// check if player dead
 		if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
 			eventDead = blockInput = true;
-
-		// check if end of level event should start
-		if (teleport.contains(player)) {
-			eventFinish = blockInput = true;
 		}
-
+		
 		//Check if done Boss
 		if (CountBoss==0) {
 			eventFinish = blockInput = true;

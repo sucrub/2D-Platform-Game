@@ -214,7 +214,7 @@ public class Player extends MapObject {
 
 		if (!attacking && !dashing && dashCost <= mpDash) {
 			dashing = true;
-			JukeBox.play("playercharge");
+			Audio.play("playercharge");
 
 		}
 	}
@@ -365,7 +365,7 @@ public class Player extends MapObject {
 			dx = 0;
 		}
 		// dashing
-		mpDash += 100;
+		mpDash += 50;
 		if (mpDash > maxMpDash)
 			mpDash = maxMpDash;
 
@@ -373,7 +373,7 @@ public class Player extends MapObject {
 			mpDash -= dashCost;
 			dy = 0;
 			left = right = false;
-			double ddx = moveSpeed * 15;
+			double ddx = moveSpeed * 18;
 			if (facingRight)
 				dx = ddx;
 			else
@@ -393,7 +393,7 @@ public class Player extends MapObject {
 			dy = doubleJumpStart;
 			alreadyDoubleJump = true;
 			doubleJump = false;
-			JukeBox.play("playerjump");
+			Audio.play("playerjump");
 		}
 
 		if (!falling)
