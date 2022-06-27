@@ -5,14 +5,14 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.EnemyProjectile;
 import com.neet.Entity.EnergyParticle;
 import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
-import com.neet.Entity.PlayerSave;
+import com.neet.Entity.PlayerStatus;
 
 import com.neet.Entity.Enemies.BigBoss;
 
@@ -67,10 +67,10 @@ public class Level3State extends GameState {
 		// player
 		player = new Player(tileMap);
 		player.setPosition(300, 61);
-		player.setHealth(PlayerSave.getHealth());
-		player.setLives(PlayerSave.getLives());
-		player.setTime(PlayerSave.getTime());
-		player.setmaxHealth(PlayerSave.getmaxHealth());
+		player.setHealth(PlayerStatus.getHealth());
+		player.setLives(PlayerStatus.getLives());
+		player.setTime(PlayerStatus.getTime());
+		player.setmaxHealth(PlayerStatus.getmaxHealth());
 
 		// enemies
 		enemies = new ArrayList<Enemy>();
@@ -99,16 +99,16 @@ public class Level3State extends GameState {
 		eventStart();
 
 		// sfx
-		JukeBox.load("/SFX/teleport.mp3", "teleport");
-		JukeBox.load("/SFX/explode.mp3", "explode");
-		JukeBox.load("/SFX/enemyhit.mp3", "enemyhit");
+		Audio.load("/SFX/teleport.mp3", "teleport");
+		Audio.load("/SFX/explode.mp3", "explode");
+		Audio.load("/SFX/enemyhit.mp3", "enemyhit");
 
 		// music
-		JukeBox.load("/Music/level2.mp3", "level2");
-		JukeBox.stop("level2");
+		Audio.load("/Music/level2.mp3", "level2");
+		Audio.stop("level2");
 		
-		JukeBox.load("/Music/level3.mp3", "level3");
-		JukeBox.loop("level3", 600, JukeBox.getFrames("level3") - 2200);
+		Audio.load("/Music/level3.mp3", "level3");
+		Audio.loop("level3", 600, Audio.getFrames("level3") - 2200);
 
 	}
 
@@ -123,7 +123,7 @@ public class Level3State extends GameState {
 		enemies.add(n);
 		
 		/////HARD///
-		if(ChooseDifficultyState.Hard()) {
+		if(ChooseDifficultyState.hard()) {
 			n = new BigBoss(tileMap, player, enemies,1);
 			n.setPosition(400,88);
 			enemies.add(n);
@@ -335,7 +335,7 @@ public class Level3State extends GameState {
 	private void eventFinish() {
 		eventCount++;
 		if (eventCount == 1) {
-			JukeBox.play("teleport");
+			Audio.play("teleport");
 			player.setTeleporting(true);
 			player.stop();
 		} else if (eventCount == 120) {
@@ -347,12 +347,12 @@ public class Level3State extends GameState {
 			tb.get(0).y -= 4;
 			tb.get(0).width += 12;
 			tb.get(0).height += 8;
-			JukeBox.stop("teleport");
+			Audio.stop("teleport");
 		}
 		if (eventCount == 180) {
-			PlayerSave.setHealth(player.getHealth());
-			PlayerSave.setLives(player.getLives());
-			PlayerSave.setTime(player.getTime());
+			PlayerStatus.setHealth(player.getHealth());
+			PlayerStatus.setLives(player.getLives());
+			PlayerStatus.setTime(player.getTime());
 			gsm.setState(GameStateManager.VICTORYSTATE);
 		}
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.TileMap.TileMap;
 import com.neet.Entity.Knife;
 
@@ -169,11 +169,11 @@ public class Player extends MapObject {
 
 		setAnimation(IDLE);
 
-		JukeBox.load("/SFX/playerjump.mp3", "playerjump");
-		JukeBox.load("/SFX/playerlands.mp3", "playerlands");
-		JukeBox.load("/SFX/playerattack.mp3", "playerattack");
-		JukeBox.load("/SFX/playerhit.mp3", "playerhit");
-		JukeBox.load("/SFX/playercharge.mp3", "playercharge");
+		Audio.load("/SFX/playerjump.mp3", "playerjump");
+		Audio.load("/SFX/playerlands.mp3", "playerlands");
+		Audio.load("/SFX/playerattack.mp3", "playerattack");
+		Audio.load("/SFX/playerhit.mp3", "playerhit");
+		Audio.load("/SFX/playercharge.mp3", "playercharge");
 
 	}
 
@@ -243,7 +243,7 @@ public class Player extends MapObject {
 		
 		if (!attacking && !dashing) {
 			dashing = true;
-			JukeBox.play("playercharge");
+			Audio.play("playercharge");
 			// chargingTick = 0;
 		}
 	}
@@ -323,7 +323,7 @@ public class Player extends MapObject {
 		
 		if (flinching)
 			return;
-		JukeBox.play("playerhit");
+		Audio.play("playerhit");
 		stop();
 		health -= damage;
 		if (health < 0)
@@ -408,7 +408,7 @@ public class Player extends MapObject {
 			// sfx.get("jump").play();
 			dy = jumpStart;
 			falling = true;
-			JukeBox.play("playerjump");
+			Audio.play("playerjump");
 		}
 
 		if (doubleJump) {
@@ -416,7 +416,7 @@ public class Player extends MapObject {
 			// alreadyDoubleJump = true;
 			doubleJump = false;
 
-			JukeBox.play("playerjump");
+			Audio.play("playerjump");
 			for (int i = 0; i < 6; i++) {
 				energyParticles.add(
 						new EnergyParticle(
@@ -469,7 +469,7 @@ public class Player extends MapObject {
 		checkTileMapCollision();
 		setPosition(xtemp, ytemp);
 		if (isFalling && !falling) {
-			JukeBox.play("playerlands");
+			Audio.play("playerlands");
 		}
 		if (dx == 0)
 			x = (int) x;
@@ -575,7 +575,7 @@ public class Player extends MapObject {
 			}
 
 			if (e.isDead()) {
-				JukeBox.play("explode", 2000);
+				Audio.play("explode", 2000);
 			}
 
 		}
@@ -595,7 +595,7 @@ public class Player extends MapObject {
 			}
 		} else if (attacking) {
 			if (currentAction != ATTACKING) {
-				JukeBox.play("playerattack");
+				Audio.play("playerattack");
 
 				setAnimation(ATTACKING);
 				ar.y = (int) y - 2;

@@ -1,6 +1,6 @@
 package com.neet.GameState;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.Main.GamePanel;
 
 public class GameStateManager {
@@ -22,7 +22,7 @@ public class GameStateManager {
 	
 	public GameStateManager() {
 		
-		JukeBox.init();
+		Audio.init();
 		
 		gameStates = new GameState[NUMGAMESTATES];
 		

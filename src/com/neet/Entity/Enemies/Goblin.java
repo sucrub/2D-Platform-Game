@@ -3,7 +3,7 @@ package com.neet.Entity.Enemies;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.Player;
 import com.neet.Handlers.Content;
@@ -24,7 +24,7 @@ public class Goblin extends Enemy {
 		
 
 		 //SetDifficult
-		if(com.neet.GameState.ChooseDifficultyState.Hard()) {
+		if(com.neet.GameState.ChooseDifficultyState.hard()) {
 			health = maxHealth =5;
 		}
 		else {
@@ -105,7 +105,7 @@ public class Goblin extends Enemy {
 	public void hit(int damage) {
 		
 		if(dead || flinching) return;
-		JukeBox.play("enemyhit");
+		Audio.play("enemyhit");
 		health -= damage;
 		if(health < 0) health = 0;
 		if(health == 0) dead = true;

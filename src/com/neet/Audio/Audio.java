@@ -9,7 +9,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class JukeBox {
+public class Audio {
 	
 	private static HashMap<String, Clip> clips;
 	private static int gap;
@@ -29,7 +29,7 @@ public class JukeBox {
 			
 			AudioInputStream ais =
 				AudioSystem.getAudioInputStream(
-					JukeBox.class.getResourceAsStream(s)
+					Audio.class.getResourceAsStream(s)
 				);
 			AudioFormat baseFormat = ais.getFormat();
 			AudioFormat decodeFormat = new AudioFormat(
@@ -72,13 +72,6 @@ public class JukeBox {
 		
 		if(clips.get(s) == null) return;
 		if(clips.get(s).isRunning()) clips.get(s).stop();
-	}
-	
-	public static void resume(String s) {
-		
-		if(mute) return;
-		if(clips.get(s).isRunning()) return;
-		clips.get(s).start();
 	}
 	
 	public static void loop(String s) {

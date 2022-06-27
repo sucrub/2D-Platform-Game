@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import com.neet.Audio.JukeBox;
-import com.neet.Entity.PlayerSave;
+import com.neet.Audio.Audio;
+import com.neet.Entity.PlayerStatus;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 
@@ -45,12 +45,12 @@ public class MenuState extends GameState {
 			font2 = new Font("Arial", Font.PLAIN, 10);
 			
 			// load sound fx
-			JukeBox.load("/SFX/menuoption.mp3", "menuoption");
-			JukeBox.load("/SFX/menuselect.mp3", "menuselect");
+			Audio.load("/SFX/menuoption.mp3", "menuoption");
+			Audio.load("/SFX/menuselect.mp3", "menuselect");
 			
 			// load menu sound
-			JukeBox.load("/Music/menusong.mp3", "menusong");
-			JukeBox.loop("menusong", 600, JukeBox.getFrames("menusong") - 2200);
+			Audio.load("/Music/menusong.mp3", "menusong");
+			Audio.loop("menusong", 600, Audio.getFrames("menusong") - 2200);
 			
 		}
 		catch(Exception e) {
@@ -100,11 +100,11 @@ public class MenuState extends GameState {
 	private void select() {
 		
 		if(currentChoice == 0) {
-			JukeBox.play("menuselect");
+			Audio.play("menuselect");
 			gsm.setState(GameStateManager.CHOOSEDIFFICULTYSTATE);
 		}
 		else if(currentChoice == 1) {
-			JukeBox.play("menuselect");
+			Audio.play("menuselect");
 			gsm.setState(GameStateManager.HELPSTATE);
 		}
 		else if(currentChoice == 2) {
@@ -117,13 +117,13 @@ public class MenuState extends GameState {
 		if(Keys.isPressed(Keys.ENTER)) select();
 		if(Keys.isPressed(Keys.UP)) {
 			if(currentChoice > 0) {
-				JukeBox.play("menuoption", 0);
+				Audio.play("menuoption", 0);
 				currentChoice--;
 			}
 		}
 		if(Keys.isPressed(Keys.DOWN)) {
 			if(currentChoice < options.length - 1) {
-				JukeBox.play("menuoption", 0);
+				Audio.play("menuoption", 0);
 				currentChoice++;
 			}
 		}
