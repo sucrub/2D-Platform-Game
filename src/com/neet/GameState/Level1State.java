@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import com.neet.Audio.Audio;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.EnemyProjectile;
-import com.neet.Entity.EnergyParticle;
 import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
@@ -37,7 +36,6 @@ public class Level1State extends GameState {
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<EnemyProjectile> eprojectiles;
-	private ArrayList<EnergyParticle> energyParticles;
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
@@ -80,11 +78,8 @@ public class Level1State extends GameState {
 		eprojectiles = new ArrayList<EnemyProjectile>();
 		populateEnemies();
 
-		// energy particle
-		energyParticles = new ArrayList<EnergyParticle>();
-
 		// init player
-		player.init(enemies, energyParticles);
+		player.init(enemies);
 
 		// explosions
 		explosions = new ArrayList<Explosion>();
@@ -113,9 +108,9 @@ public class Level1State extends GameState {
 	}
 
 	private void populateEnemies() {
-	
+
 		enemies.clear();
-	
+
 		Goblin go;
 		Bomber bo;
 		Bird bi;
@@ -204,14 +199,6 @@ public class Level1State extends GameState {
 		m = new Mushroom(tileMap, player);
 		m.setPosition(3350, 153);
 		enemies.add(m);
-		
-		bi = new Bird(tileMap);
-		bi.setPosition(1900, 80);
-		enemies.add(bi);
-		
-		bi = new Bird(tileMap);
-		bi.setPosition(2100, 50);
-		enemies.add(bi);
 		
 		bi = new Bird(tileMap);
 		bi.setPosition(2350, 70);
@@ -366,7 +353,7 @@ public class Level1State extends GameState {
 	}
 
 	public void handleInput() {
-		
+
 		if (Keys.isPressed(Keys.ESCAPE))
 			gsm.setPaused(true);
 		if (blockInput || player.getHealth() == 0)
@@ -392,13 +379,13 @@ public class Level1State extends GameState {
 
 	// reset level
 	private void reset() {
-		
+
 		player.reset();
 		player.setPosition(400, 61);
 		populateEnemies();
 		blockInput = true;
 		eventCount = 0;
-		
+
 		eventStart = true;
 		eventStart();
 	}

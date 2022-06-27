@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import com.neet.Audio.Audio;
 import com.neet.Entity.Enemy;
 import com.neet.Entity.EnemyProjectile;
-import com.neet.Entity.EnergyParticle;
 import com.neet.Entity.Explosion;
 import com.neet.Entity.HUD;
 import com.neet.Entity.Player;
@@ -30,7 +29,6 @@ public class Level3State extends GameState {
 	private TileMap tileMap;
 	private ArrayList<Enemy> enemies;
 	private ArrayList<EnemyProjectile> eprojectiles;
-	private ArrayList<EnergyParticle> energyParticles;
 	private ArrayList<Explosion> explosions;
 
 	private HUD hud;
@@ -77,11 +75,9 @@ public class Level3State extends GameState {
 		eprojectiles = new ArrayList<EnemyProjectile>();
 		populateEnemies();
 
-		// energy particle
-		energyParticles = new ArrayList<EnergyParticle>();
-
 		// init player
 		player.init(enemies, energyParticles);
+
 
 		// explosions
 		explosions = new ArrayList<Explosion>();
@@ -140,8 +136,11 @@ public class Level3State extends GameState {
 		// check if player dead
 		if (player.getHealth() == 0 || player.gety() > tileMap.getHeight()) {
 			eventDead = blockInput = true;
-		}
 
+		// check if end of level event should start
+		if (teleport.contains(player)) {
+			eventFinish = blockInput = true;
+		}
 
 		//Check if done Boss
 		if (CountBoss==0) {
