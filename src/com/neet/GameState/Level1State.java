@@ -201,6 +201,14 @@ public class Level1State extends GameState {
 		enemies.add(m);
 		
 		bi = new Bird(tileMap);
+		bi.setPosition(1900, 80);
+		enemies.add(bi);
+		
+		bi = new Bird(tileMap);
+		bi.setPosition(2100, 50);
+		enemies.add(bi);
+		
+		bi = new Bird(tileMap);
 		bi.setPosition(2350, 70);
 		enemies.add(bi);
 		

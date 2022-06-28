@@ -22,11 +22,6 @@ public class Background {
 	private double xscale;
 	private double yscale;
 	
-	public Background(String s) {
-		
-		this(s, 0.1);
-	}
-	
 	public Background(String s, double d) {
 		
 		this(s, d, d);
@@ -41,22 +36,6 @@ public class Background {
 			height = image.getHeight();
 			xscale = d1;
 			yscale = d2;
-		}
-		catch(Exception e) {
-			
-			e.printStackTrace();
-		}
-	}
-	
-	public Background(String s, double ms, int x, int y, int w, int h) {
-		try {
-			
-			image = ImageIO.read(getClass().getResourceAsStream(s));
-			image = image.getSubimage(x, y, w, h);
-			width = image.getWidth();
-			height = image.getHeight();
-			xscale = ms;
-			yscale = ms;
 		}
 		catch(Exception e) {
 			
