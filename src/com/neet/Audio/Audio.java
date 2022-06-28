@@ -74,16 +74,6 @@ public class Audio {
 		if(clips.get(s).isRunning()) clips.get(s).stop();
 	}
 	
-	public static void loop(String s) {
-		
-		loop(s, gap, gap, clips.get(s).getFrameLength() - 1);
-	}
-	
-	public static void loop(String s, int frame) {
-		
-		loop(s, frame, gap, clips.get(s).getFrameLength() - 1);
-	}
-	
 	public static void loop(String s, int start, int end) {
 		
 		loop(s, gap, start, end);
