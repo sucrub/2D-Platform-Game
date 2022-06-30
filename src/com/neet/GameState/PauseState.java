@@ -10,6 +10,8 @@ import com.neet.Main.GamePanel;
 
 public class PauseState extends GameState {
 	
+	private int NumState;
+	
 	private Font font;
 	
 	public PauseState(GameStateManager gsm) {
@@ -20,6 +22,8 @@ public class PauseState extends GameState {
 		font = new Font("Century Gothic", Font.PLAIN, 14);
 		
 	}
+	
+	public void getNumState(int n) {NumState=n;}
 	
 	public void init() {}
 	
@@ -41,7 +45,9 @@ public class PauseState extends GameState {
 		
 		if(Keys.isPressed(Keys.ESCAPE)) gsm.setPaused(false);
 		if(Keys.isPressed(Keys.UP)) {
-			
+			Audio.stop("level1");
+			Audio.stop("level2");
+			Audio.stop("level3");
 			gsm.setPaused(false);
 			gsm.setState(GameStateManager.MENUSTATE);
 		}

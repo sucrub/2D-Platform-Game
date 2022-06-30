@@ -40,7 +40,8 @@ public class Level1State extends GameState {
 
 	private HUD hud;
 	private Teleport teleport;
-
+	
+	
 	// events
 	private boolean blockInput = false;
 	private int eventCount = 0;
@@ -362,8 +363,9 @@ public class Level1State extends GameState {
 
 	public void handleInput() {
 
-		if (Keys.isPressed(Keys.ESCAPE))
+		if (Keys.isPressed(Keys.ESCAPE)) {
 			gsm.setPaused(true);
+		}
 		if (blockInput || player.getHealth() == 0)
 			return;
 		player.setUp(Keys.keyState[Keys.UP]);
