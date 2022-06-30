@@ -167,19 +167,6 @@ public class TileMap {
 		int c = rc % numTilesAcross;
 		return tiles[r][c].getType();
 	}
-
-	public void setTween(double d) { 
-		
-		tween = d; 
-	}
-
-	public void setBounds(int i1, int i2, int i3, int i4) {
-		
-		xmin = GamePanel.WIDTH - i1;
-		ymin = GamePanel.WIDTH - i2;
-		xmax = i3;
-		ymax = i4;
-	}
 	
 	public void setPosition(double x, double y) {
 		

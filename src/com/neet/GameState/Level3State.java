@@ -160,8 +160,6 @@ public class Level3State extends GameState {
 				GamePanel.WIDTH / 2 - player.getx(),
 				GamePanel.HEIGHT / 2 - player.gety());
 
-		tileMap.fixBounds();
-
 		// update enemies
 		for (int i = 0; i < enemies.size(); i++) {
 			Enemy e = enemies.get(i);

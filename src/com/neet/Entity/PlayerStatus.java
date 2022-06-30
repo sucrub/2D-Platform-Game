@@ -5,7 +5,7 @@ package com.neet.Entity;
 public class PlayerStatus {
 
 	private static int lives = 3;
-	private static int health = 2;
+	private static int health = 6;
 	private static int maxHealth = 6;
 	private static int mp = 2500;
 	private static int maxMp = 2500;

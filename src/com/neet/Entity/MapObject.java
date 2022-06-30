@@ -2,6 +2,7 @@
 
 package com.neet.Entity;
 
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.neet.Main.GamePanel;
@@ -226,7 +227,7 @@ public abstract class MapObject {
 			y + ymap - height > GamePanel.HEIGHT;
 	}
 	
-	public void draw(java.awt.Graphics2D g) {
+	public void draw(Graphics2D g) {
 		setMapPosition();
 		if(facingRight) {
 			g.drawImage(

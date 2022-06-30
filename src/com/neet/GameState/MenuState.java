@@ -77,7 +77,8 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("T H E    G A M E", 150, 90);
+		g.drawString("?", 307, 77);
+		g.drawString("S U P E R    H E O", 130, 90);
 		
 		// draw menu options
 		g.setFont(font);

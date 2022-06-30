@@ -38,12 +38,7 @@ public class Player extends MapObject {
 	private double doubleJumpStart;
 	private long time;
 
-
-
-	// fireball
-
 	// knife
-
 	private boolean flyingKnife;
 	private int knifeCost;
 	private int flyingKnifeDamage;
@@ -228,13 +223,6 @@ public class Player extends MapObject {
 		stop();
 	}
 
-	public String getTimeToString() {
-		
-		int minutes = (int) (time / 3600);
-		int seconds = (int) ((time % 3600) / 60);
-		return seconds < 10 ? minutes + ":0" + seconds : minutes + ":" + seconds;
-	}
-
 	public long getTime() {
 		
 		return time;
@@ -278,16 +266,6 @@ public class Player extends MapObject {
 	public int getLives() {
 		
 		return lives;
-	}
-
-	public void increaseScore(int score) {
-		
-		this.score += score;
-	}
-
-	public int getScore() {
-		
-		return score;
 	}
 
 	public void hit(int damage) {
