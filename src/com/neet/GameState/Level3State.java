@@ -23,7 +23,6 @@ import com.neet.TileMap.TileMap;
 public class Level3State extends GameState {
 
 	private Background sky;
-	private Background mountains;
 
 	private Player player;
 	private TileMap tileMap;
@@ -54,8 +53,7 @@ public class Level3State extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/bossbackground.png", 0);
-		mountains = new Background("/Backgrounds/mountain.png", 0.2);
+		sky = new Background("/Backgrounds/bossbackground.png");
 
 		// tilemap
 		tileMap = new TileMap(32);
@@ -148,9 +146,6 @@ public class Level3State extends GameState {
 			eventDead();
 		if (eventFinish)
 			eventFinish();
-
-		// move backgrounds
-		mountains.setPosition(tileMap.getx(), tileMap.gety());
 
 		// update player
 		player.update();

@@ -53,7 +53,7 @@ public class Level2State extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/level2background.png", 0);
+		sky = new Background("/Backgrounds/level2background.png");
 
 		// tilemap
 		tileMap = new TileMap(32);
