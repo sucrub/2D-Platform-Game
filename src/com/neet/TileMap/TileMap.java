@@ -33,7 +33,7 @@ public class TileMap {
 	private int width;
 	private int height;
 	
-	// tileset
+	// tile set
 	private BufferedImage tileset;
 	private int numTilesAcross;
 	private Tile[][] tiles;
@@ -44,15 +44,12 @@ public class TileMap {
 	private int numRowsToDraw;
 	private int numColsToDraw;
 	
-	// effects
-	private int intensity;
-	
 	public TileMap(int tileSize) {
 		
 		this.tileSize = tileSize;
 		numRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
 		numColsToDraw = GamePanel.WIDTH / tileSize + 2;
-		tween = 0.07;
+		tween = 0.09;
 	}
 	
 	public void loadTiles(String s) {
@@ -64,19 +61,27 @@ public class TileMap {
 			tiles = new Tile[7][numTilesAcross];
 			
 			BufferedImage subimage;
+			
 			for(int col = 0; col < numTilesAcross; col++) {
+				
 				subimage = tileset.getSubimage(col * tileSize, 0, tileSize, tileSize);
 				tiles[0][col] = new Tile(subimage, Tile.NORMAL);
+				
 				subimage = tileset.getSubimage(col * tileSize, tileSize, tileSize, tileSize);
 				tiles[1][col] = new Tile(subimage, Tile.BLOCKED);
+				
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 2, tileSize, tileSize);
 				tiles[2][col] = new Tile(subimage, Tile.BLOCKED);
+				
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 3, tileSize, tileSize);
 				tiles[3][col] = new Tile(subimage, Tile.BLOCKED);
+				
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 4, tileSize, tileSize);
 				tiles[4][col] = new Tile(subimage, Tile.BLOCKED);
+				
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 5, tileSize, tileSize);
 				tiles[5][col] = new Tile(subimage, Tile.BLOCKED);
+				
 				subimage = tileset.getSubimage(col * tileSize, tileSize * 6, tileSize, tileSize);
 				tiles[6][col] = new Tile(subimage, Tile.BLOCKED);
 			}
@@ -88,6 +93,7 @@ public class TileMap {
 	}
 	
 	public void loadMap(String s) {
+		
 		try {	
 			
 			InputStream in = getClass().getResourceAsStream(s);
@@ -160,19 +166,6 @@ public class TileMap {
 		int r = rc / numTilesAcross;
 		int c = rc % numTilesAcross;
 		return tiles[r][c].getType();
-	}
-
-	public void setTween(double d) { 
-		
-		tween = d; 
-	}
-
-	public void setBounds(int i1, int i2, int i3, int i4) {
-		
-		xmin = GamePanel.WIDTH - i1;
-		ymin = GamePanel.WIDTH - i2;
-		xmax = i3;
-		ymax = i4;
 	}
 	
 	public void setPosition(double x, double y) {

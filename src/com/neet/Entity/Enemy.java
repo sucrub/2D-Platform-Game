@@ -1,6 +1,8 @@
+/*THIS CLASS IS FOR ENEMY OVERALL*/
+
 package com.neet.Entity;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.TileMap.TileMap;
 
 public class Enemy extends MapObject {
@@ -15,28 +17,49 @@ public class Enemy extends MapObject {
 	protected long flinchCount;
 	
 	public Enemy(TileMap tm) {
+		
 		super(tm);
 		remove = false;
 	}
 	
-	public boolean isDead() { return dead; }
-	public boolean shouldRemove() { return remove; }
+	public boolean isDead() { 
+		
+		return dead; 
+	}
 	
-	public int getDamage() { return damage; }
+	public boolean shouldRemove() {
+		
+		return remove;
+	}
+	
+
+	public int getDamage() { 
+		
+		return damage; 
+	}
 	
 	public void hit(int damage) {
+		
 		if(dead || flinching) return;
-		JukeBox.play("enemyhit");
+		Audio.play("enemyhit");
 		health -= damage;
 		if(health < 0) health = 0;
 		if(health == 0) dead = true;
 		if(dead) remove = true;
 		flinching = true;
 		flinchCount = 0;
+		
 	}
 	
-	public void update() {}
-	
+	public void update() {
+		
+		if (flinching) {
+			flinchCount++;
+			if (flinchCount > 300) {
+				flinching = false;
+			}
+		}
+	}
 }
 
 

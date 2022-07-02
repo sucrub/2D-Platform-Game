@@ -1,5 +1,8 @@
+/*THIS CLASS OVERALL IS FOR THE OBJECT ON THE MAP INCLUDING PROJECTILES, PLAYER, ENEMIES, ETC*/
+
 package com.neet.Entity;
 
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.neet.Main.GamePanel;
@@ -11,7 +14,6 @@ public abstract class MapObject {
 	
 	// tile stuff
 	protected TileMap tileMap;
-
 
 	protected int tileSize;
 	protected double xmap;
@@ -66,8 +68,8 @@ public abstract class MapObject {
 	protected double jumpStart;
 	protected double stopJumpSpeed;
 	
-	// constructor
 	public MapObject(TileMap tm) {
+		
 		tileMap = tm;
 		tileSize = tm.getTileSize();
 		animation = new Animation();
@@ -75,26 +77,31 @@ public abstract class MapObject {
 	}
 	
 	public boolean intersects(MapObject o) {
+		
 		Rectangle r1 = getRectangle();
 		Rectangle r2 = o.getRectangle();
 		return r1.intersects(r2);
 	}
 	
 	public boolean intersects(Rectangle r) {
+		
 		return getRectangle().intersects(r);
 	}
 	
 	public boolean contains(MapObject o) {
+		
 		Rectangle r1 = getRectangle();
 		Rectangle r2 = o.getRectangle();
 		return r1.contains(r2);
 	}
 	
 	public boolean contains(Rectangle r) {
+		
 		return getRectangle().contains(r);
 	}
-	
+	//trả lại hình chữ nhật va chạm
 	public Rectangle getRectangle() {
+		
 		return new Rectangle(
 				(int)x - cwidth / 2,
 				(int)y - cheight / 2,
@@ -104,6 +111,7 @@ public abstract class MapObject {
 	}
 	
 	public void calculateCorners(double x, double y) {
+		
 		int leftTile = (int)(x - cwidth / 2) / tileSize;
 		int rightTile = (int)(x + cwidth / 2 - 1) / tileSize;
 		int topTile = (int)(y - cheight / 2) / tileSize;
@@ -219,7 +227,7 @@ public abstract class MapObject {
 			y + ymap - height > GamePanel.HEIGHT;
 	}
 	
-	public void draw(java.awt.Graphics2D g) {
+	public void draw(Graphics2D g) {
 		setMapPosition();
 		if(facingRight) {
 			g.drawImage(
@@ -239,11 +247,6 @@ public abstract class MapObject {
 				null
 			);
 		}
-		// draw collision box
-		//Rectangle r = getRectangle();
-		//r.x += xmap;
-		//r.y += ymap;
-		//g.draw(r);
 	}
 	
 }

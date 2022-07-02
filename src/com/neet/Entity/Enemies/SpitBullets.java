@@ -17,9 +17,10 @@ public class SpitBullets extends Enemy {
 	private boolean permanent;
 	
 	private int type = 0;
-	public static int VECTOR = 0;
+	public static int CROSS = 0;
 	public static int GRAVITY = 1;
-	public static int BOUNCE = 5;
+	public static int BOUNCE = 2;
+	public static int HORIZONTAL = 3;
 	
 	private int bounceCount = 0;
 	
@@ -27,7 +28,7 @@ public class SpitBullets extends Enemy {
 		
 		super(tm);
 		
-		health = maxHealth = 1;
+		health = maxHealth = 4;
 		
 		width = 16;
 		height = 25;
@@ -37,11 +38,10 @@ public class SpitBullets extends Enemy {
 		damage = 1;
 		moveSpeed = 10;
 		
-
 		sprites = Content.SpitBullets[0];
 		
 		animation.setFrames(sprites);
-		animation.setDelay(-1);
+		animation.setDelay(4);
 		
 		start = true;
 		flinching = true;
@@ -58,21 +58,29 @@ public class SpitBullets extends Enemy {
 			if(animation.hasPlayedOnce()) {
 				animation.setFrames(sprites);
 				animation.setNumFrames(8);
-				animation.setDelay(-1);
+				animation.setDelay(4);
 				start = false;
 			}
 		}
 		
-		if(type == VECTOR) {
+		if(type == HORIZONTAL) {
+			
+			x +=dx;
+			bounceCount++;
+		}
+		else if(type == CROSS) {
+			
 			x += dx;
 			y += dy;
 		}
 		else if(type == GRAVITY) {
-			dy += 0.2;
+			
+			dy -= 0.2;
 			x += dx;
-			y += dy;
+			y -= dy;
 		}
 		else if(type == BOUNCE) {
+			
 			double dx2 = dx;
 			double dy2 = dy;
 			checkTileMapCollision();
@@ -80,6 +88,7 @@ public class SpitBullets extends Enemy {
 				dx = -dx2;
 				bounceCount++;
 			}
+			
 			if(dy == 0) {
 				dy = -dy2;
 				bounceCount++;
@@ -92,6 +101,7 @@ public class SpitBullets extends Enemy {
 		animation.update();
 		
 		if(!permanent) {
+			
 			if(x < 0 || x > tileMap.getWidth() || y < 0 || y > tileMap.getHeight()) {
 				remove = true;
 			}
@@ -103,6 +113,7 @@ public class SpitBullets extends Enemy {
 	}
 	
 	public void draw(Graphics2D g) {
+		
 		super.draw(g);
 	}
 	

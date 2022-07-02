@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import com.neet.Audio.JukeBox;
-import com.neet.Entity.PlayerSave;
+import com.neet.Audio.Audio;
+import com.neet.Entity.PlayerStatus;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 
@@ -21,6 +21,8 @@ public class ChooseDifficultyState extends GameState{
 		"Normal",
 		"Hard"
 	};
+	
+	public static boolean hard;
 	
 	private Font font, titlefont;
 	
@@ -37,9 +39,9 @@ public class ChooseDifficultyState extends GameState{
 			titlefont = new Font("Times New Roman", Font.PLAIN, 18);
 			
 			//load sounds fx
-			JukeBox.load("/SFX/menuoption.mp3", "menuoption");
-			JukeBox.load("/SFX/menuselect.mp3", "menuselect");
-			JukeBox.load("/Music/menusong.mp3", "menusong");
+			Audio.load("/SFX/menuoption.mp3", "menuoption");
+			Audio.load("/SFX/menuselect.mp3", "menuselect");
+			Audio.load("/Music/menusong.mp3", "menusong");
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -80,35 +82,43 @@ public class ChooseDifficultyState extends GameState{
 	public void select() {
 		
 		if(currentChoice == 0) {
-			JukeBox.stop("menusong");
-			JukeBox.play("menuselect");
-			PlayerSave.init();
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+
+			Audio.stop("menusong");
+			Audio.play("menuselect");
+			PlayerStatus.init();
+			gsm.setState(GameStateManager.LEVEL1STATE);
+			hard= false;
 		}
 		else if(currentChoice == 1) {
-			JukeBox.stop("menusong");
-			JukeBox.play("menuselect");
-			PlayerSave.init();
-			PlayerSave.setHealth(3);
-			PlayerSave.setLives(1);
-			gsm.setState(GameStateManager.LEVEL1ASTATE);
+			Audio.stop("menusong");
+			Audio.play("menuselect");
+			PlayerStatus.init();
+			gsm.setState(GameStateManager.LEVEL3STATE);
+			hard=true;
 		}
+	}
+	
+	public static boolean hard() {
+		
+		return hard;
 	}
 	
 	public void handleInput() {
 		
 		if(Keys.isPressed(Keys.ENTER)) select();
+		
 		if(Keys.isPressed(Keys.UP)) {
 			if(currentChoice > 0) {
-				JukeBox.play("menuoption", 0);
+				Audio.play("menuoption", 0);
 				currentChoice--;
 			}
 		}
 		if(Keys.isPressed(Keys.DOWN)) {
 			if(currentChoice < options.length - 1) {
-				JukeBox.play("menuoption", 0);
+				Audio.play("menuoption", 0);
 				currentChoice++;
 			}
 		}
 	}
+	
 }

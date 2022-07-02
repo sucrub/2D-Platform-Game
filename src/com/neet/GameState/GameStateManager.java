@@ -1,6 +1,6 @@
 package com.neet.GameState;
 
-import com.neet.Audio.JukeBox;
+import com.neet.Audio.Audio;
 import com.neet.Main.GamePanel;
 
 public class GameStateManager {
@@ -11,18 +11,20 @@ public class GameStateManager {
 	private PauseState pauseState;
 	private boolean paused;
 	
-	public static final int NUMGAMESTATES = 16;
+	public static final int NUMGAMESTATES = 10;
 	public static final int MENUSTATE = 0;
 	public static final int HELPSTATE = 1;
 	public static final int CHOOSEDIFFICULTYSTATE = 2;
-	public static final int LEVEL1ASTATE = 3;
-	public static final int LEVEL1BSTATE = 4;
-	public static final int LEVEL1CSTATE = 5;
-	public static final int ACIDSTATE = 15;
+	public static final int LEVEL1STATE = 3;
+	public static final int LEVEL2STATE = 4;
+	public static final int LEVEL3STATE = 5;
+	public static final int VICTORYSTATE = 6;
+	public static final int LOSTSTATE = 7;
+	public static final int MUSICSTATE = 8;
 	
 	public GameStateManager() {
 		
-		JukeBox.init();
+		Audio.init();
 		
 		gameStates = new GameState[NUMGAMESTATES];
 		
@@ -31,7 +33,6 @@ public class GameStateManager {
 		
 		currentState = MENUSTATE;
 		loadState(currentState);
-		
 	}
 	
 	private void loadState(int state) {
@@ -42,14 +43,18 @@ public class GameStateManager {
 			gameStates[state] = new HelpState(this);
 		else if(state == CHOOSEDIFFICULTYSTATE)
 			gameStates[state] = new ChooseDifficultyState(this);
-		else if(state == LEVEL1ASTATE)
-			gameStates[state] = new Level1AState(this);
-		else if(state == LEVEL1BSTATE)
-			gameStates[state] = new Level1BState(this);
-		else if(state == LEVEL1CSTATE)
-			gameStates[state] = new Level1CState(this);
-		else if(state == ACIDSTATE)
-			gameStates[state] = new AcidState(this);
+		else if(state == LEVEL1STATE)
+			gameStates[state] = new Level1State(this);
+		else if(state == LEVEL2STATE)
+			gameStates[state] = new Level2State(this);
+		else if(state == LEVEL3STATE)
+			gameStates[state] = new Level3State(this);
+		else if(state == VICTORYSTATE)
+			gameStates[state] = new VictoryState(this);
+		else if(state == LOSTSTATE)
+			gameStates[state] = new LostState(this);
+		else if(state == MUSICSTATE)
+			gameStates[state] = new MusicState(this);
 	}
 	
 	private void unloadState(int state) {
@@ -65,6 +70,7 @@ public class GameStateManager {
 	}
 	
 	public void setPaused(boolean b) { 
+		
 		paused = b; 
 	}
 	
@@ -74,6 +80,7 @@ public class GameStateManager {
 			pauseState.update();
 			return;
 		}
+		
 		if(gameStates[currentState] != null) gameStates[currentState].update();
 	}
 	
@@ -85,6 +92,7 @@ public class GameStateManager {
 		}
 		
 		if(gameStates[currentState] != null) gameStates[currentState].draw(g);
+		
 		else {
 			
 			g.setColor(java.awt.Color.BLACK);

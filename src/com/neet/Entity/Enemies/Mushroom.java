@@ -9,84 +9,92 @@ import com.neet.Handlers.Content;
 import com.neet.Main.GamePanel;
 import com.neet.TileMap.TileMap;
 
-public class Mushroom extends Enemy{
-	
+public class Mushroom extends Enemy {
+
 	private BufferedImage[] sprites;
 	private Player player;
 	private boolean active;
-	
+
 	public Mushroom(TileMap tm, Player p) {
-		
+
 		super(tm);
 		player = p;
 		
-		health = maxHealth = 1;
-		
+		 //SetDifficult
+		if(com.neet.GameState.ChooseDifficultyState.hard()) {
+			health = maxHealth =6;
+		}
+		else {
+			health = maxHealth = 4;
+		}
+	
 		width = 16;
 		height = 16;
-		cwidth = 20;
-		cheight = 25;
-		
+		cwidth = 8;
+		cheight = 8;
+
 		damage = 1;
-		
+
 		sprites = Content.Mushroom[0];
-		
+
 		animation.setFrames(sprites);
 		animation.setDelay(4);
-		
+
 		left = true;
 		facingRight = false;
-		
+
 	}
-	
-	private void getNextPosition() {}
-	
+
+	private void getNextPosition() {
+	}
+
 	public void update() {
-		
-		if(!active) {
-			if(Math.abs(player.getx() - x) < GamePanel.WIDTH) active = true;
+
+		if (!active) {
+			if (Math.abs(player.getx() - x) < GamePanel.WIDTH)
+				active = true;
 			return;
 		}
-		
+
 		// check if done flinching
-		if(flinching) {
+		if (flinching) {
 			flinchCount++;
-			if(flinchCount == 6) flinching = false;
+			if (flinchCount == 6)
+				flinching = false;
 		}
-		
+
 		getNextPosition();
 		checkTileMapCollision();
 		calculateCorners(x, ydest + 1);
-		if(!bottomLeft) {
+		if (!bottomLeft) {
 			left = false;
 			right = facingRight = true;
 		}
-		if(!bottomRight) {
+		if (!bottomRight) {
 			left = true;
 			right = facingRight = false;
 		}
 		setPosition(xtemp, ytemp);
-		
-		if(dx == 0) {
+
+		if (dx == 0) {
 			left = !left;
 			right = !right;
 			facingRight = !facingRight;
 		}
-		
+
 		// update animation
 		animation.update();
-		
-	}
-	
-	public void draw(Graphics2D g) {
-		
-		if(flinching) {
-			if(flinchCount == 0 || flinchCount == 2) return;
-		}
-		
-		super.draw(g);
-		
 	}
 
+	public void draw(Graphics2D g) {
+
+		if (flinching) {
+			if (flinchCount == 0 || flinchCount == 2)
+				return;
+		}
+
+		super.draw(g);
+
+	}
 
 }
