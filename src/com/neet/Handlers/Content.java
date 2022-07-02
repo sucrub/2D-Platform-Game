@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 // spritesheets are taken from here.
 
 public class Content {
-
 	public static BufferedImage[][] Explosion = load("/Sprites/Enemies/Explosion.gif", 16, 16);
 
 	public static BufferedImage[][] Mushroom1 = load("/Sprites/Enemies/Mushroom1.gif", 16, 16);
@@ -21,9 +20,11 @@ public class Content {
 	public static BufferedImage[][] Bomb = load("/Sprites/Enemies/DarkEnergy.gif", 20, 20);
 	public static BufferedImage[][] BigBoss = load("/Sprites/Enemies/BigBoss.png", 64, 62);
 
-	public static BufferedImage[][] SpitBullets = load ("/Sprites/Enemies/BulletsBoss.gif", 16, 25);
-	public static BufferedImage[][] FireBallLeft = load("/Sprites/Enemies/FireBallLeft.gif",40, 32);
-	public static BufferedImage[][] FireBallRight = load("/Sprites/Enemies/FireBallRight.png",40, 32);
+	public static BufferedImage[][] SpitBullets = load("/Sprites/Enemies/BulletsBoss.gif", 16, 25);
+	public static BufferedImage[][] FireBallLeft = load("/Sprites/Enemies/FireBallLeft.gif", 40, 32);
+	public static BufferedImage[][] FireBallRight = load("/Sprites/Enemies/FireBallRight.png", 40, 32);
+
+	public static BufferedImage[][] Knife = load("/Sprites/Player/Knife.png", 13, 6);
 
 	public static BufferedImage[][] load(String s, int w, int h) {
 		BufferedImage[][] ret;
