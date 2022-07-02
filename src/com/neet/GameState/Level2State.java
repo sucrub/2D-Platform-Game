@@ -402,8 +402,11 @@ public class Level2State extends GameState {
 
 	public void handleInput() {
 		
-		if (Keys.isPressed(Keys.ESCAPE))
+		if (Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("level2");
 			gsm.setPaused(true);
+			PauseState.setNumState(2);
+		}
 		if (blockInput || player.getHealth() == 0)
 			return;
 		player.setUp(Keys.keyState[Keys.UP]);

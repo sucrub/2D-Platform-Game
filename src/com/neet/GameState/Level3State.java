@@ -234,8 +234,11 @@ public class Level3State extends GameState {
 
 	public void handleInput() {
 		
-		if (Keys.isPressed(Keys.ESCAPE))
+		if (Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("level3");
 			gsm.setPaused(true);
+			PauseState.setNumState(3);
+		}
 		if (blockInput || player.getHealth() == 0)
 			return;
 		player.setUp(Keys.keyState[Keys.UP]);

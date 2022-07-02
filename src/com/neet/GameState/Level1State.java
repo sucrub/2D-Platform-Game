@@ -364,7 +364,9 @@ public class Level1State extends GameState {
 	public void handleInput() {
 
 		if (Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("level1");
 			gsm.setPaused(true);
+			PauseState.setNumState(1);
 		}
 		if (blockInput || player.getHealth() == 0)
 			return;
