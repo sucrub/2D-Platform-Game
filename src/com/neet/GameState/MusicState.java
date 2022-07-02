@@ -12,26 +12,21 @@ import com.neet.Entity.PlayerStatus;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
 
-public class MenuState extends GameState {
-	
+public class MusicState extends GameState{
+
 	private BufferedImage head;
 	
 	private int currentChoice = 0;
 	private String[] options = {
-		"Start",
-		"Music",
-		"Help",
-		"Quit"
+		"Mute",
+		"UnMute"
 	};
 	
-	private Color titleColor;
-	private Font titleFont;
+	public static boolean mute;
 	
-	private Font font;
-	private Font font2;
+	private Font font, titlefont;
 	
-	public MenuState(GameStateManager gsm) {
-		
+	public MusicState(GameStateManager gsm) {
 		super(gsm);
 		
 		try {
@@ -39,25 +34,18 @@ public class MenuState extends GameState {
 			// load floating head
 			head = ImageIO.read(getClass().getResourceAsStream("/HUD/lifes_icon.png")).getSubimage(0, 0, 16, 16);
 			
-			// titles and fonts
-			titleColor = Color.WHITE;
-			titleFont = new Font("Times New Roman", Font.BOLD, 28);
+			//font
 			font = new Font("Arial", Font.PLAIN, 14);
-			font2 = new Font("Arial", Font.PLAIN, 10);
+			titlefont = new Font("Times New Roman", Font.PLAIN, 18);
 			
-			// load sound fx
+			//load sounds fx
 			Audio.load("/SFX/menuoption.mp3", "menuoption");
 			Audio.load("/SFX/menuselect.mp3", "menuselect");
-			
-			// load menu sound
 			Audio.load("/Music/menusong.mp3", "menusong");
-			Audio.loop("menusong", 600, Audio.getFrames("menusong") - 2200);
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public void init() {}
@@ -75,55 +63,48 @@ public class MenuState extends GameState {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		
-		// draw title
-		g.setColor(titleColor);
-		g.setFont(titleFont);
-		g.drawString("?", 307, 77);
-		g.drawString("S U P E R    H E O", 130, 90);
+		// draw the "choose difficulty"
+		g.setFont(titlefont);
+		g.setColor(Color.WHITE);
+		g.drawString("Setting Music", 185, 95);
 		
-		// draw menu options
+		// draw options
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString("Start", 230, 135);
-		g.drawString("Music", 230, 155);
-		g.drawString("Help", 230, 175);
-		g.drawString("Quit", 230, 195);
+		g.drawString("Mute", 230, 145);
+		g.drawString("UnMute", 230, 165);
 		
 		// draw floating head
-		if(currentChoice == 0) g.drawImage(head, 210, 122, null);
-		else if(currentChoice == 1) g.drawImage(head, 210, 142, null);
-		else if(currentChoice == 2) g.drawImage(head, 210, 162, null);
-		else if(currentChoice == 3) g.drawImage(head, 210, 182, null);
-		
-		// other
-		g.setFont(font2);
-		g.drawString("OOP Project!", 8, 232);
-		
+		if(currentChoice == 0) g.drawImage(head, 210, 132, null);
+		else if(currentChoice == 1) g.drawImage(head, 210, 152, null);
 	}
 	
-	private void select() {
+	public void select() {
 		
 		if(currentChoice == 0) {
+			Audio.setMute(true);
+			Audio.stop("menusong");
 			Audio.play("menuselect");
-			gsm.setState(GameStateManager.CHOOSEDIFFICULTYSTATE);
+			PlayerStatus.init();
+			gsm.setState(GameStateManager.MENUSTATE);
+			mute= false;
 		}
 		else if(currentChoice == 1) {
+			Audio.setMute(false);
+			Audio.stop("menusong");
 			Audio.play("menuselect");
-			gsm.setState(GameStateManager.MUSICSTATE);
-		}
-		else if(currentChoice == 2) {
-			Audio.play("menuselect");
-			gsm.setState(GameStateManager.HELPSTATE);
-		}
-		
-		else if(currentChoice == 3) {
-			System.exit(0);
+			PlayerStatus.init();
+			gsm.setState(GameStateManager.MENUSTATE);
+			mute=true;
 		}
 	}
+	
+
 	
 	public void handleInput() {
 		
 		if(Keys.isPressed(Keys.ENTER)) select();
+		
 		if(Keys.isPressed(Keys.UP)) {
 			if(currentChoice > 0) {
 				Audio.play("menuoption", 0);
@@ -139,13 +120,3 @@ public class MenuState extends GameState {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
