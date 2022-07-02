@@ -19,7 +19,7 @@ public class PauseState extends GameState {
 		super(gsm);
 		
 		// fonts
-		font = new Font("Century Gothic", Font.PLAIN, 14);
+		font = new Font("Times New Roman", Font.BOLD, 14);
 		
 	}
 	
@@ -38,7 +38,9 @@ public class PauseState extends GameState {
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		g.setColor(Color.WHITE);
 		g.setFont(font);
-		g.drawString("Game Paused", 190, 110);
+		g.drawString("Game Paused....", 190, 110);
+		g.drawString("Press Escape to return", 190, 130);
+		g.drawString("Press W to return to Menu", 190, 150);
 	}
 	
 	public void handleInput() {

@@ -480,7 +480,7 @@ public class Level2State extends GameState {
 		}
 		if (eventCount >= 120) {
 			if (player.getLives() == 0) {
-				gsm.setState(GameStateManager.MENUSTATE);
+				gsm.setState(GameStateManager.LOSTSTATE);
 			} else {
 				eventDead = blockInput = false;
 				eventCount = 0;
