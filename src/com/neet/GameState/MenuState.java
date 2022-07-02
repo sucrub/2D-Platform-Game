@@ -20,6 +20,7 @@ public class MenuState extends GameState {
 	private int currentChoice = 0;
 	private String[] options = {
 		"Start",
+		"Music",
 		"Help",
 		"Quit"
 	};
@@ -85,14 +86,16 @@ public class MenuState extends GameState {
 		// draw menu options
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString("Start", 230, 165);
-		g.drawString("Help", 230, 185);
-		g.drawString("Quit", 230, 205);
+		g.drawString("Start", 230, 135);
+		g.drawString("Music", 230, 155);
+		g.drawString("Help", 230, 175);
+		g.drawString("Quit", 230, 195);
 		
 		// draw floating head
-		if(currentChoice == 0) g.drawImage(head, 210, 152, null);
-		else if(currentChoice == 1) g.drawImage(head, 210, 172, null);
-		else if(currentChoice == 2) g.drawImage(head, 210, 192, null);
+		if(currentChoice == 0) g.drawImage(head, 210, 122, null);
+		else if(currentChoice == 1) g.drawImage(head, 210, 142, null);
+		else if(currentChoice == 2) g.drawImage(head, 210, 162, null);
+		else if(currentChoice == 3) g.drawImage(head, 210, 182, null);
 		
 		// other
 		g.setFont(font2);
@@ -108,9 +111,14 @@ public class MenuState extends GameState {
 		}
 		else if(currentChoice == 1) {
 			Audio.play("menuselect");
-			gsm.setState(GameStateManager.HELPSTATE);
+			gsm.setState(GameStateManager.MUSICSTATE);
 		}
 		else if(currentChoice == 2) {
+			Audio.play("menuselect");
+			gsm.setState(GameStateManager.HELPSTATE);
+		}
+		
+		else if(currentChoice == 3) {
 			System.exit(0);
 		}
 	}
