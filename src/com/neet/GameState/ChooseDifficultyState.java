@@ -82,6 +82,7 @@ public class ChooseDifficultyState extends GameState{
 	public void select() {
 		
 		if(currentChoice == 0) {
+
 			Audio.stop("menusong");
 			Audio.play("menuselect");
 			PlayerStatus.init();
