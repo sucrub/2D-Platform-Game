@@ -15,6 +15,7 @@ import com.neet.Main.GamePanel;
 public class MenuState extends GameState {
 	
 	private BufferedImage head;
+	private BufferedImage bigHead;
 	
 	private int currentChoice = 0;
 	private String[] options = {
@@ -38,12 +39,13 @@ public class MenuState extends GameState {
 			
 			// load floating head
 			head = ImageIO.read(getClass().getResourceAsStream("/HUD/lifes_icon.png")).getSubimage(0, 0, 16, 16);
+			bigHead = ImageIO.read(getClass().getResourceAsStream("/HUD/HEAD.png")).getSubimage(0, 0, 32, 32);
 			
 			// titles and fonts
 			titleColor = Color.WHITE;
 			titleFont = new Font("Times New Roman", Font.BOLD, 28);
-			font = new Font("Arial", Font.PLAIN, 14);
-			font2 = new Font("Arial", Font.PLAIN, 10);
+			font = new Font("Times New Roman", Font.BOLD, 14);
+			font2 = new Font("Times New Roman", Font.BOLD, 10);
 			
 			// load sound fx
 			Audio.load("/SFX/menuoption.mp3", "menuoption");
@@ -78,8 +80,8 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("?", 307, 77);
-		g.drawString("S U P E R    H E O", 130, 90);
+		g.drawString("S U P E R    H E R O", 128, 90);
+		g.drawImage(bigHead, 90, 65, null);
 		
 		// draw menu options
 		g.setFont(font);

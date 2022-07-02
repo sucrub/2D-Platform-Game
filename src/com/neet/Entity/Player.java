@@ -32,7 +32,6 @@ public class Player extends MapObject {
 	private boolean knockback;
 	private boolean flinching;
 	private long flinchCount;
-	private int score;
 	private boolean doubleJump;
 	private boolean alreadyDoubleJump;
 	private double doubleJumpStart;
