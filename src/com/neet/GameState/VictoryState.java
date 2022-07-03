@@ -19,6 +19,9 @@ public class VictoryState extends GameState {
 	
 	public VictoryState(GameStateManager gsm) {
 		super(gsm);
+// load victory sound
+			Audio.load("/Music/victory.mp3", "victorysong");
+			Audio.loop("victorysong", 600, Audio.getFrames("victorysong") - 2200);
 		
 	}
 
@@ -49,7 +52,9 @@ public class VictoryState extends GameState {
 	
 	public void handleInput() {
 		
-		if(Keys.isPressed(Keys.ESCAPE))
+		if(Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("victorysong");
 			gsm.setState(GameStateManager.MENUSTATE);
+		}
 	}
 }

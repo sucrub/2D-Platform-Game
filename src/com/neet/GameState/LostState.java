@@ -19,6 +19,9 @@ public class LostState extends GameState {
 	
 	public LostState(GameStateManager gsm) {
 		super(gsm);
+// load menu sound
+			Audio.load("/Music/lost.mp3", "lostsong");
+			Audio.loop("lostsong", 600, Audio.getFrames("lostsong") - 2200);
 		
 	}
 
@@ -55,7 +58,9 @@ public class LostState extends GameState {
 	
 	public void handleInput() {
 		
-		if(Keys.isPressed(Keys.ESCAPE))
+		if(Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("lostsong");
 			gsm.setState(GameStateManager.MENUSTATE);
+		}
 	}
 }
