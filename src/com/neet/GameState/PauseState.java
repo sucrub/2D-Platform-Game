@@ -64,7 +64,7 @@ public class PauseState extends GameState {
 		handleInput();
 	}
 	
-public void draw(Graphics2D g) {
+	public void draw(Graphics2D g) {
 		
 		// draw bg
 		g.setColor(Color.BLACK);
@@ -89,7 +89,7 @@ public void draw(Graphics2D g) {
 		g.setFont(font);
 		g.drawString("Game Paused....", 190, 110);
 	}
-private void select() {
+	private void select() {
 		
 		if(currentChoice == 0) {
 			Audio.play("menuselect");

@@ -99,7 +99,7 @@ public abstract class MapObject {
 		
 		return getRectangle().contains(r);
 	}
-	//trả lại hình chữ nhật va chạm
+
 	public Rectangle getRectangle() {
 		
 		return new Rectangle(
