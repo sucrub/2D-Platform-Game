@@ -30,7 +30,12 @@ public class HelpState extends GameState{
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		g.setColor(Color.WHITE);
 		g.setFont(font);
-		g.drawString("Write something to help people playing here", 90, 90);
+		g.drawString("Moving: A W S D (You can double jump)", 60, 60);
+		g.drawString("F: Knifing", 60, 80);
+		g.drawString("E: Dashing (There is cooldown)", 60, 100);
+		g.drawString("R: Attacking", 60, 120);
+		g.drawString("Knife cant go through boss's bullet", 60, 140);
+		g.drawString("Tips: Don't die", 60, 200);
 	}
 	
 	public void handleInput() {

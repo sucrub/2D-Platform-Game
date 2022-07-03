@@ -56,7 +56,6 @@ public class PauseState extends GameState {
 		
 	}
 	
-
 	
 	public void init() {}
 	
@@ -75,7 +74,7 @@ public void draw(Graphics2D g) {
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 		g.drawString("Continue", 230, 135);
-		g.drawString("BackMenu", 230, 155);
+		g.drawString("Back to Menu", 230, 155);
 		
 		// draw floating head
 		if(currentChoice == 0) g.drawImage(head, 210, 122, null);
@@ -83,15 +82,12 @@ public void draw(Graphics2D g) {
 		
 		// other
 		g.setFont(font2);
-		g.drawString("OOP Project!", 8, 232);
 		
 
 		//drawTile
 		g.setColor(Color.WHITE);
 		g.setFont(font);
 		g.drawString("Game Paused....", 190, 110);
-		g.drawString("Press Escape to return", 190, 130);
-		g.drawString("Press W to return to Menu", 190, 150);
 	}
 private void select() {
 		
