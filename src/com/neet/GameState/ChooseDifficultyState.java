@@ -105,6 +105,9 @@ public class ChooseDifficultyState extends GameState{
 	
 	public void handleInput() {
 		
+		if(Keys.isPressed(Keys.ESCAPE))
+			gsm.setState(GameStateManager.MENUSTATE);
+		
 		if(Keys.isPressed(Keys.ENTER)) select();
 		
 		if(Keys.isPressed(Keys.UP)) {

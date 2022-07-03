@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import com.neet.Audio.Audio;
 import com.neet.Handlers.Content;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
@@ -21,7 +22,9 @@ public class VictoryState extends GameState {
 		
 	}
 
-	public void init() {}
+	public void init() {
+		
+	}
 	
 	public void update() {
 		
