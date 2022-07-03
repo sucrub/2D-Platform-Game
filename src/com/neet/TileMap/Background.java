@@ -64,7 +64,6 @@ public class Background {
 			g.drawImage(image, (int)x, (int)y - GamePanel.HEIGHT, null);
 		}
 	}
-	
 }
 
 
