@@ -448,6 +448,7 @@ public class Level1State extends GameState {
 		}
 		if (eventCount >= 120) {
 			if (player.getLives() == 0) {
+				Audio.stop("level1");
 				gsm.setState(GameStateManager.LOSTSTATE);
 			} else {
 				eventDead = blockInput = false;

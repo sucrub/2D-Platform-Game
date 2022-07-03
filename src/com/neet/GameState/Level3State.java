@@ -310,6 +310,7 @@ public class Level3State extends GameState {
 		}
 		if (eventCount >= 120) {
 			if (player.getLives() == 0) {
+				Audio.stop("level3");
 				gsm.setState(GameStateManager.LOSTSTATE);
 			} else {
 				eventDead = blockInput = false;
@@ -342,6 +343,7 @@ public class Level3State extends GameState {
 			PlayerStatus.setHealth(player.getHealth());
 			PlayerStatus.setLives(player.getLives());
 			PlayerStatus.setTime(player.getTime());
+			Audio.stop("level3");
 			gsm.setState(GameStateManager.VICTORYSTATE);
 		}
 
