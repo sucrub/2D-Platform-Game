@@ -82,6 +82,7 @@ public class ChooseDifficultyState extends GameState{
 	public void select() {
 		
 		if(currentChoice == 0) {
+
 			Audio.stop("menusong");
 			Audio.play("menuselect");
 			PlayerStatus.init();
@@ -92,7 +93,7 @@ public class ChooseDifficultyState extends GameState{
 			Audio.stop("menusong");
 			Audio.play("menuselect");
 			PlayerStatus.init();
-			gsm.setState(GameStateManager.LEVEL1STATE);
+			gsm.setState(GameStateManager.LEVEL3STATE);
 			hard=true;
 		}
 	}
@@ -103,6 +104,9 @@ public class ChooseDifficultyState extends GameState{
 	}
 	
 	public void handleInput() {
+		
+		if(Keys.isPressed(Keys.ESCAPE))
+			gsm.setState(GameStateManager.MENUSTATE);
 		
 		if(Keys.isPressed(Keys.ENTER)) select();
 		

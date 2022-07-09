@@ -21,7 +21,6 @@ public class Animation {
 	}
 	
 	public void setFrames(BufferedImage[] frames) {
-		
 		this.frames = frames;
 		currentFrame = 0;
 		count = 0;

@@ -99,7 +99,7 @@ public abstract class MapObject {
 		
 		return getRectangle().contains(r);
 	}
-	
+
 	public Rectangle getRectangle() {
 		
 		return new Rectangle(

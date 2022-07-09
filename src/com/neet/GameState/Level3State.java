@@ -23,7 +23,6 @@ import com.neet.TileMap.TileMap;
 public class Level3State extends GameState {
 
 	private Background sky;
-	private Background mountains;
 
 	private Player player;
 	private TileMap tileMap;
@@ -54,8 +53,7 @@ public class Level3State extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/bossbackground.png", 0);
-		mountains = new Background("/Backgrounds/mountain.png", 0.2);
+		sky = new Background("/Backgrounds/bossbackground.png");
 
 		// tilemap
 		tileMap = new TileMap(32);
@@ -149,9 +147,6 @@ public class Level3State extends GameState {
 		if (eventFinish)
 			eventFinish();
 
-		// move backgrounds
-		mountains.setPosition(tileMap.getx(), tileMap.gety());
-
 		// update player
 		player.update();
 
@@ -234,8 +229,11 @@ public class Level3State extends GameState {
 
 	public void handleInput() {
 		
-		if (Keys.isPressed(Keys.ESCAPE))
+		if (Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("level3");
 			gsm.setPaused(true);
+			PauseState.setNumState(3);
+		}
 		if (blockInput || player.getHealth() == 0)
 			return;
 		player.setUp(Keys.keyState[Keys.UP]);
@@ -312,7 +310,8 @@ public class Level3State extends GameState {
 		}
 		if (eventCount >= 120) {
 			if (player.getLives() == 0) {
-				gsm.setState(GameStateManager.MENUSTATE);
+				Audio.stop("level3");
+				gsm.setState(GameStateManager.LOSTSTATE);
 			} else {
 				eventDead = blockInput = false;
 				eventCount = 0;
@@ -344,6 +343,7 @@ public class Level3State extends GameState {
 			PlayerStatus.setHealth(player.getHealth());
 			PlayerStatus.setLives(player.getLives());
 			PlayerStatus.setTime(player.getTime());
+			Audio.stop("level3");
 			gsm.setState(GameStateManager.VICTORYSTATE);
 		}
 

@@ -15,10 +15,12 @@ import com.neet.Main.GamePanel;
 public class MenuState extends GameState {
 	
 	private BufferedImage head;
+	private BufferedImage bigHead;
 	
 	private int currentChoice = 0;
 	private String[] options = {
 		"Start",
+		"Music",
 		"Help",
 		"Quit"
 	};
@@ -37,12 +39,13 @@ public class MenuState extends GameState {
 			
 			// load floating head
 			head = ImageIO.read(getClass().getResourceAsStream("/HUD/lifes_icon.png")).getSubimage(0, 0, 16, 16);
+			bigHead = ImageIO.read(getClass().getResourceAsStream("/HUD/HEAD.png")).getSubimage(0, 0, 32, 32);
 			
 			// titles and fonts
 			titleColor = Color.WHITE;
 			titleFont = new Font("Times New Roman", Font.BOLD, 28);
-			font = new Font("Arial", Font.PLAIN, 14);
-			font2 = new Font("Arial", Font.PLAIN, 10);
+			font = new Font("Times New Roman", Font.BOLD, 14);
+			font2 = new Font("Times New Roman", Font.BOLD, 10);
 			
 			// load sound fx
 			Audio.load("/SFX/menuoption.mp3", "menuoption");
@@ -77,20 +80,22 @@ public class MenuState extends GameState {
 		// draw title
 		g.setColor(titleColor);
 		g.setFont(titleFont);
-		g.drawString("?", 307, 77);
-		g.drawString("S U P E R    H E O", 130, 90);
+		g.drawString("S U P E R    H E R O", 128, 90);
+		g.drawImage(bigHead, 90, 65, null);
 		
 		// draw menu options
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString("Start", 230, 165);
-		g.drawString("Help", 230, 185);
-		g.drawString("Quit", 230, 205);
+		g.drawString("Start", 230, 135);
+		g.drawString("Music", 230, 155);
+		g.drawString("Help", 230, 175);
+		g.drawString("Quit", 230, 195);
 		
 		// draw floating head
-		if(currentChoice == 0) g.drawImage(head, 210, 152, null);
-		else if(currentChoice == 1) g.drawImage(head, 210, 172, null);
-		else if(currentChoice == 2) g.drawImage(head, 210, 192, null);
+		if(currentChoice == 0) g.drawImage(head, 210, 122, null);
+		else if(currentChoice == 1) g.drawImage(head, 210, 142, null);
+		else if(currentChoice == 2) g.drawImage(head, 210, 162, null);
+		else if(currentChoice == 3) g.drawImage(head, 210, 182, null);
 		
 		// other
 		g.setFont(font2);
@@ -106,9 +111,14 @@ public class MenuState extends GameState {
 		}
 		else if(currentChoice == 1) {
 			Audio.play("menuselect");
-			gsm.setState(GameStateManager.HELPSTATE);
+			gsm.setState(GameStateManager.MUSICSTATE);
 		}
 		else if(currentChoice == 2) {
+			Audio.play("menuselect");
+			gsm.setState(GameStateManager.HELPSTATE);
+		}
+		
+		else if(currentChoice == 3) {
 			System.exit(0);
 		}
 	}

@@ -108,5 +108,5 @@ public class Audio {
 		stop(s);
 		clips.get(s).close();
 	}
-	
+	public static void setMute(boolean m) {mute=m;}
 }

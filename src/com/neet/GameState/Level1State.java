@@ -40,7 +40,8 @@ public class Level1State extends GameState {
 
 	private HUD hud;
 	private Teleport teleport;
-
+	
+	
 	// events
 	private boolean blockInput = false;
 	private int eventCount = 0;
@@ -58,7 +59,7 @@ public class Level1State extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/level1background.png", 0);
+		sky = new Background("/Backgrounds/level1background.png");
 
 		// tilemap
 		tileMap = new TileMap(32);
@@ -362,8 +363,11 @@ public class Level1State extends GameState {
 
 	public void handleInput() {
 
-		if (Keys.isPressed(Keys.ESCAPE))
+		if (Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("level1");
 			gsm.setPaused(true);
+			PauseState.setNumState(1);
+		}
 		if (blockInput || player.getHealth() == 0)
 			return;
 		player.setUp(Keys.keyState[Keys.UP]);
@@ -444,6 +448,7 @@ public class Level1State extends GameState {
 		}
 		if (eventCount >= 120) {
 			if (player.getLives() == 0) {
+				Audio.stop("level1");
 				gsm.setState(GameStateManager.LOSTSTATE);
 			} else {
 				eventDead = blockInput = false;

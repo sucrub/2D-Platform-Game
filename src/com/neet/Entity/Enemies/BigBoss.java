@@ -5,8 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import com.neet.Audio.Audio;
-
 import javax.imageio.ImageIO;
 
 import com.neet.Entity.Enemy;

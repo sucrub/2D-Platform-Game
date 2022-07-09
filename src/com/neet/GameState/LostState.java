@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import com.neet.Audio.Audio;
 import com.neet.Handlers.Content;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
@@ -18,10 +19,21 @@ public class LostState extends GameState {
 	
 	public LostState(GameStateManager gsm) {
 		super(gsm);
+// load menu sound
+			Audio.load("/Music/lost.mp3", "lostsong");
+			Audio.loop("lostsong", 600, Audio.getFrames("lostsong") - 2200);
 		
 	}
 
-	public void init() {}
+	public void init() {
+		
+		Audio.load("/Music/level1.mp3", "level1");
+		Audio.stop("level1");
+		Audio.load("/Music/level2.mp3", "level2");
+		Audio.stop("level2");
+		Audio.load("/Music/level3.mp3", "level3");
+		Audio.stop("level3");
+	}
 	
 	public void update() {
 		
@@ -46,7 +58,9 @@ public class LostState extends GameState {
 	
 	public void handleInput() {
 		
-		if(Keys.isPressed(Keys.ESCAPE))
+		if(Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("lostsong");
 			gsm.setState(GameStateManager.MENUSTATE);
+		}
 	}
 }

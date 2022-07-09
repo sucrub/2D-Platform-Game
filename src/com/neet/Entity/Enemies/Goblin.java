@@ -114,9 +114,9 @@ public class Goblin extends Enemy {
 		flinchCount = 0;
 		
 		if (facingRight)
-			dx = 2;
+			dx = 5;
 		else
-			dx = -2;
+			dx = -5;
 		dy = -2;
 		knockback = true;
 		falling = true;

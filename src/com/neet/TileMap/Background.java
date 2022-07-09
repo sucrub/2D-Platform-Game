@@ -13,58 +13,22 @@ public class Background {
 	
 	private double x;
 	private double y;
-	private double dx;
-	private double dy;
 	
 	private int width;
 	private int height;
 	
-	private double xscale;
-	private double yscale;
-	
-	public Background(String s, double d) {
-		
-		this(s, d, d);
-	}
-	
-	public Background(String s, double d1, double d2) {
+	public Background(String s) {
 		
 		try {
 			
 			image = ImageIO.read(getClass().getResourceAsStream(s));
 			width = image.getWidth();
 			height = image.getHeight();
-			xscale = d1;
-			yscale = d2;
 		}
 		catch(Exception e) {
 			
 			e.printStackTrace();
 		}
-	}
-	
-	public void setPosition(double x, double y) {
-		
-		this.x = (x * xscale) % width;
-		this.y = (y * yscale) % height;
-	}
-	
-	public void setVector(double dx, double dy) {
-		
-		this.dx = dx;
-		this.dy = dy;
-	}
-	
-	public void setScale(double xscale, double yscale) {
-		
-		this.xscale = xscale;
-		this.yscale = yscale;
-	}
-	
-	public void setDimensions(int i1, int i2) {
-		
-		width = i1;
-		height = i2;
 	}
 	
 	public double getx() { 
@@ -77,10 +41,8 @@ public class Background {
 	
 	public void update() {
 		
-		x += dx;
 		while(x <= -width) x += width;
 		while(x >= width) x -= width;
-		y += dy;
 		while(y <= -height) y += height;
 		while(y >= height) y -= height;
 	}
@@ -102,7 +64,6 @@ public class Background {
 			g.drawImage(image, (int)x, (int)y - GamePanel.HEIGHT, null);
 		}
 	}
-	
 }
 
 

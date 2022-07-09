@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import com.neet.Audio.Audio;
 import com.neet.Handlers.Content;
 import com.neet.Handlers.Keys;
 import com.neet.Main.GamePanel;
@@ -18,10 +19,15 @@ public class VictoryState extends GameState {
 	
 	public VictoryState(GameStateManager gsm) {
 		super(gsm);
+// load victory sound
+			Audio.load("/Music/victory.mp3", "victorysong");
+			Audio.loop("victorysong", 600, Audio.getFrames("victorysong") - 2200);
 		
 	}
 
-	public void init() {}
+	public void init() {
+		
+	}
 	
 	public void update() {
 		
@@ -46,7 +52,9 @@ public class VictoryState extends GameState {
 	
 	public void handleInput() {
 		
-		if(Keys.isPressed(Keys.ESCAPE))
+		if(Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("victorysong");
 			gsm.setState(GameStateManager.MENUSTATE);
+		}
 	}
 }

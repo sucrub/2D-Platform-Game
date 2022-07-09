@@ -53,7 +53,7 @@ public class Level2State extends GameState {
 	public void init() {
 
 		// backgrounds
-		sky = new Background("/Backgrounds/level2background.png", 0);
+		sky = new Background("/Backgrounds/level2background.png");
 
 		// tilemap
 		tileMap = new TileMap(32);
@@ -402,8 +402,11 @@ public class Level2State extends GameState {
 
 	public void handleInput() {
 		
-		if (Keys.isPressed(Keys.ESCAPE))
+		if (Keys.isPressed(Keys.ESCAPE)) {
+			Audio.stop("level2");
 			gsm.setPaused(true);
+			PauseState.setNumState(2);
+		}
 		if (blockInput || player.getHealth() == 0)
 			return;
 		player.setUp(Keys.keyState[Keys.UP]);
@@ -480,7 +483,8 @@ public class Level2State extends GameState {
 		}
 		if (eventCount >= 120) {
 			if (player.getLives() == 0) {
-				gsm.setState(GameStateManager.MENUSTATE);
+				Audio.stop("level2");
+				gsm.setState(GameStateManager.LOSTSTATE);
 			} else {
 				eventDead = blockInput = false;
 				eventCount = 0;
