@@ -67,6 +67,8 @@ public class Level2State extends GameState {
 		player.setLives(PlayerStatus.getLives());
 		player.setTime(PlayerStatus.getTime());
 		player.setmaxHealth(PlayerStatus.getmaxHealth());
+		player.setMp(PlayerStatus.getMp());
+		player.setmaxMp(PlayerStatus.getmaxMp());
 
 		// enemies
 		enemies = new ArrayList<Enemy>();
